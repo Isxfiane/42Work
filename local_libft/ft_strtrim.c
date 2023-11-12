@@ -38,11 +38,17 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (is_set(s1[start], set) == 1)
 		start++;
 	if (s1[start] == '\0')
-		return ((char *) malloc (sizeof(char) * 1));
+	{
+		result = (char *) malloc (sizeof(char) * 1);
+		result[0] = '\0';
+		return (result);
+	}
 	end = (ft_strlen(s1)) - 1;
 	while (is_set(s1[end], set) == 1)
 		end--;
 	len = (end - start) + 1;
 	result = ft_substr(s1, start, len);
+	if (result == NULL)
+		return (NULL);
 	return (result);
 }

@@ -22,8 +22,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	i = start;
 	k = -1;
-	count = 0;
+	count = -1;
 	error = (char *) malloc (sizeof(char) * 1);
+	error[0] = '\0';
 	if (error == NULL)
 		return (NULL);
 	if (start > ft_strlen(s) + 1 || s[0] == '\0')
@@ -31,11 +32,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	cpy = (char *) malloc (sizeof(char) * (len + 1));
 	if (cpy == NULL)
 		return (NULL);
-	while ((s[i] != '\0') && (count < len))
+	while ((s[i] != '\0') && (++count < len))
 	{
 		cpy[++k] = s[i];
 		i++;
-		count++;
 	}
 	cpy[k] = '\0';
 	return (cpy);
