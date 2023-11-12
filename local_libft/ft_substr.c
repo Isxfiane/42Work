@@ -15,6 +15,7 @@
 static char	*error(void)
 {
 	char	*error;
+
 	error = (char *) malloc (sizeof(char) * 1);
 	if (error == NULL)
 		return (NULL);
@@ -32,7 +33,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = start;
 	k = 0;
 	count = 0;
-	if (start > ft_strlen(s) + 1 || s[0] == '\0')
+	if (start > ft_strlen(s) || s[0] == '\0')
 		return (error());
 	cpy = (char *) malloc (sizeof(char) * (len + 1));
 	if (cpy == NULL)

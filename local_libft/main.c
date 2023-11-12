@@ -2,8 +2,6 @@
 #include <stdio.h>
 int main()
 {
-    printf("%s\n", (ft_substr("", 1, 1)));
-    // printf("Resultat\n");
-    ft_strtrim("zebi", "z");
+    printf("%s\n", (ft_itoa(10001)));
     return 0;
 }
