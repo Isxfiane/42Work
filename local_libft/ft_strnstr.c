@@ -28,12 +28,14 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	while (i < len && (big[i] != '\0'))
 	{
 		if (k == lenlittle)
-			return (&bigcopy[i - lenlittle]);
+			return (&bigcopy[i - k]);
 		if (big[i] == little[k])
 			k++;
 		else
 			k = 0;
 		i++;
 	}
-	return (NULL);
+	 if (k == lenlittle)
+        return (&bigcopy[i - k]);
+    return (NULL);
 }
