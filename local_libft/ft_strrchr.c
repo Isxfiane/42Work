@@ -15,22 +15,22 @@
 char	*ft_strrchr(const char *s, int c)
 {
 	char			*scopy;
-	unsigned int	i;
+	long int		i;
 	long int		save;
 
 	i = 0;
 	save = -1;
+	if (!s)
+		return (NULL);
 	scopy = (char *)s;
-	if (scopy[0] == '\0')
-		return (scopy);
+	if (c == '\0')
+		return (&scopy[ft_strlen(scopy)]);
 	while (scopy[i] != '\0')
 	{
 		if (scopy[i] == c)
 			save = i;
 		i++;
 	}
-	if (scopy[i] == '\0' && c == '\0')
-		return (&scopy[i]);
 	if (save != -1)
 		return (&scopy[save]);
 	return (NULL);

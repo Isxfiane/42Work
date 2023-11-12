@@ -18,17 +18,19 @@ char	*ft_strchr(const char *s, int c)
 	unsigned int	i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	scopy = (char *)s;
 	if (scopy[0] == '\0')
-		return (scopy);
+		return ((char *)s);
 	while (scopy[i] != '\0')
 	{
 		if (scopy[i] == c)
-			return (&scopy[i]);
+			return ((char *)&s[i]);
 		else
 			i++;
 	}
 	if (scopy[i] == '\0' && c == '\0')
-		return (&scopy[i]);
+		return ((char *)&s[i]);
 	return (NULL);
 }
