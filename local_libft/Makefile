@@ -40,7 +40,7 @@ SRC		=	ft_atoi.c\
 
 OBJ_DIR	=	.objs
 
-FLAGS	=	-Wall -Wextra -Werror -I.
+FLAGS	=	-Wall -Wextra -Werror -I .
 #Create .o file in an other directory*/
 OBJ		=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

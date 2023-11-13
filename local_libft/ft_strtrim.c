@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:48:36 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/11/12 11:45:38 by sben-rho         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:18:58 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 	unsigned int	len;
 
 	start = 0;
+	if (!s1)
+		return (NULL);
 	while (is_set(s1[start], set) == 1)
 		start++;
 	if (s1[start] == '\0')
-	{
-		result = (char *) malloc (sizeof(char) * 1);
-		result[0] = '\0';
-		return (result);
-	}
+		return (ft_strdup(""));
 	end = (ft_strlen(s1)) - 1;
 	while (is_set(s1[end], set) == 1)
 		end--;

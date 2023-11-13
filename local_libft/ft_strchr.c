@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:24:23 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/11/11 10:56:29 by sben-rho         ###   ########.fr       */
+/*   Updated: 2023/11/13 13:56:12 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char			*scopy;
+	char			*dest;
 	unsigned int	i;
+	unsigned char	set;
 
-	i = 0;
 	if (!s)
 		return (NULL);
-	scopy = (char *)s;
-	if (scopy[0] == '\0')
-		return ((char *)s);
-	while (scopy[i] != '\0')
+	set = c;
+	dest = (char *)s;
+	i = -1;
+	while (dest[++i] != '\0')
 	{
-		if (scopy[i] == c)
-			return ((char *)&s[i]);
-		else
-			i++;
+		if (dest[i] == set)
+			return (&dest[i]);
 	}
-	if (scopy[i] == '\0' && c == '\0')
-		return ((char *)&s[i]);
+	if (dest[i] == '\0' && set == '\0')
+		return (&dest[i]);
 	return (NULL);
 }
