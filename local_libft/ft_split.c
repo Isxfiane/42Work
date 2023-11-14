@@ -6,11 +6,12 @@
 /*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:01:57 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/11/13 18:42:02 by sben-rho         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:59:04 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static int	nb_of_split(char const *s, char c)
 {
@@ -18,7 +19,7 @@ static int	nb_of_split(char const *s, char c)
 	unsigned int	count;
 
 	i = 0;
-	count = 1;
+	count = 0;
 	while (s[i] != '\0')
 	{
 		if (s[i] == c)
@@ -30,42 +31,17 @@ static int	nb_of_split(char const *s, char c)
 		else
 			i++;
 	}
+	if (count == 0)
+		return (1);
 	return (count);
 }
 
-static int	fill_split(char **tab, unsigned int count, char *cpy, char c)
-{
-	unsigned int	i;
-	unsigned int	k;
-	size_t			len;
-
-	i = 0;
-	k = -1;
-	len = ft_strlen(cpy);
-	while (i < len)
-	{
-		count = i;
-		while (cpy[i] != c && i < len)
-			i++;
-		k++;
-		tab[k] = ft_substr(cpy, count, i - count);
-		if (tab[k] == NULL)
-			return (k);
-		while (cpy[i] == c && i < len)
-			i++;
-	}
-	k++;
-	tab[k] = NULL;
-	return (-1);
-}
-
-static void	*freeall(char *cpy, char **result, long long int n)
+static void	*freeall( char **result, unsigned int n)
 {
 	unsigned int	i;
 
 	i = 0;
-	free(cpy);
-	while (n + 1 != i)
+	while (n + 1 > i)
 	{
 		free(result[i]);
 		i++;
@@ -74,29 +50,45 @@ static void	*freeall(char *cpy, char **result, long long int n)
 	return (NULL);
 }
 
+char	**fillsplit(char **result, const char *s, unsigned int n, char c)
+{
+	unsigned int	i;
+	unsigned int	k;
+	unsigned int	save;
+
+	i = 0;
+	k = 0;
+	while (i != n + 1)
+	{
+		while (s[k] == c && s[k] != '\0')
+			k++;
+		save = k;
+		if (s[save] == '\0')
+			break ;
+		while (s[k] != c && s[k] != '\0')
+			k++;
+		if (k - save > 0)
+		{
+			result[i] = ft_substr(s, save, k - save);
+			if (result[i] == NULL)
+				return (freeall(result, i));
+		}
+		i++;
+	}
+	result[i] = NULL;
+	return (result);
+}
+
 char	**ft_split(char const *s, char c)
 {
-	char			*cpy;
-	char			charset[5];
-	unsigned int	count;
+	unsigned int	n;
 	char			**result;
-	long long int	n;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
-	cpy = (char *)s;
-	n = 0;
-	ft_memset(charset, c, 5);
-	cpy = ft_strtrim(cpy, charset);
-	if (cpy == NULL)
+	n = nb_of_split(s, c);
+	result = (char **) malloc (sizeof(char *) * (n + 1));
+	if (!result)
 		return (NULL);
-	count = nb_of_split(cpy, c);
-	result = (char **) malloc (sizeof(char *) * (count + 1));
-	if (result == NULL)
-		return (freeall(cpy, result, n));
-	n = fill_split(result, count, cpy, c);
-	if (n != -1)
-		return (freeall(cpy, result, n));
-	free(cpy);
-	return (result);
+	return (fillsplit(result, s, n, c));
 }

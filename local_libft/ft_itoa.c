@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:20:13 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/11/09 11:38:56 by sben-rho         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:13:18 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	get_size(unsigned int n)
 	return (count);
 }
 
-char	*get_numb(char *n, unsigned int nbr, int sign, int len)
+static char	*get_numb(char *n, unsigned int nbr, int sign, int len)
 {
 	int	save;
 
