@@ -50,34 +50,33 @@ static void	*freeall( char **result, unsigned int n)
 	return (NULL);
 }
 
-char	**fillsplit(char **result, const char *s, unsigned int n, char c)
+char **fillsplit(char **result, const char *s, unsigned int n, char c)
 {
-	unsigned int	i;
-	unsigned int	k;
-	unsigned int	save;
+    unsigned int i;
+    unsigned int k;
+    unsigned int save;
 
-	i = 0;
-	k = 0;
-	while (i != n + 1)
-	{
-		while (s[k] == c && s[k] != '\0')
-			k++;
-		save = k;
-		if (s[save] == '\0')
-			break ;
-		while (s[k] != c && s[k] != '\0')
-			k++;
-		if (k - save > 0)
-		{
-			result[i] = ft_substr(s, save, k - save);
-			if (result[i] == NULL)
-				return (freeall(result, i));
-		}
-		i++;
-	}
-	result[i] = NULL;
-	return (result);
+    i = 0;
+    k = 0;
+    while (i < n && s[k])
+    {
+        while (s[k] == c)
+            k++;
+        save = k;
+        while (s[k] && s[k] != c)
+            k++;
+        if (k - save > 0)
+        {
+            result[i] = ft_substr(s, save, k - save);
+            if (result[i] == NULL)
+                return (freeall(result, i));
+        }
+        i++;
+    }
+    result[i] = NULL;
+    return (result);
 }
+
 
 char	**ft_split(char const *s, char c)
 {
