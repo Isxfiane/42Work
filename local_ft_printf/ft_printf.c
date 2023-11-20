@@ -6,22 +6,27 @@
 /*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:48:03 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/11/17 15:01:17 by sben-rho         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:07:25 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-void	print_address(va_list args, unsigned int *cwrite)
+void	string_function(unsigned int *cwrite, char *str)
 {
-	ft_putstr_fd("0x", 1);
-	*cwrite = *cwrite + 2;
-	ft_putnbr_base((size_t)va_arg(args, long long int), "0123456789abcdef", cwrite);
+	if (!str)
+	{
+		ft_putstr_fd("(null)", 1);
+		*cwrite = *cwrite + 6;
+		return ;
+	}
+	ft_putstr_fd(str, 1);
+	*cwrite = *cwrite + ft_strlen(str);
 }
-static unsigned int	writebase(const char *str, unsigned int *cwrite, unsigned int i)
+
+static size_t	writebase(const char *str, unsigned int *cwrite, unsigned int i)
 {
-	int count;
+	size_t	count;
 
 	count = 0;
 	while (str[i] != '\0' && str[i] != '%')
@@ -37,21 +42,19 @@ static unsigned int	writebase(const char *str, unsigned int *cwrite, unsigned in
 static void	after_sign(unsigned int *cwrite, va_list args, char c)
 {
 	if (c == 'c')
-		ft_putchar_fd(c, 1);
+		ft_putchar_fd(va_arg(args, int), 1);
 	if (c == 's')
-		string_function(cwrite, args);
- 	if (c == 'p')
-		print_address(args, cwrite);
-	// if (c == 'd')
-	// 	print_float(va_arg(args, double), cwrite);
- 	if (c == 'i')
-	 	ft_putnbr_count(cwrite, args);
-	// if (c == 'u')
-	// A voir en fonction diff (Float Positive ?)
+		string_function(cwrite, va_arg(args, char *));
+	if (c == 'p')
+		print_address(va_arg(args, unsigned long long), cwrite);
+	if (c == 'i' || c == 'd')
+		ft_putnbr_count(cwrite, (va_arg(args, int)));
+	if (c == 'u')
+		ft_putunbr_count(cwrite, va_arg(args, unsigned int));
 	if (c == 'x')
-		ft_putnbr_base(va_arg(args, int), "0123456789abcdef", cwrite);
+		ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef", cwrite);
 	if (c == 'X')
-		ft_putnbr_base(va_arg(args, int), "0123456789ABCDEF", cwrite);
+		ft_putnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF", cwrite);
 	if (c == '%')
 		ft_putchar_fd('%', 1);
 	if (c == 'c' || c == '%')
@@ -63,8 +66,8 @@ int	ft_printf(const char *str, ...)
 	unsigned int	cwrite;
 	unsigned int	i;
 	unsigned int	len;
-	va_list args;
-	
+	va_list			args;
+
 	cwrite = 0;
 	i = 0;
 	len = ft_strlen(str) + 1;
@@ -73,25 +76,10 @@ int	ft_printf(const char *str, ...)
 	{
 		i = i + writebase(str, &cwrite, i);
 		if (i > len || i + 1 > len)
-			break;	
-			after_sign(&cwrite, args, str[i + 1]);
-			i = i + 2;
+			break ;
+		after_sign(&cwrite, args, str[i + 1]);
+		i = i + 2;
 	}
 	va_end(args);
 	return (cwrite);
-}
-
-//3099999904632568
-
-
-	int main()
-	{
-	float a;
-	int b;
-	char *str = "Zebi il a ";
-	char *str2 = " gun ce fou";
-
-	a = 556.556;
-	printf(" | [%d]\n", ft_printf("Oh %s%d%s il a cru akimbo ici ouuu", str, a, str2));
-	printf("\n[%f]\n", a);
 }
