@@ -43,26 +43,23 @@ char *save_buffer(char *buffer, char *result, int lenbuff, int *n)
 char	*get_next_line(int fd)
 {
 	int				n;
-	static char		*buffer;
+	static char		buffer[BUFFER_SIZE];
 	char			*result;
 	int				lenbuff;
 	
 	n = 0;
-	result = (char *) malloc (sizeof(char) * 1);
-	result = 0; 
+	result = (char *) malloc (sizeof(char) * 2);
+	result[0] = 'z';
+	result[1] = '\0';
 	while (n != -1)
 	{
 		lenbuff = read(fd, buffer, BUFFER_SIZE);
-		printf("Read good\n pour lenbuuf = %d\n", lenbuff);
 		if (lenbuff == -1)
 		{
-			printf("in IF\n");
 			free(result);
 			return (NULL);
 		}
-		printf("Hors if\n");
 		result = save_buffer(buffer, result, lenbuff, &n);
 	}
-	printf("Hors boucle\n");
 	return (result);
 }

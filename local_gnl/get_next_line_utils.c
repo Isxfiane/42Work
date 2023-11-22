@@ -22,7 +22,7 @@ char	*ft_strncpy(char *src, char *dest, int len)
 		dest[i] = src[i];
 		i++;
 	}
-	src[i] = '\0';
+	dest[i] = '\0';
 	return (dest);
 }
 
@@ -31,6 +31,8 @@ size_t ft_strlen(char *str)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i] != '\0')
 		i++;
 	return (i);
