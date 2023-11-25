@@ -8,10 +8,17 @@
 int main() {
 
 	int fd;
+	char *la;
 
 
 	fd = open("test.txt", O_RDONLY);
-	get_next_line(fd);
+
+	while (la != NULL)
+	{
+		la = get_next_line(fd);
+		printf("%s", la);
+	}
+
 
 
 	// char buffer[100];

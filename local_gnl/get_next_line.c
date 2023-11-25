@@ -30,8 +30,6 @@ char *save_buffer(char *buffer, char *result, int lenbuff, int *n)
 	{
 		result = (char *) malloc ((sizeof(char) * i) + (sizeof(char) * ft_strlen(temp)) +2);
 		result = ft_str2cpy(temp, buffer, result, i + 1);
-		// printf("%s", result);
-		// printf("[Signal : -1]");
 		*n = -1;
 	}
 	else
@@ -56,7 +54,7 @@ char	*get_next_line(int fd)
 	while (n != -1)
 	{
 		lenbuff = read(fd, buffer, BUFFER_SIZE);
-		if (lenbuff == -1)
+		if (lenbuff == -1 || lenbuff == 0)
 		{
 			free(result);
 			return (NULL);
