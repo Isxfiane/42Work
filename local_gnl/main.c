@@ -17,16 +17,13 @@ int main() {
 	{
 		la = get_next_line(fd);
 		printf("%s", la);
+		free(la);
 	}
 
+// Fin --> Si \n est suivie d'un char, save dans static buffer
+// 			Sinon Buffer = NULL
+// Début --> Si buffer != NULL
+// Après \n on récup
 
-
-	// char buffer[100];
-	// ssize_t bytesRead;
-
-	// printf("Entrez quelque chose : ");
-	// bytesRead = read(0, buffer, sizeof(buffer));
-	// printf("%s | [%ld]", buffer, bytesRead);
-	// printf("se : %s\n", get_next_line(0));
 	return 0;
 }

@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:48:03 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/11/20 18:07:25 by sben-rho         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:21:47 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	string_function(unsigned int *cwrite, char *str)
+int	string_function(unsigned int *cwrite, char *str)
 {
 	if (!str)
 	{
-		ft_putstr_fd("(null)", 1);
+		if (ft_putstr_fd("(null)", 1) == -1)
+			return (-1);
 		*cwrite = *cwrite + 6;
-		return ;
+		return (0);
 	}
-	ft_putstr_fd(str, 1);
+	if (ft_putstr_fd(str, 1) == -1)
+		return (-1);
 	*cwrite = *cwrite + ft_strlen(str);
+	return (0);
 }
 
 static size_t	writebase(const char *str, unsigned int *cwrite, unsigned int i)
@@ -31,7 +34,8 @@ static size_t	writebase(const char *str, unsigned int *cwrite, unsigned int i)
 	count = 0;
 	while (str[i] != '\0' && str[i] != '%')
 	{
-		ft_putchar_fd(str[i], 1);
+		if (ft_putchar_fd(str[i], 1) == -1)
+			return (-1);
 		i++;
 		count++;
 	}
@@ -39,26 +43,32 @@ static size_t	writebase(const char *str, unsigned int *cwrite, unsigned int i)
 	return (count);
 }
 
-static void	after_sign(unsigned int *cwrite, va_list args, char c)
+static int	after_sign(unsigned int *cwrite, va_list args, char c)
 {
+	int	temp;
+
+	temp = 0;
 	if (c == 'c')
-		ft_putchar_fd(va_arg(args, int), 1);
+		temp = ft_putchar_fd(va_arg(args, int), 1);
 	if (c == 's')
-		string_function(cwrite, va_arg(args, char *));
+		temp = string_function(cwrite, va_arg(args, char *));
 	if (c == 'p')
-		print_address(va_arg(args, unsigned long long), cwrite);
+		temp = print_address(va_arg(args, unsigned long long), cwrite);
 	if (c == 'i' || c == 'd')
-		ft_putnbr_count(cwrite, (va_arg(args, int)));
+		temp = ft_putnbr_count(cwrite, (va_arg(args, int)));
 	if (c == 'u')
-		ft_putunbr_count(cwrite, va_arg(args, unsigned int));
+		temp = ft_putunbr_count(cwrite, va_arg(args, unsigned int));
 	if (c == 'x')
-		ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef", cwrite);
+		temp = ft_putnbr_base(va_arg(args, unsigned int), 0, cwrite);
 	if (c == 'X')
-		ft_putnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF", cwrite);
+		temp = ft_putnbr_base(va_arg(args, unsigned int), 1, cwrite);
 	if (c == '%')
-		ft_putchar_fd('%', 1);
+		temp = ft_putchar_fd('%', 1);
 	if (c == 'c' || c == '%')
 		*cwrite = *cwrite + 1;
+	if (temp == -1)
+		return (-1);
+	return (0);
 }
 
 int	ft_printf(const char *str, ...)
@@ -77,7 +87,11 @@ int	ft_printf(const char *str, ...)
 		i = i + writebase(str, &cwrite, i);
 		if (i > len || i + 1 > len)
 			break ;
-		after_sign(&cwrite, args, str[i + 1]);
+		if (after_sign(&cwrite, args, str[i + 1]) == -1)
+		{
+			va_end(args);
+			return (-1);
+		}
 		i = i + 2;
 	}
 	va_end(args);

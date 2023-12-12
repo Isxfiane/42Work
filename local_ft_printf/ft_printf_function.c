@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_function.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:11:30 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/11/20 18:09:14 by sben-rho         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:56:06 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,48 +30,61 @@ static int	get_size(int nb)
 	return (i);
 }
 
-void	ft_putnbr_count(unsigned int *cwrite, int nb)
+int	ft_putnbr_count(unsigned int *cwrite, int nb)
 {
 	int	len;
 
 	len = get_size(nb);
-	ft_putnbr_fd(nb, 1);
+	if (ft_putnbr_fd(nb, 1) == -1)
+		return (-1);
 	if (nb >= 0)
 		*cwrite = *cwrite + len;
 	else
 		*cwrite = *cwrite + len + 1 ;
+	return (0);
 }
 
-void	ft_putnbr_base(unsigned long long n, char *base, unsigned int *cwrite)
+int	ft_putnbr_base(unsigned long long n, int i, unsigned int *cwrite)
 {
 	unsigned int	k;
+	char			*base;
 
+	if (i == 1)
+		base = "0123456789ABCDEF";
+	else
+		base = "0123456789abcdef";
 	k = ft_strlen(base);
 	if (n >= k)
 	{
-		ft_putnbr_base(n / k, base, cwrite);
-		ft_putnbr_base(n % k, base, cwrite);
+		ft_putnbr_base(n / k, i, cwrite);
+		ft_putnbr_base(n % k, i, cwrite);
 	}
 	else
 	{
-		ft_putchar_fd(base[n], 1);
+		if (ft_putchar_fd(base[n], 1) == -1)
+			return (-1);
 		*cwrite = *cwrite + 1;
 	}
+	return (0);
 }
 
-void	print_address(unsigned long long add, unsigned int *cwrite)
+int	print_address(unsigned long long add, unsigned int *cwrite)
 {
 	if (add == 0)
 	{
-		string_function(cwrite, "(nil)");
-		return ;
+		if (string_function(cwrite, "(nil)") == -1)
+			return (-1);
+		return (0);
 	}
-	ft_putstr_fd("0x", 1);
+	if (ft_putstr_fd("0x", 1) == -1)
+		return (-1);
 	*cwrite = *cwrite + 2;
-	ft_putnbr_base(add, "0123456789abcdef", cwrite);
+	if (ft_putnbr_base(add, 0, cwrite) == -1)
+		return (-1);
+	return (0);
 }
 
-void	ft_putunbr_count(unsigned int *cwrite, unsigned int nb)
+int	ft_putunbr_count(unsigned int *cwrite, unsigned int nb)
 {
 	if (nb > 9)
 	{
@@ -80,7 +93,9 @@ void	ft_putunbr_count(unsigned int *cwrite, unsigned int nb)
 	}
 	else
 	{
-		ft_putchar_fd(nb + '0', 1);
+		if (ft_putchar_fd(nb + '0', 1) == -1)
+			return (-1);
 		*cwrite = *cwrite + 1;
 	}
+	return (0);
 }

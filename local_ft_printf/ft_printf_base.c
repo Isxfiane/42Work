@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:25:36 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/11/20 15:49:32 by sben-rho         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:34:08 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,40 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	if (write(fd, &c, 1) == -1)
+		return (-1);
+	return (0);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
 	unsigned int	i;
 
 	i = 0;
 	while (s[i] != '\0')
 	{
-		ft_putchar_fd(s[i], fd);
+		if (ft_putchar_fd(s[i], fd) == -1)
+			return (-1);
 		i++;
 	}
+	return (0);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)
 	{
-		write(fd, "-2147483648", 11);
-		return ;
+		if (write(fd, "-2147483648", 11) == -1)
+			return (-1);
+		return (0);
 	}
 	if (n < 0)
 	{
 		n = n * -1;
-		ft_putchar_fd('-', fd);
+		if (ft_putchar_fd('-', fd) == -1)
+			return (-1);
 	}
 	if (n > 9)
 	{
@@ -57,5 +63,7 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(n % 10, fd);
 	}
 	else
-		ft_putchar_fd(n + '0', fd);
+		if (ft_putchar_fd(n + '0', fd) == -1)
+			return (-1);
+	return (0);
 }

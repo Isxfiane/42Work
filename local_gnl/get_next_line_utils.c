@@ -67,7 +67,7 @@ int ft_strchr(char *str, char c)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (i < BUFFER_SIZE)
 	{
 		if (str[i] == c)
 			return (i);
