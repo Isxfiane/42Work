@@ -1,0 +1,41 @@
+int	function_comm(comm ...)
+{
+ 0 : TRAITER; |  1 : PAS TOUCHE; |  2 : SOIT PAS TOUCHE, SOIT SWAP;
+ 3 : Counter tout les cas possible;
+ 4 : Isoler pour creer un cas 3 et faire cas 1;
+ 5 : Isoler pour creer un cas 3 et faire cas 2 (a l'envers);
+ 6 : Isoler pour creer un cas 3 et faire cas 3 (a l'envers);
+
+ Pour a l'envers traiter les nombre en negatif
+
+	https://medium.com/@ayogun/push-swap-c1f5d2d41e97
+ Pour les autre cas :
+ - Push 2 nombres en B
+ - push chaque prochain nombre en tant que new min ou max (max = pb) (min = pb + rrb) | la liste doit etre dans l'ordre
+
+ au lieu de remettre la liste en ordre a chaque fois, on la laisse en desordre et foncer vers la prochaine pose pour inclure le nombre
+ (En dessous ou dessus du nombre le plus proche)
+	quand on doit push un extreme on doit remettre la liste en ordre
+
+	rb	pb	rrb
+9	5	6	9
+5	1	5	6
+1	9	1	5
+		9	1
+
+ 9	8
+ 8	7
+ 7	6
+ 6	1
+ 4	3
+ 3	2
+ 2	1
+ 1	9
+
+	rb	pb	sb	rrb
+9	5	3	5	9
+5	1	5	3	5
+1	9	1	1	3
+		9	9	1
+
+}
