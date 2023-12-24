@@ -54,7 +54,7 @@ t_list	*ft_lst_rerot(t_list *a)
 	t_list *acp;
 	int temp;
 
-	if (ft_listlen(a) >= 1)
+	if (ft_listlen(a) <= 1)
 		return (a);
 	acp = a;
 	while (acp->next != NULL)

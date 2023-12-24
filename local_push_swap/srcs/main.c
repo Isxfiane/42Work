@@ -15,9 +15,6 @@ int	main(int argc, char **argv)
 {
 	t_list	*lista;
 
-	int	min;
-	int max;
-
 	if (argc == 1)
 		return (1);
 	lista = NULL;
@@ -29,7 +26,7 @@ int	main(int argc, char **argv)
 	}
 	ft_printf("A :");
 	ft_print_list(lista);
-	ft_mainalgo(lista);
+	lista = ft_mainalgo(lista);
 	ft_printf("A :");
 	ft_print_list(lista);
 	return (0);

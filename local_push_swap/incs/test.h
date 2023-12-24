@@ -47,11 +47,11 @@ t_list		*ft_lst_rerot(t_list *a); // rra | rrb | rrr	|
 //----------------------------------------------------------//
 
 //----------------------Function_Algo-------------------------------//
-void	ft_mainalgo(t_list *li); // Fontion directrice algo			|
+t_list 	*ft_mainalgo(t_list *li); // Fontion directrice algo			|
 int		ft_findmax(t_list *li); // Trouve le MAX et enovie valeur	|
 int		ft_findmin(t_list *li); // Trouve le MIN et enovie valeur	|
 int	    ft_isorder(t_list *li); // Liste en ordre ou pas			|
-void	case_two(t_list *li);
+void	case_two(t_list *li, char c);
+t_list 	*case_three(t_list *li, char c);
 //-------------------------------------------------------------------//
-
 #endif
