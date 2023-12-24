@@ -22,15 +22,15 @@ typedef struct s_list{
 }	t_list;
 
 //--------------------Function_Random-------------------------//
-long int	ft_atol(const char *nptr);
-//--------------------------------------------------------------//
+long int	ft_atol(const char *nptr);//						|
+//------------------------------------------------------------//
 
-//-------------------List_function------------------------//
-int			isemptylt(t_list *li); // (-1) VIDE || (0) REMPLIE
-int			ft_listlen(t_list *li); // len de la liste
-int			ft_listchr(t_list *li, long int x); // Cherche et renvoie pos
-void		ft_print_list(t_list *li); // Printf la con de toi
-//--------------------------------------------------------------//
+//-------------------List_function------------------------------------------//
+int			isemptylt(t_list *li); // (-1) VIDE || (0) REMPLIE              |
+int			ft_listlen(t_list *li); // len de la liste                      |
+int			ft_listchr(t_list *li, long int x); // Cherche et renvoie pos   |
+void		ft_print_list(t_list *li); // Printf la con de toi              |
+//--------------------------------------------------------------------------//
 t_list		*ft_lstadd_back(t_list *li, int x); // ADD-BACK
 t_list		*ft_lstadd_front(t_list *li, int x); // ADD-FRONT
 t_list		*ft_lstrm_back(t_list *li); // RM-BACK
@@ -46,10 +46,12 @@ t_list		*ft_lst_rot(t_list *a); // ra | rb | rr			|	cas de segfault & leaks /!
 t_list		*ft_lst_rerot(t_list *a); // rra | rrb | rrr	|
 //----------------------------------------------------------//
 
-//----------------------Function_Algo------------------------------//
+//----------------------Function_Algo-------------------------------//
 void	ft_mainalgo(t_list *li); // Fontion directrice algo			|
 int		ft_findmax(t_list *li); // Trouve le MAX et enovie valeur	|
 int		ft_findmin(t_list *li); // Trouve le MIN et enovie valeur	|
-//------------------------------------------------------------------//
+int	    ft_isorder(t_list *li); // Liste en ordre ou pas			|
+void	case_two(t_list *li);
+//-------------------------------------------------------------------//
 
 #endif

@@ -14,14 +14,13 @@
 int	main(int argc, char **argv)
 {
 	t_list	*lista;
-	t_list	*listb;
+
 	int	min;
 	int max;
 
 	if (argc == 1)
 		return (1);
 	lista = NULL;
-	listb = NULL;
 	lista = ft_fill_numb(lista, argc, argv);
 	if (lista == NULL)
 	{
@@ -30,10 +29,8 @@ int	main(int argc, char **argv)
 	}
 	ft_printf("A :");
 	ft_print_list(lista);
-	max = ft_findmax(lista);
-	min = ft_findmin(lista);
-	ft_printf("[MAX : %d] [%d]\n",max, ft_listchr(lista, max));
-	ft_printf("[MIN : %d] [%d]\n",min, ft_listchr(lista, min) );
-
+	ft_mainalgo(lista);
+	ft_printf("A :");
+	ft_print_list(lista);
 	return (0);
 }

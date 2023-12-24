@@ -1,6 +1,8 @@
 int	function_comm(comm ...)
 {
  0 : TRAITER; |  1 : PAS TOUCHE; |  2 : SOIT PAS TOUCHE, SOIT SWAP;
+
+
  3 : Counter tout les cas possible;
  4 : Isoler pour creer un cas 3 et faire cas 1;
  5 : Isoler pour creer un cas 3 et faire cas 2 (a l'envers);

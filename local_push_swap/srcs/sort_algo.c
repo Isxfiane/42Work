@@ -21,7 +21,7 @@
  * 					- Met en haut le chiffre le plus proche du nb
  * 						- push et swap si besoin
  *
-*
+ *
  * 		check note.txt au besoin
  */
 
@@ -61,6 +61,27 @@ int ft_findmin(t_list *li)
 	return (min);
 }
 
+int	ft_isorder(t_list *li)
+{
+	t_list	*temp;
+	int		p1;
+	int		p2;
+
+	temp = li;
+	p2 = 0;
+	while(temp->next != NULL)
+	{
+		p1 = temp->content;
+		if (p1 < p2 && p2 != 0)
+			return (-1);
+		p2 = p1;
+		temp=temp->next;
+	}
+	if (temp->content < p2)
+		return (-1);
+	return (0);
+}
+
 void	ft_mainalgo(t_list *li)
 {
 	int	len;
@@ -69,7 +90,7 @@ void	ft_mainalgo(t_list *li)
 	if (len == 0 || len == 1)
 		return ;
 	if (len == 2)
-		ft_printf("Cas '2'\n");
+		case_two(li);
 	if (len == 3)
 		ft_printf("Cas '2'\n");
 	if (len == 4)

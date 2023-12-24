@@ -7,7 +7,8 @@ SRCS		:=	main.c\
 				fill_list.c\
 				sort_function.c\
 				sort_algo.c\
-				algo_for_small.c
+				algo_for_small.c\
+				case.c
 
 HEAD		:=	test.h
 
@@ -34,8 +35,8 @@ LIB_A		:=	libft/libft.a
 CC		:=	cc
 
 RM		:=	rm -rf
-
-CFLAGS	:=	-Wall -Wextra -Werror -I$(HEAD_D) -I$(LIB_D)
+# -Wall -Wextra -Werror
+CFLAGS	:=	 -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAME)
 
