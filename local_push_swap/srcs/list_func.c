@@ -28,20 +28,21 @@ int	ft_listchr(t_list *li, long int x)
 	return (0);
 }
 
-t_list	*ft_lstrm_back(t_list *li)
+void	ft_lstrm_back(t_list **li)
 {
 	t_list	*temp;
 	t_list	*beforetemp;
 
-	if (isemptylt(li) == -1)
-		return (NULL);
-	if (li->next == NULL)
+	if (*li == NULL)
+		return ;
+	if ((*li)->next == NULL)
 	{
-		free(li);
-		return (NULL);
+		free(*li);
+		*li = NULL;
+		return ;
 	}
-	temp = li;
-	beforetemp = li;
+	temp = *li;
+	beforetemp = *li;
 	while (temp->next != NULL)
 	{
 		beforetemp = temp;
@@ -49,28 +50,22 @@ t_list	*ft_lstrm_back(t_list *li)
 	}
 	beforetemp->next = NULL;
 	free(temp);
-	return (li);
 }
 
-t_list	*ft_lstrm_front(t_list *li)
+void ft_lstrm_front(t_list **li)
 {
-	t_list	*element;
-
-	if (isemptylt(li) == -1)
-		return (NULL);
-	element = malloc(sizeof(*element));
-	if (!element)
-		return (NULL);
-	element = li->next;
-	free(li);
-	return (element);
+	if (*li == NULL)
+		return;
+	t_list *tmp = *li;
+	*li = (*li)->next;
+	free(tmp);
 }
 
-t_list	*ft_lst_clear(t_list *li)
+void	*ft_lst_clear(t_list *li)
 {
 	if (isemptylt(li) == -1)
 		return (NULL);
 	while (li != NULL)
-		li = ft_lstrm_back(li);
+		ft_lstrm_back(&li);
 	return (NULL);
 }

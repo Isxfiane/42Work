@@ -40,4 +40,11 @@ int	function_comm(comm ...)
 1	9	1	1	3
 		9	9	1
 
+
+Probleme sur la list_func, il faut faire en sorte de toujours avoir la meme liste
+sinon obliger de double return = pas possible
+Sur les fonction front
+
+mettre en param "char *a_print"
+
 }

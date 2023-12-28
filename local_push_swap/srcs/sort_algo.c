@@ -82,24 +82,23 @@ int	ft_isorder(t_list *li)
 	return (0);
 }
 
-t_list 	*ft_mainalgo(t_list *li)
+void 	ft_mainalgo(t_list **li, t_list **b)
 {
 	int	len;
 
-	len = ft_listlen(li);
+	len = ft_listlen(*li);
 	if (len == 0 || len == 1)
-		return(li);
+		return ;
 	if (len == 2)
-		case_two(li, 'a');
+		case_two(*li, 'a');
 	if (len == 3)
-		li = case_three(li, 'a');
+		case_three(li, 'a');
 	if (len == 4)
-		ft_printf("Cas '3'\n");
+		case_for(li, b);
 	if (len == 5)
 		ft_printf("Cas '4'\n");
 	if (len == 6)
 		ft_printf("Cas '5'\n");
 	if (len > 6)
 		ft_printf("Cas '6'\n");
-	return (li);
 }

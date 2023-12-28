@@ -48,45 +48,45 @@ void	ft_print_list(t_list *li) // A voir si retrait ou pas
 	ft_printf("\n"); // Printf la con de toi
 }
 
-t_list	*ft_lstadd_back(t_list *li, int x)
+void	ft_lstadd_back(t_list **li, int x)
 {
 	t_list	*element;
 	t_list	*temp;
-	t_list	*beforetemp;
 
 	element = malloc(sizeof(*element));
 	if (!element)
-		return (NULL);
+		return ;
 	element->content = x;
 	element->next = NULL;
-	if (isemptylt(li) == -1)
-		return (element);
-	temp = li;
+	if (*li == NULL)
+	{
+		*li = element;
+		return;
+	}
+	temp = *li;
 	while (temp->next != NULL)
 	{
-		beforetemp = temp;
 		temp = temp->next;
 	}
 	temp->next = element;
-	return (li);
 }
 
-t_list	*ft_lstadd_front(t_list *li, int x)
+void 	ft_lstadd_front(t_list **li, int x)
 {
-	t_list	*element;
+	t_list *element;
 
 	element = malloc(sizeof(*element));
 	if (!element)
-		return (NULL);
+		return;
 	element->content = x;
-	if (isemptylt(li) == -1)
+	if (*li == NULL)
 	{
 		element->next = NULL;
-		return (element);
+		*li = element;
 	}
 	else
 	{
-		element->next = li;
-		return (element);
+		element->next = *li;
+		*li = element;
 	}
 }

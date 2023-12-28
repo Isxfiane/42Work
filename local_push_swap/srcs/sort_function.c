@@ -26,41 +26,39 @@ void	ft_lst_swap(t_list *a)
 	a->content = temp;
 }
 
-void	ft_lst_push(t_list *a, t_list * b)
+void	ft_lst_push(t_list **a, t_list **b)
 {
 	int tempa;
 
-	if (isemptylt(b) == -1)
+	if (isemptylt(*a) == -1)
 		return ;
-	tempa = a->content;
-	a->content = b->content;
-	b->content = tempa;
+	tempa = (*a)->content;
+	ft_lstrm_front(a);
+	ft_lstadd_front(b, tempa);
 }
 
-t_list	*ft_lst_rot(t_list *a)
+void	ft_lst_rot(t_list **a)
 {
 	int temp;
 
-	if (ft_listlen(a) <= 1)
-		return (a);
-	temp = a->content;
-	a = ft_lstrm_front(a);
+	if (ft_listlen(*a) <= 1)
+		return ;
+	temp = (*a)->content;
+	ft_lstrm_front(a);
 	ft_lstadd_back(a, temp);
-	return (a);
 }
 
-t_list	*ft_lst_rerot(t_list *a)
+void	ft_lst_rerot(t_list **a)
 {
 	t_list *acp;
 	int temp;
 
-	if (ft_listlen(a) <= 1)
-		return (a);
-	acp = a;
+	if (ft_listlen(*a) <= 1)
+		return ;
+	acp = *a;
 	while (acp->next != NULL)
 		acp = acp->next;
 	temp = acp->content;
-	a = ft_lstrm_back(a);
-	a = ft_lstadd_front(a, temp);
-	return (a);
+	ft_lstrm_back(a);
+	ft_lstadd_front(a, temp);
 }
