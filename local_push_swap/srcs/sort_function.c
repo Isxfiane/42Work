@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "test.h"
 
-void	ft_lst_swap(t_list *a)
+void	ft_lst_swap(t_list *a, char *print)
 {
 	t_list *before;
 	int	temp;
@@ -24,9 +24,10 @@ void	ft_lst_swap(t_list *a)
 	a->content = before->content;
 	a = a->next;
 	a->content = temp;
+	ft_printf("%s\n", print);
 }
 
-void	ft_lst_push(t_list **a, t_list **b)
+void	ft_lst_push(t_list **a, t_list **b,  char *print)
 {
 	int tempa;
 
@@ -35,9 +36,10 @@ void	ft_lst_push(t_list **a, t_list **b)
 	tempa = (*a)->content;
 	ft_lstrm_front(a);
 	ft_lstadd_front(b, tempa);
+	ft_printf("%s\n", print);
 }
 
-void	ft_lst_rot(t_list **a)
+void	ft_lst_rot(t_list **a, char *print)
 {
 	int temp;
 
@@ -46,9 +48,10 @@ void	ft_lst_rot(t_list **a)
 	temp = (*a)->content;
 	ft_lstrm_front(a);
 	ft_lstadd_back(a, temp);
+	ft_printf("%s\n", print);
 }
 
-void	ft_lst_rerot(t_list **a)
+void	ft_lst_rerot(t_list **a, char *print)
 {
 	t_list *acp;
 	int temp;
@@ -61,4 +64,5 @@ void	ft_lst_rerot(t_list **a)
 	temp = acp->content;
 	ft_lstrm_back(a);
 	ft_lstadd_front(a, temp);
+	ft_printf("%s\n", print);
 }

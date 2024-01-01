@@ -52,7 +52,7 @@ void	ft_lstrm_back(t_list **li)
 	free(temp);
 }
 
-void ft_lstrm_front(t_list **li)
+void	ft_lstrm_front(t_list **li)
 {
 	if (*li == NULL)
 		return;

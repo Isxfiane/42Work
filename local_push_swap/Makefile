@@ -6,9 +6,9 @@ SRCS		:=	main.c\
 				list_base_fun.c\
 				fill_list.c\
 				sort_function.c\
-				sort_algo.c\
-				algo_for_small.c\
-				case.c
+				algo_func.c\
+				case.c\
+				algo.c
 
 HEAD		:=	test.h
 
@@ -36,7 +36,7 @@ CC		:=	cc
 
 RM		:=	rm -rf
 # -Wall -Wextra -Werror
-CFLAGS	:= -g -g3 -I$(HEAD_D) -I$(LIB_D)
+CFLAGS	:=	-fsanitize=address -g -g3 -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAME)
 

@@ -25,7 +25,7 @@
  * 		check note.txt au besoin
  */
 
-int ft_findmax(t_list *li)
+int	ft_findmax(t_list *li)
 {
 	t_list *stack;
 	int	max;
@@ -81,24 +81,50 @@ int	ft_isorder(t_list *li)
 		return (-1);
 	return (0);
 }
+// remise en place de la liste
 
-void 	ft_mainalgo(t_list **li, t_list **b)
+int	ft_isreverse(t_list *li)
 {
-	int	len;
+	t_list	*temp;
+	int		p1;
+	int		p2;
 
-	len = ft_listlen(*li);
-	if (len == 0 || len == 1)
-		return ;
-	if (len == 2)
-		case_two(*li, 'a');
-	if (len == 3)
-		case_three(li, 'a');
-	if (len == 4)
-		case_for(li, b);
-	if (len == 5)
-		ft_printf("Cas '4'\n");
-	if (len == 6)
-		ft_printf("Cas '5'\n");
-	if (len > 6)
-		ft_printf("Cas '6'\n");
+	temp = li;
+	p2 = 0;
+	while(temp->next != NULL)
+	{
+		p1 = temp->content;
+		if (p1 > p2 && p2 != 0)
+			return (-1);
+		p2 = p1;
+		temp=temp->next;
+	}
+	if (temp->content > p2)
+		return (-1);
+	return (0);
+}
+
+void	ft_lst_reverse(t_list **li)
+{
+	int	index;
+	int len;
+	int nb;
+
+	len = ft_listlen((*li)) + 1;
+	index = ft_listchr((*li), ft_findmax((*li)));
+	index = index - 1;
+	ft_printf("NB = %d | len = %d | index = %d\n", nb, len , index);
+	if (len / 2 < index + 1)
+	{
+		while (++index < len)
+			ft_lst_rerot(li, "rrb");
+	}
+	else
+	{
+		while (index != 0)
+		{
+			ft_lst_rot(li, "rb");
+			index--;
+		}
+	}
 }

@@ -39,10 +39,10 @@ void		*ft_lst_clear(t_list *li); // clear all
 //--------------------------------------------------------------//
 
 //----------------------Function_Game-----------------------//
-void		ft_lst_swap(t_list *a); // sa | sb | ss			|
-void		ft_lst_push(t_list **a, t_list **b); // pa | pb	| /!\ Attention
-void		ft_lst_rot(t_list **a); // ra | rb | rr			|	cas de segfault & leaks /!
-void		ft_lst_rerot(t_list **a); // rra | rrb | rrr	|
+void		ft_lst_swap(t_list *a, char *print); // sa | sb | ss			|
+void		ft_lst_push(t_list **a, t_list **b,  char *print); // pa | pb	| /!\ Attention
+void		ft_lst_rot(t_list **a, char *print); // ra | rb | rr			|	cas de segfault & leaks /!
+void		ft_lst_rerot(t_list **a, char *print); // rra | rrb | rrr	|
 //----------------------------------------------------------//
 
 //----------------------Function_Algo-------------------------------//
@@ -50,8 +50,9 @@ void	ft_mainalgo(t_list **li, t_list **b); // Fontion directrice algo			|
 int		ft_findmax(t_list *li); // Trouve le MAX et enovie valeur	|
 int		ft_findmin(t_list *li); // Trouve le MIN et enovie valeur	|
 int	    ft_isorder(t_list *li); // Liste en ordre ou pas			|
-void	case_two(t_list *li, char c);
-void	case_three(t_list **li, char c);
-void	case_for(t_list **a, t_list **b);
+void	case_two(t_list *li, char *c);
+void	case_three(t_list **li);
+int		ft_isreverse(t_list *li);
+void	ft_lst_reverse(t_list **li);
 //-------------------------------------------------------------------//
 #endif

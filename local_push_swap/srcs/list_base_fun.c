@@ -42,10 +42,10 @@ void	ft_print_list(t_list *li) // A voir si retrait ou pas
 		return;
 	while (li != NULL)
 	{
-		ft_printf("[%d]", li->content); // Printf la con de toi
+		ft_printf("[%d]", li->content);
 		li = li->next;
 	}
-	ft_printf("\n"); // Printf la con de toi
+	ft_printf("\n");
 }
 
 void	ft_lstadd_back(t_list **li, int x)
@@ -71,7 +71,7 @@ void	ft_lstadd_back(t_list **li, int x)
 	temp->next = element;
 }
 
-void 	ft_lstadd_front(t_list **li, int x)
+void	ft_lstadd_front(t_list **li, int x)
 {
 	t_list *element;
 

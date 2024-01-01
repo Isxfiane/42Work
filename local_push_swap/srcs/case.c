@@ -1,42 +1,34 @@
 #include "test.h"
 
-void	case_two(t_list *li, char c)
+void	case_two(t_list *li, char *str)
 {
 	if (ft_isorder(li) == -1)
 	{
-		ft_lst_swap(li);
-		ft_printf("s%c\n", c);
+		ft_lst_swap(li, str);
+		ft_printf("%s\n", str);
 	}
 }
-t_list 	*algoforthree(t_list **li, int min, int max, char c)
+t_list	*algoforthree(t_list **li, int min, int max)
 {
-	if (min == 2 && max == 3) // Nice
-		case_two(*li, c);
-	else if (max == 1 && min == 3) // reroot
+	if (min == 2 && max == 3)
+		case_two(*li, "sa");
+	else if (max == 1 && min == 3)
 	{
-		case_two(*li, c);
-		ft_lst_rerot(li);
-		ft_printf("rr%c\n", c);
+		case_two(*li, "sa");
+		ft_lst_rerot(li, "rra");
 	}
-	else if (max == 1 && min == 2) // Nice
+	else if (max == 1 && min == 2)
+		ft_lst_rot(li, "ra");
+	else if (min == 1 && max == 2)
 	{
-		ft_lst_rot(li);
-		ft_printf("r%c\n", c);
-	}
-	else if (min == 1 && max == 2) // Nice
-	{
-		case_two(*li, c);
-		ft_lst_rot(li);
-		ft_printf("r%c\n", c);
+		case_two(*li, "sa");
+		ft_lst_rot(li, "ra");
 	}
 	else if (max == 2 && min == 3)
-	{
-		ft_lst_rerot(li);
-		ft_printf("rr%c\n", c);
-	}
+		ft_lst_rerot(li, "rra");
 	return (*li);
 }
-void	case_three(t_list **li, char c)
+void	case_three(t_list **li)
 {
 	int min;
 	int max;
@@ -49,12 +41,5 @@ void	case_three(t_list **li, char c)
 	min = ft_findmin(*li);
 	inmin = ft_listchr(*li, min);
 	inmax = ft_listchr(*li, max);
-	algoforthree(li, inmin, inmax, c);
-}
-
-void	case_for(t_list **a, t_list **b)
-{
-	ft_lst_push(a, b);
-	ft_printf("pb\n");
-	case_three(a, 'a');
+	algoforthree(li, inmin, inmax);
 }

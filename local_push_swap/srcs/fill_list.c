@@ -39,7 +39,7 @@ long int	ft_atol(const char *nptr)
 	return (nb * sign);
 }
 
-t_list 	*ft_fill_numb(t_list *li, int argc, char **argv)
+t_list	*ft_fill_numb(t_list *li, int argc, char **argv)
 {
 	int			i;
 	long int	nb;
