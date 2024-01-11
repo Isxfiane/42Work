@@ -1,71 +1,95 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_func.c                                        :+:      :+:    :+:   */
+/*   list_base_fun.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 12:23:28 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/12/22 14:36:08 by sben-rho         ###   ########.fr       */
+/*   Created: 2023/12/19 12:23:21 by sben-rho          #+#    #+#             */
+/*   Updated: 2024/01/05 09:37:27 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "test.h"
+/*
+int		isemptylt(t_list *li);
+int		ft_listlen(t_list *li);
+void	ft_print_list(t_list *li);
+int		ft_isorder(t_list *li);
+int		ft_isreverse(t_list *li);
+*/
 
-int	ft_listchr(t_list *li, long int x)
+int	isemptylt(t_list *li)
 {
-	int i;
-
-	if (isemptylt(li) == -1)
-		return (0);
-	i = 1;
-	while (li != NULL)
-	{
-		if (li->content == x)
-			return (i);
-		i++;
-		li = li->next;
-	}
+	if (li == NULL)
+		return (-1);
 	return (0);
 }
 
-void	ft_lstrm_back(t_list **li)
+int	ft_listlen(t_list *li)
 {
-	t_list	*temp;
-	t_list	*beforetemp;
+	int	size;
 
-	if (*li == NULL)
-		return ;
-	if ((*li)->next == NULL)
+	size = 0;
+	if (isemptylt(li) == -1)
+		return (size);
+	while (li != NULL)
 	{
-		free(*li);
-		*li = NULL;
-		return ;
+		size++;
+		li = li->next;
 	}
-	temp = *li;
-	beforetemp = *li;
-	while (temp->next != NULL)
-	{
-		beforetemp = temp;
-		temp = temp->next;
-	}
-	beforetemp->next = NULL;
-	free(temp);
+	return (size);
 }
 
-void	ft_lstrm_front(t_list **li)
-{
-	if (*li == NULL)
-		return;
-	t_list *tmp = *li;
-	*li = (*li)->next;
-	free(tmp);
-}
-
-void	*ft_lst_clear(t_list *li)
+void	ft_print_list(t_list *li)
 {
 	if (isemptylt(li) == -1)
-		return (NULL);
+		return ;
 	while (li != NULL)
-		ft_lstrm_back(&li);
-	return (NULL);
+	{
+		ft_printf("[%d]", li->content);
+		li = li->next;
+	}
+	ft_printf("\n");
+}
+
+int	ft_isorder(t_list *li)
+{
+	t_list	*temp;
+	int		p1;
+	int		p2;
+
+	temp = li;
+	p2 = 0;
+	while (temp->next != NULL)
+	{
+		p1 = temp->content;
+		if (p1 < p2 && p2 != 0)
+			return (-1);
+		p2 = p1;
+		temp = temp->next;
+	}
+	if (temp->content < p2)
+		return (-1);
+	return (0);
+}
+
+int	ft_isreverse(t_list *li)
+{
+	t_list		*temp;
+	int			p1;
+	long int	p2;
+
+	temp = li;
+	p2 = -21474836475;
+	while (temp->next != NULL)
+	{
+		p1 = temp->content;
+		if (p1 > p2 && p2 != 0)
+			return (-1);
+		p2 = p1;
+		temp = temp->next;
+	}
+	if (temp->content > p2)
+		return (-1);
+	return (0);
 }

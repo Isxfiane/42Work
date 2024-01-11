@@ -6,20 +6,20 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:06:08 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/12/21 16:53:59 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/04 07:28:33 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "test.h"
 
 void	ft_lst_swap(t_list *a, char *print)
 {
-	t_list *before;
-	int	temp;
+	t_list	*before;
+	int		temp;
 
 	if (isemptylt(a) == -1 || ft_listlen(a) <= 1)
 		return ;
 	before = a;
-	before= before->next;
+	before = before->next;
 	temp = a->content;
 	a->content = before->content;
 	a = a->next;
@@ -27,9 +27,9 @@ void	ft_lst_swap(t_list *a, char *print)
 	ft_printf("%s\n", print);
 }
 
-void	ft_lst_push(t_list **a, t_list **b,  char *print)
+void	ft_lst_push(t_list **a, t_list **b, char *print)
 {
-	int tempa;
+	int	tempa;
 
 	if (isemptylt(*a) == -1)
 		return ;
@@ -41,7 +41,7 @@ void	ft_lst_push(t_list **a, t_list **b,  char *print)
 
 void	ft_lst_rot(t_list **a, char *print)
 {
-	int temp;
+	int	temp;
 
 	if (ft_listlen(*a) <= 1)
 		return ;
@@ -53,8 +53,8 @@ void	ft_lst_rot(t_list **a, char *print)
 
 void	ft_lst_rerot(t_list **a, char *print)
 {
-	t_list *acp;
-	int temp;
+	t_list	*acp;
+	int		temp;
 
 	if (ft_listlen(*a) <= 1)
 		return ;

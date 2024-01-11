@@ -1,14 +1,16 @@
 ########################################################################################################################
 #                                                       VARIABLE                                                       #
 ########################################################################################################################
-SRCS		:=	main.c\
-				list_func.c\
-				list_base_fun.c\
-				fill_list.c\
-				sort_function.c\
-				algo_func.c\
+SRCS		:=	algo.c\
 				case.c\
-				algo.c
+				list_chr.c\
+				list_chr_func.c\
+				list_func.c\
+				list_main_func.c\
+				main.c\
+				parsing.c\
+				sort_function.c
+
 
 HEAD		:=	test.h
 
@@ -35,8 +37,8 @@ LIB_A		:=	libft/libft.a
 CC		:=	cc
 
 RM		:=	rm -rf
-# -Wall -Wextra -Werror
-CFLAGS	:=	-fsanitize=address -g -g3 -I$(HEAD_D) -I$(LIB_D)
+#
+CFLAGS	:=	 -Wall -Wextra -Werror -fsanitize=address -g -g3 -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAME)
 

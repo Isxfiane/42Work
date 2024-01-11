@@ -54,7 +54,6 @@ all	:	$(NAME)
 $(NAME) : $(OBJ)
 	$(AR) rcs libft_temp.a $^
 	$(AR) rcT libft.a libft_temp.a ft_printf/libftprintf.a
-	$(RM) libft_temp.a
 
 $(OBJ_DIR)/%.o : %.c $(INC) $(LIB_A)
 	mkdir -p $(dir $@)
@@ -71,6 +70,7 @@ clean :
 fclean :
 	$(MAKE) clean
 	$(RM) $(NAME)
+	$(RM) libft_temp.a
 	make -C ft_printf/ fclean
 
 re :

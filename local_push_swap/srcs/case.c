@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   case.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/04 07:24:42 by sben-rho          #+#    #+#             */
+/*   Updated: 2024/01/10 10:59:30 by sben-rho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "test.h"
 
 void	case_two(t_list *li, char *str)
@@ -5,9 +16,9 @@ void	case_two(t_list *li, char *str)
 	if (ft_isorder(li) == -1)
 	{
 		ft_lst_swap(li, str);
-		ft_printf("%s\n", str);
 	}
 }
+
 t_list	*algoforthree(t_list **li, int min, int max)
 {
 	if (min == 2 && max == 3)
@@ -28,12 +39,13 @@ t_list	*algoforthree(t_list **li, int min, int max)
 		ft_lst_rerot(li, "rra");
 	return (*li);
 }
+
 void	case_three(t_list **li)
 {
-	int min;
-	int max;
-	int inmin;
-	int inmax;
+	int	min;
+	int	max;
+	int	inmin;
+	int	inmax;
 
 	if (ft_isorder(*li) == 0)
 		return ;
@@ -42,4 +54,17 @@ void	case_three(t_list **li)
 	inmin = ft_listchr(*li, min);
 	inmax = ft_listchr(*li, max);
 	algoforthree(li, inmin, inmax);
+}
+
+void	case_for(t_list **la, t_list **lb)
+{
+	int	inmin;
+	int	inmax;
+
+	ft_lst_push(la, lb, "pb");
+	inmin = ft_listchr(*la, ft_findmin(*la));
+	inmax = ft_listchr(*la, ft_findmax(*la));
+	algoforthree(la, inmin, inmax);
+	rotpush(la, lb, (*lb)->content);
+	ft_lst_reverse(la, ft_findmin(*la), "ra", "rra");
 }

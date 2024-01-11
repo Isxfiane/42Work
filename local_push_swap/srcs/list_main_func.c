@@ -1,52 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_base_fun.c                                    :+:      :+:    :+:   */
+/*   list_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 12:23:21 by sben-rho          #+#    #+#             */
-/*   Updated: 2023/12/19 18:37:36 by sben-rho         ###   ########.fr       */
+/*   Created: 2023/12/19 12:23:28 by sben-rho          #+#    #+#             */
+/*   Updated: 2024/01/05 09:31:46 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "test.h"
-// ft_lstnew -> new list avec le bloc bloc de set
-// ft_lstadd_front --> puhs_front_list
-// ft_lstadd_back --> push_back_list
-
-int	isemptylt(t_list *li)
-{
-	if (li == NULL)
-		return (-1);
-	return (0);
-}
-
-int	ft_listlen(t_list *li) // ft_lstsize
-{
-	int	size;
-
-	size = 0;
-	if (isemptylt(li) == -1)
-		return (size);
-	while (li != NULL)
-	{
-		size++;
-		li = li->next;
-	}
-	return (size);
-}
-
-void	ft_print_list(t_list *li) // A voir si retrait ou pas
-{
-	if (isemptylt(li) == -1)
-		return;
-	while (li != NULL)
-	{
-		ft_printf("[%d]", li->content);
-		li = li->next;
-	}
-	ft_printf("\n");
-}
+/*
+void	ft_lstadd_back(t_list **li, int x);
+void	ft_lstadd_front(t_list **li, int x);
+void	ft_lstrm_back(t_list **li);
+void	ft_lstrm_front(t_list **li);
+void	*ft_lst_clear(t_list *li);
+*/
 
 void	ft_lstadd_back(t_list **li, int x)
 {
@@ -61,7 +31,7 @@ void	ft_lstadd_back(t_list **li, int x)
 	if (*li == NULL)
 	{
 		*li = element;
-		return;
+		return ;
 	}
 	temp = *li;
 	while (temp->next != NULL)
@@ -73,11 +43,11 @@ void	ft_lstadd_back(t_list **li, int x)
 
 void	ft_lstadd_front(t_list **li, int x)
 {
-	t_list *element;
+	t_list	*element;
 
 	element = malloc(sizeof(*element));
 	if (!element)
-		return;
+		return ;
 	element->content = x;
 	if (*li == NULL)
 	{
@@ -89,4 +59,48 @@ void	ft_lstadd_front(t_list **li, int x)
 		element->next = *li;
 		*li = element;
 	}
+}
+
+void	ft_lstrm_back(t_list **li)
+{
+	t_list	*temp;
+	t_list	*beforetemp;
+
+	if (*li == NULL)
+		return ;
+	if ((*li)->next == NULL)
+	{
+		free(*li);
+		*li = NULL;
+		return ;
+	}
+	temp = *li;
+	beforetemp = *li;
+	while (temp->next != NULL)
+	{
+		beforetemp = temp;
+		temp = temp->next;
+	}
+	beforetemp->next = NULL;
+	free(temp);
+}
+
+void	ft_lstrm_front(t_list **li)
+{
+	t_list	*tmp;
+
+	if (*li == NULL)
+		return ;
+	tmp = *li;
+	*li = (*li)->next;
+	free(tmp);
+}
+
+void	*ft_lst_clear(t_list *li)
+{
+	if (isemptylt(li) == -1)
+		return (NULL);
+	while (li != NULL)
+		ft_lstrm_back(&li);
+	return (NULL);
 }
