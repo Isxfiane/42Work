@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 07:20:17 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/10 12:34:27 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/15 08:11:50 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	logicalpush(t_list **la, t_list **lb)
 	ft_lst_push(la, lb, "pb");
 	if (ft_isorder(*lb) == 0)
 		ft_lst_swap(*lb, "sb");
-	while (ft_listlen((*la)) > 3)
+	while (ft_listlen((*la)) > 3) // <
 	{
 		max = ft_findmax((*lb));
 		min = ft_findmin((*lb));
@@ -75,7 +75,7 @@ void	logcical_replace(t_list **la, t_list **lb)
 			if (ft_isorder(*la) == -1)
 				ft_lst_reverse(la, ft_findmin(*la), "ra", "rra");
 			ft_lst_push(lb, la, "pa");
-			if ((*la)->content > ft_findmin(*la)) // <
+			if ((*la)->content > ft_findmin(*la))
 				ft_lst_rot(la, "ra");
 		}
 		else
@@ -101,14 +101,13 @@ void	ft_mainalgo(t_list **li, t_list **b)
 		case_three(li);
 	if (len == 4)
 		case_for(li, b);
-	if (len > 4 )
+	if (len > 4  && len < 45)
 	{
 		logicalpush(li, b);
 		ft_lst_reverse(b, ft_findmax((*b)), "rb", "rrb");
 		case_three(li);
 		logcical_replace(li, b);
 	}
-//	if (len > 45)
-//	sortbigaglo(li, b);
-// && len < 45
+	if (len > 45)
+		sortbigaglo(li, b, len);
 }

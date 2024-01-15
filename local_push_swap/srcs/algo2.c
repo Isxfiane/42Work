@@ -14,14 +14,14 @@ void	minialgo(t_list **la, t_list **lb)
 		if (ft_isreverse((*lb)) == -1)
 			ft_lst_reverse(lb, ft_findmax((*lb)), "rb", "rrb");
 		ft_lst_push(la, lb, "pb");
-		if (content > max)
+		if (content < max)
 			ft_lst_rot(lb, "rb");
 	}
 	else
 		safeplace(la, lb, content);
 }
 
-void	pushandrepush(t_list **la, t_list **lb)
+void	pushandrepush(t_list **la, t_list **lb, int limit)
 {
 	int len;
 	int	j;
@@ -33,9 +33,9 @@ void	pushandrepush(t_list **la, t_list **lb)
 	while (len != 0)
 	{
 		minialgo(la, lb);
-		if (i == 10 || len == 1)
+		if (i == limit || len == 1)
 		{
-			while (j != 10)
+			while (j != limit)
 			{
 				ft_lst_reverse(lb, ft_findmax((*lb)), "rb", "rrb");
 				ft_lst_push(lb, la, "pa");
@@ -49,10 +49,17 @@ void	pushandrepush(t_list **la, t_list **lb)
 		i++;
 	}
 }
-void	sortbigaglo(t_list **la, t_list **lb)
+void	sortbigaglo(t_list **la, t_list **lb, int len)
 {
-
-	pushandrepush(la, lb); // Donc la j'ai plein de morceaux de 10
+	if (len > 450)
+		pushandrepush(la, lb, 50);
+	else
+		pushandrepush(la, lb, 20);
+	logicalpush(la, lb);
+	ft_lst_reverse(lb, ft_findmax((*lb)), "rb", "rrb");
+//	ft_lst_reverse(lb, ft_findmin((*la)), "ra", "rra");
+	case_three(la);
+	logcical_replace(la, lb);
 
 
 }

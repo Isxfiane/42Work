@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:34:28 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/11 13:46:58 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/15 07:57:47 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef TEST_H
@@ -55,7 +55,9 @@ int			ft_lst_find_near(t_list *li, int nb);
 void		logcical_replace(t_list **la, t_list **lb);
 void		rotpush(t_list **la, t_list **lb, int x);
 
-void	sortbigaglo(t_list **la, t_list **lb);
+void	sortbigaglo(t_list **la, t_list **lb, int len);
 void	safeplace(t_list **la, t_list **lb, int content);
+void	pushandrepush(t_list **la, t_list **lb, int limit);
+void	logicalpush(t_list **la, t_list **lb);
 
 #endif
