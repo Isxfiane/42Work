@@ -63,6 +63,7 @@ void	sortbigaglo(t_list **la, t_list **lb, int len)
 {
 	if (len > 498)
 	{
+		ft_lst_rerot(la, "rra");
 		pushandrepush(la, lb, 50);
 		logicalpush(la, lb, 50);
 	}
