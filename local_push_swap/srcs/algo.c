@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 07:20:17 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/15 08:11:50 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:46:23 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	safeplace(t_list **la, t_list **lb, int content)
 	ft_lst_push(la, lb, "pb");
 }
 
-void	logicalpush(t_list **la, t_list **lb)
+void	logicalpush(t_list **la, t_list **lb, int limit)
 {
 	int	min;
 	int	max;
@@ -33,7 +33,7 @@ void	logicalpush(t_list **la, t_list **lb)
 	ft_lst_push(la, lb, "pb");
 	if (ft_isorder(*lb) == 0)
 		ft_lst_swap(*lb, "sb");
-	while (ft_listlen((*la)) > 3) // <
+	while (ft_listlen((*la)) > limit)
 	{
 		max = ft_findmax((*lb));
 		min = ft_findmin((*lb));
@@ -43,8 +43,8 @@ void	logicalpush(t_list **la, t_list **lb)
 			if (ft_isreverse((*lb)) == -1)
 				ft_lst_reverse(lb, ft_findmax((*lb)), "rb", "rrb");
 			ft_lst_push(la, lb, "pb");
-			if (content > max)
-				ft_lst_rot(lb, "rb");
+//			if (content > max)
+//				ft_lst_rot(lb, "rb"); PLUS QUE 1
 		}
 		else
 			safeplace(la, lb, content);
@@ -75,13 +75,9 @@ void	logcical_replace(t_list **la, t_list **lb)
 			if (ft_isorder(*la) == -1)
 				ft_lst_reverse(la, ft_findmin(*la), "ra", "rra");
 			ft_lst_push(lb, la, "pa");
-			if ((*la)->content > ft_findmin(*la))
-				ft_lst_rot(la, "ra");
 		}
 		else
-		{
 			rotpush(la, lb, temp);
-		}
 	}
 	ft_lst_reverse(la, ft_findmin(*la), "ra", "rra");
 }
@@ -103,7 +99,7 @@ void	ft_mainalgo(t_list **li, t_list **b)
 		case_for(li, b);
 	if (len > 4  && len < 45)
 	{
-		logicalpush(li, b);
+		logicalpush(li, b, 3);
 		ft_lst_reverse(b, ft_findmax((*b)), "rb", "rrb");
 		case_three(li);
 		logcical_replace(li, b);

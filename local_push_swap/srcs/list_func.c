@@ -60,6 +60,8 @@ int	ft_isorder(t_list *li)
 
 	temp = li;
 	p2 = 0;
+	if (isemptylt(li) == -1)
+		return (0);
 	while (temp->next != NULL)
 	{
 		p1 = temp->content;
