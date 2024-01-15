@@ -9,7 +9,8 @@ SRCS		:=	algo.c\
 				list_main_func.c\
 				main.c\
 				parsing.c\
-				sort_function.c
+				sort_function.c\
+				algo2.c
 
 
 HEAD		:=	test.h

@@ -81,6 +81,8 @@ int	ft_isreverse(t_list *li)
 
 	temp = li;
 	p2 = -21474836475;
+	if (li == NULL)
+		return (0);
 	while (temp->next != NULL)
 	{
 		p1 = temp->content;

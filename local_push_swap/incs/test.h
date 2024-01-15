@@ -54,4 +54,8 @@ void		ft_lst_reverse(t_list **li, int x, char *rot, char *rerot);
 int			ft_lst_find_near(t_list *li, int nb);
 void		logcical_replace(t_list **la, t_list **lb);
 void		rotpush(t_list **la, t_list **lb, int x);
+
+void	sortbigaglo(t_list **la, t_list **lb);
+void	safeplace(t_list **la, t_list **lb, int content);
+
 #endif

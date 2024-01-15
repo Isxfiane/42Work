@@ -101,11 +101,14 @@ void	ft_mainalgo(t_list **li, t_list **b)
 		case_three(li);
 	if (len == 4)
 		case_for(li, b);
-	if (len > 4)
+	if (len > 4 )
 	{
 		logicalpush(li, b);
 		ft_lst_reverse(b, ft_findmax((*b)), "rb", "rrb");
 		case_three(li);
 		logcical_replace(li, b);
 	}
+//	if (len > 45)
+//	sortbigaglo(li, b);
+// && len < 45
 }

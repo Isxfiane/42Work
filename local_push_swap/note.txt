@@ -9,9 +9,11 @@ Pour 500 : 3700 ou 9700
 Pour 100 : 340 ou 1140
 https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a
 
-    Appliquer l'algo 10 par 10 (A voir si opti pour tous)
-    Tout repush en A a l'aveugle
+Appliquer l'algo 10 par 10 (A voir si opti pour tous)
+Tout repush en A a l'aveugle
     Rattraper tout les morceaux de liste a l'envers (Guetter le mim / max tout les 10)
                                                             - Soit fusion (Complexe)
                                                             - Soit juste push et rb
     Repush en A.
+
+    Sa a pas l'air d'être ouf.
