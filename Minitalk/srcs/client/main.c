@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:50:04 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/18 16:32:51 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:24:02 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
@@ -105,8 +105,7 @@ int	main(int argc, char **argv)
 		ft_printf("Invalid PID !\n");
 		return (1);
 	}
-	temp = ft_itoa_base(ft_strlen(argv[2]), "01");
-	send_bin(temp, pid);
+	send_bin(ft_itoa_base(ft_strlen(argv[2]), "01"), pid); // Je devait economiser une ligne
 	free(temp);
 	while (argv[2][i] != '\0') // On envoie notre nombre + 11111110 pour delimiter
 	{

@@ -6,25 +6,12 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:21:18 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/18 16:50:09 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:52:09 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
 
-/*
-Ameliorer la reception avec sigaction
-	*(Premiere reception = LEN)* -->  Malloc d'un buffer pour recevoir la phrase
-	Recevoir jusqua que 11111110 soit trouver
- 	L'enlever | transformer en char
- 	Stack dans un buffer
- 	print du buffer
-*/
 
-// Malloc taille max soit 16 avec \0
-//		- si on arrive pas au bout je remplie de 2
-// puis j'envoie la chaine se faire convertir avec atoi_base si n > 1
-// sinon c'est la len;
-// stack dans un buffer
 
 void handleUSR1(int signo)
 {
