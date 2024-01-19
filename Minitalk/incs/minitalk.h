@@ -9,6 +9,7 @@
 # include "ft_printf.h"
 
 char	*ft_itoa_base(ssize_t nbr, char *base);
+int		ft_strstr(const char *str, const char *tofind);
 
 
 #endif

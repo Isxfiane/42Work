@@ -1,6 +1,7 @@
 
 #	Serv ressources.
-SRCSSERV	:=	main.c
+SRCSSERV	:=	main.c\
+				utils.c
 
 SRCSSERV_D	:=	srcs/server/
 
@@ -43,8 +44,8 @@ LIB_A		:=	ft_printf/libftprintf.a
 CC		:=	cc
 
 RM		:=	rm -rf
-
-CFLAGS	:=	 -Wall -Wextra -Werror -I$(HEAD_D) -I$(LIB_D)
+#-Wall -Wextra -Werror
+CFLAGS	:=	  -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAMESERV) $(NAMECLIENT)
 

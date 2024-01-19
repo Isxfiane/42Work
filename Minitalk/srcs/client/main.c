@@ -78,11 +78,13 @@ void	send_bin(const char *str, long int pid)
 		if (str[i] == '0')
 		{
 			kill(pid, SIGUSR1);
+			usleep(1);
 			printf("Recu.\n");
 		}
 		else
 		{
 			kill(pid, SIGUSR2);
+			usleep(1);
 			printf("White Flag.\n");
 		}
 		i++;
@@ -106,7 +108,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	send_bin(ft_itoa_base(ft_strlen(argv[2]), "01"), pid); // Je devait economiser une ligne
-	free(temp);
+	send_bin("11111110", pid);
 	while (argv[2][i] != '\0') // On envoie notre nombre + 11111110 pour delimiter
 	{
 		temp = ft_itoa_base(argv[2][i], "01");
