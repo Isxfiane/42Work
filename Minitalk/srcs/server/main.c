@@ -34,12 +34,37 @@ void handleUSR1(int signo)
 		signal_result = -1;
 }
 
-char one_or_zero(int a)
+int	fill(int x, char *buffer) // Faut clear le buffer
 {
-	if (a == 1)
-		return ('1');
-	else
-		return ('0');
+	int n;
+
+	n = 0;
+	while (1)
+	{
+		if (signal_result == 1 || signal_result == 0)
+		{
+			buffer[x] = one_or_zero(signal_result);
+			signal_result = 2;
+			printf("%s\n", buffer);
+			if (x > 8 && ft_strstr(buffer, "11111110") != -1)
+			{
+				if (n == 0)
+				{
+					/*
+					 * RETRAIT DU LIMITATEUR --> ATOI_BASE --> création du buffer avec la len [Remplie de 2 ?]
+					 * Crée le buffer dans main et le dro pici
+					 */
+					n = 1;
+				}
+				else
+					/*
+					 * RETRAIT DU LIMITATEUR --> atoi_base --> parcourir le buffer jusqu'a un 2 de trouver
+					 * Mettre le int.
+					 */
+			}
+		x++;
+		}
+	}
 }
 
 int main()
@@ -56,18 +81,7 @@ int main()
 	sa.sa_handler = &handleUSR1;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	while (1)
-	{
-		if (signal_result == 1 || signal_result == 0)
-		{
-			buffer[x] = one_or_zero(signal_result);
-			signal_result = 2;
-			printf("%s\n", buffer);
-			if (x > 8 && ft_strstr(buffer, "11111110") != -1)
-				printf("Reaching.\n"); // Faut clear le buffer
-			x++;
-		}
-	}
+	fill(x, buffer);
 	return 0;
 }
 

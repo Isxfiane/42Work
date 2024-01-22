@@ -101,7 +101,7 @@ int	main(int argc, char **argv)
 	if (check_args(argc, argv) == 1)
 		return (1);
 	pid = ft_atol(argv[1]);
-	i = 0;
+	i = -1;
 	if (pid <= 0 || pid > 4194304)
 	{
 		ft_printf("Invalid PID !\n");
@@ -109,13 +109,12 @@ int	main(int argc, char **argv)
 	}
 	send_bin(ft_itoa_base(ft_strlen(argv[2]), "01"), pid); // Je devait economiser une ligne
 	send_bin("11111110", pid);
-	while (argv[2][i] != '\0') // On envoie notre nombre + 11111110 pour delimiter
+	while (argv[2][++i] != '\0') // On envoie notre nombre + 11111110 pour delimiter
 	{
 		temp = ft_itoa_base(argv[2][i], "01");
 		send_bin(temp, pid);
 		free(temp);
 		send_bin("11111110", pid);
-		i++;
 	}
 	send_bin("011111110", pid);
 	return (0);
