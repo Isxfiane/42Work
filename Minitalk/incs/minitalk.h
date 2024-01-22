@@ -11,7 +11,7 @@
 char	*ft_itoa_base(ssize_t nbr, char *base);
 int		ft_strstr(const char *str, const char *tofind);
 char	one_or_zero(int a);
-int    ft_atoi_base(char *str, char *base);
-
+int   ft_atoi_base(char *str, char *base);
+char 	*copyandclear(char *buffer, int *n, char *result);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:54:59 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/18 16:27:29 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:59:00 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
@@ -17,7 +17,7 @@ char	*get_size(ssize_t nbr, int len)
 
 	if (nbr < 0)
 	{
-		nb = (char *)malloc((sizeof(char) * len) + 2);
+		nb = (char *)malloc((sizeof(char) * len) + 3);
 		len++;
 		nb[0] = '-';
 	}
@@ -32,7 +32,7 @@ int	ft_len_int(ssize_t nbr, ssize_t len_base)
 
 	i = 0;
 	if (nbr == 10)
-		return (2);
+		return (3);
 	while (nbr != 0)
 	{
 		i++;

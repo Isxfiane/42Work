@@ -44,8 +44,8 @@ LIB_A		:=	ft_printf/libftprintf.a
 CC		:=	cc
 
 RM		:=	rm -rf
-#-Wall -Wextra -Werror
-CFLAGS	:=	  -I$(HEAD_D) -I$(LIB_D)
+# -fsanitize=address
+CFLAGS	:=	-Wall -Wextra -Werror -g -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAMESERV) $(NAMECLIENT)
 
