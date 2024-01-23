@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/23 13:44:00 by sben-rho          #+#    #+#             */
+/*   Updated: 2024/01/23 14:42:58 by sben-rho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "minitalk.h"
 
-int ft_strstr(const char *str, const char *tofind)
+int	ft_strstr(const char *str, const char *tofind)
 {
-	int     i;
-	int     f;
-	int     k;
+	int	i;
+	int	f;
+	int	k;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -26,7 +37,7 @@ int ft_strstr(const char *str, const char *tofind)
 	return (-1);
 }
 
-char one_or_zero(int a)
+char	int_to_char(int a)
 {
 	if (a == 1)
 		return ('1');
@@ -34,9 +45,9 @@ char one_or_zero(int a)
 		return ('0');
 }
 
-int    get_index(char c, const char *base)
+int	get_index(char c, const char *base)
 {
-	int    i;
+	int	i;
 
 	i = 0;
 	while (base[i])
@@ -48,11 +59,11 @@ int    get_index(char c, const char *base)
 	return (-1);
 }
 
-int   ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base)
 {
-	int    sign;
-	int    i;
-	int   nb;
+	int	sign;
+	int	i;
+	int	nb;
 
 	sign = 1;
 	i = 0;
@@ -71,82 +82,4 @@ int   ft_atoi_base(char *str, char *base)
 		i++;
 	}
 	return (sign * nb);
-}
-
-char	*createbuff(char *buffer, ssize_t len)
-{
-	int i;
-
-	i = 0;
-	buffer = malloc(sizeof(char) * (len + 1));
-	if (!buffer)
-		return (NULL);
-	while (i < len)
-	{
-		buffer[i] = '2';
-		i++;
-	}
-	buffer[i] = '\0';
-	return (buffer);
-}
-
-char	*savechar(char *result, int c, int *n)
-{
-	int i;
-
-	i = 0;
-	printf("%d | %c\n", c, c);
-	if (c == 0)
-	{
-		printf("%s\n", result);
-		free(result);
-		*n = 0;
-		return (NULL);
-	}
-	while (result[i] != '2')
-		i++;
-	if (result[i] != '\0')
-		result[i] = c;
-	return (result);
-}
-
-char	*cleanbuffer(char *buffer)
-{
-	int i;
-
-	i = 0;
-	while (buffer[i] != '\0')
-	{
-		buffer[i] = '2';
-		i++;
-	}
-	return (buffer);
-}
-
-
-char 	*copyandclear(char *buffer, int *n, char *result)
-{
-	int			pos;
-	ssize_t 	i;
-	char		*str;
-
-	pos = ft_strstr(buffer, "100000000");
-	str = malloc(sizeof(char) * (pos + 1));
-	if (!str)
-		return (NULL);
-	i = -1;
-	while (++i < pos)
-		str[i] = buffer[i];
-	str[i] = '\0';
-	if (*n == 0)
-	{
-		i = ft_atoi_base(str, "01");
-		result = createbuff(result, i);
-		*n = 1;
-	}
-	else
-		savechar(result, ft_atoi_base(str, "01"), n);
-	buffer = cleanbuffer(buffer);
-	free(str);
-	return (result);
 }

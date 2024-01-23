@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:54:59 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/22 14:59:00 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:10:17 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
@@ -69,4 +69,30 @@ char	*ft_itoa_base(ssize_t nbr, char *base)
 	}
 	nb[len + 1] = '\0';
 	return (nb);
+}
+
+long int	ft_atol(const char *nptr)
+{
+	long int	nb;
+	int			sign;
+	int			i;
+
+	sign = 1;
+	i = 0;
+	nb = 0;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '-')
+	{
+		sign = -1;
+		i = i + 1;
+	}
+	else if (nptr[i] == '+')
+		i++;
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		nb = nb * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (nb * sign);
 }

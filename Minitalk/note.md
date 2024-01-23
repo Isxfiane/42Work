@@ -1,12 +1,14 @@
+# To dot list.
+1. [ ] ***Client :*** Envoie du premier bits | Attente de signal.
+2. [x] ***Server :*** Garde le PID | Traitement du bits | Renvoie de signal.
+3. [ ] ***Client :*** Envoie du prochains bits | Attente de signal.
+>...
+1. [x] ***Client :*** Envoie `00000000` comme delimitateur.
+2. [x] ***Server :*** Set un compeur, lorsque `i = 8` c'est good.
+> Traitement et mise du `char` dans `result`
+1. [x] ***Client :*** Envoie le char `delimitateur` une fois fini.
+2. [x] ***Server :*** Char `delimitateur` recu, lancement protocol de fin
 
-1. [x] Ameliorer la reception avec sigaction
-
-*La premiere reception est la taille du la string*
-2. [ ] Recuperer cette taille et la passer dans `atoi base`
-3. [x] Creer le buffer de recuperation
-3. [x] Passer un parametre a `n = 1` pour changer de call de fonction
-4. [ ] Recuperer et mettre dans le buffer les chars
-5. [ ] ft_printf du buffer
 
 
 ```

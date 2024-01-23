@@ -6,35 +6,17 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:50:04 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/22 13:50:55 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:24:38 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minitalk.h"
 
-long int	ft_atol(const char *nptr)
-{
-	long int	nb;
-	int			sign;
-	int			i;
+int	g_sigact;
 
-	sign = 1;
-	i = 0;
-	nb = 0;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '-')
-	{
-		sign = -1;
-		i = i + 1;
-	}
-	else if (nptr[i] == '+')
-		i++;
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		nb = nb * 10 + (nptr[i] - '0');
-		i++;
-	}
-	return (nb * sign);
+void	handle_usr1(int signo)
+{
+	if (signo == SIGUSR1)
+		g_sigact = 1;
 }
 
 int	check_args(int argc, char **argv)
@@ -62,46 +44,56 @@ void	send_bin(const char *str, long int pid)
 	i = 0;
 	while (str[i] != '\0')
 	{
+		g_sigact = 0;
 		if (str[i] == '0')
-		{
 			kill(pid, SIGUSR1);
-			usleep(1);
-		}
 		else
-		{
 			kill(pid, SIGUSR2);
-			usleep(1);
-		}
 		i++;
+		while (g_sigact == 0)
+			continue ;
 	}
 }
 
-int	main(int argc, char **argv)
+void	send_all(char **argv, long int pid)
 {
-	long int	pid;
-	int			i;
-	char		*temp;
+	char	*temp;
+	int		i;
 
-	if (check_args(argc, argv) == 1)
-		return (1);
-	pid = ft_atol(argv[1]);
 	i = -1;
-	if (pid <= 0 || pid > 4194304)
-	{
-		ft_printf("Invalid PID !\n");
-		return (1);
-	}
 	temp = ft_itoa_base(ft_strlen(argv[2]), "01");
 	send_bin(temp, pid);
 	free(temp);
 	send_bin("100000000", pid);
 	while (argv[2][++i] != '\0')
 	{
-		temp = ft_itoa_base(argv[2][i], "01");
+		temp = ft_itoa_base((unsigned char)argv[2][i], "01");
 		send_bin(temp, pid);
 		free(temp);
 		send_bin("100000000", pid);
 	}
-	send_bin("0100000000", pid);
+	send_bin("100000000", pid);
+}
+
+int	main(int argc, char **argv)
+{
+	long int			pid;
+	int					i;
+	struct sigaction	sa;
+
+	if (check_args(argc, argv) == 1)
+		return (1);
+	pid = ft_atol(argv[1]);
+	i = -1;
+	printf("\t%d\n", getpid());
+	if (pid <= 0 || pid > 4194304)
+	{
+		ft_printf("Invalid PID !\n");
+		return (1);
+	}
+	sa.sa_handler = &handle_usr1;
+	sa.sa_flags = SA_SIGINFO;
+	sigaction(SIGUSR1, &sa, NULL);
+	send_all(argv, pid);
 	return (0);
 }
