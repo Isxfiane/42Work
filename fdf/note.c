@@ -1,4 +1,4 @@
-void	draw_tile(t_img_vars *img, t_colors *col, t_coord *co) // moche, pas beau, connard
+void	draw_tile(t_img_vars *img, t_colors *col, t_coord *co) // moche, pas beau, connard ouais je sais 
 {
 	int pixel;
 
