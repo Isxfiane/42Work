@@ -34,7 +34,7 @@ CC		:=	cc
 
 RM		:=	rm -rf
 #-Wall -Wextra -Werror
-CFLAGS	:= -g -I$(HEAD_D) -I$(LIB_D)
+CFLAGS	:=   -g -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAME)
 

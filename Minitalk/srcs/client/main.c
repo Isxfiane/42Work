@@ -78,14 +78,11 @@ void	send_all(char **argv, long int pid)
 int	main(int argc, char **argv)
 {
 	long int			pid;
-	int					i;
 	struct sigaction	sa;
 
 	if (check_args(argc, argv) == 1)
 		return (1);
 	pid = ft_atol(argv[1]);
-	i = -1;
-	printf("\t%d\n", getpid());
 	if (pid <= 0 || pid > 4194304)
 	{
 		ft_printf("Invalid PID !\n");

@@ -119,19 +119,24 @@ int main (int argc, char **argv)
 		return (1);
 	i = 0;
 	fill_list(result, &map);
-	map = calculate_coord(map);
+	//map = calculate_coord(map);
 	free_char(result);
+/*
 	while (map->next != NULL)
 	{
-		printf("|\t%.1f\t| ", map->x);
-		printf("|\t%.1f\t| ", map->y);
+//		printf("|\t%.1f\t| ", map->x);
+//		printf("|\t%.1f\t| ", map->y);
 		printf("|\t%d\t| ", map->z);
+		printf("|\t%d\t| ", map->real);
 		printf("%s\t|\n", map->color);
 		map = map->next;
 	}
-	printf("|\t%.1f\t| ", map->x);
-	printf("|\t%.1f\t| ", map->y);
+//	printf("|\t%.1f\t| ", map->x);
+//	printf("|\t%.1f\t| ", map->y);
 	printf("|\t%d\t| ", map->z);
+	printf("|\t%d\t| ", map->real);
 	printf("%s\t|\n", map->color);
+ */
 	ft_lst_clear(map);
+
 }

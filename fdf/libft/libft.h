@@ -67,4 +67,5 @@ int		ft_putnbr_count(int *cwrite, int nb);
 int		print_address(unsigned long long add, int *cwrite);
 int		ft_putunbr_count(int *cwrite, unsigned int nb);
 
+
 #endif

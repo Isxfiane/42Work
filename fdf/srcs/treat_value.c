@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	ft_lstadd_back(t_map **li, int x, char *color)
+void	ft_lstadd_back(t_map **li, int x, char *color, int real)
 {
 	t_map	*element;
 	t_map	*temp;
@@ -22,6 +22,7 @@ void	ft_lstadd_back(t_map **li, int x, char *color)
 		return ;
 	element->z = x;
 	element->color = color;
+	element->real = real;
 	element->next = NULL;
 	if (*li == NULL)
 	{
@@ -36,25 +37,60 @@ void	ft_lstadd_back(t_map **li, int x, char *color)
 	temp->next = element;
 }
 
+char	*ft_strndup(const char *s, int n)
+{
+	unsigned int	i;
+	char			*str;
+
+	i = 0;
+	str = (char *) malloc (sizeof(char) * (n + 1));
+	if (str == NULL)
+		return (NULL);
+	while (i < n)
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
 void	fill_list(char **result, t_map **map)
 {
 	int	i;
 	int	k;
 	int	len;
+	char **backup;
 
 	i = 0;
 	k = 0;
 	while (result[i] != NULL)
 	{
+		if (result[i][0] == '|')
+		{
+			ft_lstadd_back(map, ft_atoi(result[i]), NULL, -1);
+			i++;
+			if (result[i] != NULL)
+				break ;
+		}
+		k = ft_strfind(result[i], '\n');
+		if (k != -1)
+		{
+			backup = malloc(sizeof(char *) * 3);
+			backup[0] = ft_strndup(result[i], k);
+			backup[1] = ft_strdup("|");
+			backup[2] = ft_substr(result[i], k + 1, ft_strlen(result[i]));
+			fill_list(backup, map);
+		}
 		k = ft_strfind(result[i], ',');
 		if (k != -1)
 		{
 			len = ft_strlen(result[i]) - k;
 			ft_lstadd_back(map, ft_atoi(result[i]),
-				ft_substr(result[i], k + 1, len));
+				ft_substr(result[i], k + 1, len), 1);
 		}
 		else
-			ft_lstadd_back(map, ft_atoi(result[i]), NULL);
+			ft_lstadd_back(map, ft_atoi(result[i]), NULL, 1);
 		i++;
 	}
 }

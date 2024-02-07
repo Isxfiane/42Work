@@ -16,7 +16,9 @@ cc test.c  minilibx-linux/libmlx_Linux.a -Lminilibx-linux -lmlx -lXext -lX11 && 
 # *To do list*
 
 1. [x] Afficher une ligne correctemnt `draw_to`.
-3. [ ] Parsing de la map.
+3. [x] Parsing de la map.
+>*Parsing : Oneleak*<br>
+>*Le reste c'est pire*
 2. [ ] Trouver la formule pour afficher sur un plan iso | calculer avec `x, y, z` `x', y'`.
 4. [ ] Assemblage et debug.
 

@@ -1,7 +1,7 @@
 # To dot list.
-1. [ ] ***Client :*** Envoie du premier bits | Attente de signal.
+1. [x] ***Client :*** Envoie du premier bits | Attente de signal.
 2. [x] ***Server :*** Garde le PID | Traitement du bits | Renvoie de signal.
-3. [ ] ***Client :*** Envoie du prochains bits | Attente de signal.
+3. [x] ***Client :*** Envoie du prochains bits | Attente de signal.
 >...
 1. [x] ***Client :*** Envoie `00000000` comme delimitateur.
 2. [x] ***Server :*** Set un compeur, lorsque `i = 8` c'est good.
@@ -27,3 +27,4 @@ long int x;
 	return (0);
 }
 ```
+

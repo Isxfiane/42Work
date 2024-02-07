@@ -46,7 +46,6 @@ char	**parsing(char *argv)
 	char	*temp;
 	char	*buffer;
 	int		fd;
-	int 	k;
 
 	if (check_file(argv) == -1)
 		return (NULL);
@@ -60,23 +59,19 @@ char	**parsing(char *argv)
 			 "impossible to make a map\e[0m\n", 2);
 		return (NULL);
 	}
-	buffer[ft_strlen(buffer)] = ' ';
 	while (1)
 	{
 		temp = get_next_line(fd);
 		if (temp == NULL)
 			break;
-		ft_printf("%d | %d | %s\n",ft_strfind(temp, '\n'), ft_strlen(temp), temp);
-		k = ft_strfind(temp, '\n');
-		if (k != -1)
-			temp[k] = ' ';
 		buffer = ft_strjoin(buffer, temp);
-		//free(temp);
+		free(temp);
 		if (!buffer)
 			perror("\e[3;31mMalloc Fail\e[0m\n\t");
 	}
 	free(temp);
 	result = ft_split(buffer, ' ');
 	free(buffer);
+	close(fd);
 	return (result);
 }

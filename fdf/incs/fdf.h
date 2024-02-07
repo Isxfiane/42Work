@@ -33,6 +33,7 @@ typedef struct s_map
 	float			y;
 	int				z;
 	char 			*color;
+	int 			real;
 	struct s_map	*next;
 }		t_map;
 
