@@ -3,7 +3,10 @@
 ########################################################################################################################
 SRCS		:=	main.c\
 				hook.c\
-				draw.c
+				draw.c\
+				parsing.c\
+				treat_value.c\
+				creat_coord.c
 
 HEAD		:=	fdf.h
 
@@ -31,7 +34,7 @@ CC		:=	cc
 
 RM		:=	rm -rf
 #-Wall -Wextra -Werror
-CFLAGS	:=	 -fsanitize=address -g -I$(HEAD_D) -I$(LIB_D)
+CFLAGS	:= -g -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAME)
 
