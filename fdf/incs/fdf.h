@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:50:30 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/07 14:57:38 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:39:28 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ void	drawto(t_img_vars *img, t_colors *col, t_coord *co);
 char	**parsing(char *argv);
 void 	fill_list(char **result, t_map **map);
 t_map 	*calculate_coord(t_map *map);
+void	free_char(char **result, int limit);
 
 #endif

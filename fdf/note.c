@@ -161,3 +161,12 @@ void	drawto(t_img_vars *img, t_colors *col, t_coord *co)
 			plothight(img, col, co);
 	}
 }
+
+
+
+
+
+--
+
+
+

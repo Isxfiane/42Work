@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:25:19 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/07 15:55:52 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:05:27 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,30 @@ int	main(void)
 */
 
 
-void	free_char(char **result)
+void	free_char(char **result, int limit)
 {
 	int i;
 
 	i = 0;
-	while (result[i] != NULL)
+	if (limit == 0)
 	{
-		free(result[i]);
-		i++;
+		while (result[i] != NULL)
+		{
+			free(result[i]);
+			i++;
+		}
+			free(result);
 	}
-	free(result);
+	else
+	{
+		while (i < limit)
+		{
+			free(result[i]);
+			i++;
+		}
+		if (result[i] == NULL)
+			free(result);
+	}
 }
 
 void	ft_lstrm_back(t_map **li)
@@ -96,6 +109,7 @@ void	ft_lstrm_back(t_map **li)
 		temp = temp->next;
 	}
 	beforetemp->next = NULL;
+	free(temp->color);
 	free(temp);
 }
 
@@ -118,25 +132,28 @@ int main (int argc, char **argv)
 	if (!result)
 		return (1);
 	i = 0;
+//	while (result[i] != NULL)
+//	{
+//		printf("'%s'\n", result[i]);
+//		i++;
+//	}
 	fill_list(result, &map);
-	//map = calculate_coord(map);
-	free_char(result);
-/*
+	calculate_coord(map);
 	while (map->next != NULL)
 	{
-//		printf("|\t%.1f\t| ", map->x);
-//		printf("|\t%.1f\t| ", map->y);
+		printf("|\t%.1f\t| ", map->x);
+		printf("|\t%.1f\t| ", map->y);
 		printf("|\t%d\t| ", map->z);
 		printf("|\t%d\t| ", map->real);
 		printf("%s\t|\n", map->color);
 		map = map->next;
 	}
-//	printf("|\t%.1f\t| ", map->x);
-//	printf("|\t%.1f\t| ", map->y);
+	printf("|\t%.1f\t| ", map->x);
+	printf("|\t%.1f\t| ", map->y);
 	printf("|\t%d\t| ", map->z);
 	printf("|\t%d\t| ", map->real);
 	printf("%s\t|\n", map->color);
- */
-	ft_lst_clear(map);
 
+	free_char(result, 0);
+	ft_lst_clear(map);
 }
