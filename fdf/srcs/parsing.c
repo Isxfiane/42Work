@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:31:26 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/08 11:55:09 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:43:52 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**parsing(char *argv)
 	char		*temp;
 	char		buffer[51];
 	int			fd;
-	ssize_t 	k;
+	ssize_t		k;
 
 	if (check_file(argv) == -1)
 		return (NULL);
@@ -58,15 +58,13 @@ char	**parsing(char *argv)
 	while (k != 0)
 	{
 		k = read(fd, buffer, 50);
-		if (k > 0)
-		{
-			buffer[k] = '\0';
-			temp = ft_strjoin(temp, buffer);
-		}
+		if (k <= 0)
+			break ;
+		buffer[k] = '\0';
+		temp = ft_strjoin(temp, buffer);
 	}
 	result = ft_split(temp, ' ');
 	free(temp);
 	close(fd);
 	return (result);
 }
-//ft_putstr_fd("\e[3;31m[FDF] This is an empty file impossible to make a map\e[0m\n", 2);

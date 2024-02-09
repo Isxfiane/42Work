@@ -161,6 +161,72 @@ void	drawto(t_img_vars *img, t_colors *col, t_coord *co)
 			plothight(img, col, co);
 	}
 }
+/*
+int	main(void)
+{
+	t_mlx		mlx;
+	t_img_vars	img;
+	t_coord		coord;
+	int			pixel;
+	t_colors	color;
+
+
+	color.a = 1;
+	color.r = 164;
+	color.g = 255;
+	color.b = 164;
+//---------------------Init--------------------------//
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, HEIGHT, WIDTH, "Hello world!");
+//---------------------Hook--------------------------//
+	mlx_key_hook(mlx.win, key_hook, &mlx);
+	mlx_mouse_hook(mlx.win, mouse_hook, &mlx);
+//---------------------IMG--------------------------//
+	img.img = mlx_new_image(mlx.mlx, 1920, 1080);
+	img.buffer = mlx_get_data_addr(img.img, &img.pixel_bits, &img.line_bytes, &img.endian);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
+//---------------------Loop-------------------------//
+	mlx_loop(mlx.mlx);
+//---------------------Free-------------------------//
+	mlx_destroy_window(mlx.mlx, mlx.win);
+	mlx_destroy_display(mlx.mlx);
+	free(mlx.mlx);
+	return (0);
+}
+*/
+/*
+int main (int argc, char **argv)
+{
+	char **result;
+	t_map	*map;
+	void	*start;
+
+	(void)argc;
+	map = NULL;
+	result = parsing(argv[1]);
+	if (!result)
+		return (1);
+	fill_list(result, &map);
+	calculate_coord(map);
+	start = map;
+	while (map->next != NULL)
+	{
+		printf("|\t%.1f\t| ", map->x);
+		printf("|\t%.1f\t| ", map->y);
+		printf("|\t%d\t| ", map->z);
+		printf("|\t%d\t| ", map->real);
+		printf("%s\t|\n", map->color);
+		map = map->next;
+	}
+	printf("|\t%.1f\t| ", map->x);
+	printf("|\t%.1f\t| ", map->y);
+	printf("|\t%d\t| ", map->z);
+	printf("|\t%d\t| ", map->real);
+	printf("%s\t|\n", map->color);
+	free_char(result, 0);
+	ft_lst_clear(start);
+}
+*/
 
 
 
@@ -170,3 +236,5 @@ void	drawto(t_img_vars *img, t_colors *col, t_coord *co)
 
 
 
+//	coord.x0 = (1 / sqrtf(2)) * coord.x0 + (1 / sqrt(2)) * coord.y0;
+//	coord.y0 = -(1 / sqrtf(6)) * coord.x0 + (1 / sqrt(6)) * coord.y0 - (2 / sqrt(6)) * coord.z0;

@@ -6,7 +6,9 @@ SRCS		:=	main.c\
 				draw.c\
 				parsing.c\
 				treat_value.c\
-				creat_coord.c
+				creat_coord.c\
+				utils.c\
+				list_utils.c
 
 HEAD		:=	fdf.h
 
@@ -33,8 +35,8 @@ LIB_A		:=	libft/libft.a
 CC		:=	cc
 
 RM		:=	rm -rf
-#-Wall -Wextra -Werror -fsanitize=address
-CFLAGS	:=  -g -g3 -I$(HEAD_D) -I$(LIB_D)
+#-Wall -Wextra -Werror
+CFLAGS	:= -Wall -Wextra -Werror -g -g3 -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAME)
 

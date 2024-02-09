@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:50:30 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/08 15:39:28 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:02:56 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
+	void	*start;
 }				t_mlx;
 
 typedef struct s_img_vars
@@ -79,5 +80,17 @@ char	**parsing(char *argv);
 void 	fill_list(char **result, t_map **map);
 t_map 	*calculate_coord(t_map *map);
 void	free_char(char **result, int limit);
+int		ft_linelen(t_map *li);
+int		ft_listlen(t_map *li);
+void	*ft_lst_clear(t_map *li);
+void	ft_lstrm_back(t_map **li);
+void	ft_lstadd_back(t_map **li, int x, char *color, int real);
+char	*ft_strndup(const char *s, unsigned int n);
+void	free_all(t_mlx *mlx, void *start, int i);
+int		ft_close(t_mlx *mlx);
+
+
+
+
 
 #endif

@@ -16,8 +16,51 @@ cc test.c  minilibx-linux/libmlx_Linux.a -Lminilibx-linux -lmlx -lXext -lX11 && 
 # *To do list*
 
 1. [x] Afficher une ligne correctemnt `draw_to`.
-3. [ ] Parsing de la map.
-2. [ ] Trouver la formule pour afficher sur un plan iso | calculer avec `x, y, z` `x', y'`.
+3. [x] Parsing de la map.
 4. [ ] Assemblage et debug.
+2. [ ] Trouver la formule pour afficher sur un plan iso | calculer avec `x, y, z` `x', y'`.
 
 > *Seulement les points principaux doivent etre convertie, pas tout un segement.*
+>
+>
+
+```c
+t_map *parsing_and_coord()
+{
+/*
+     * Parsing.c
+     * Treat_Value.c
+     * Creat_cord.c
+*/
+}
+```
+```c
+t_mlx *init_and_hook()
+{
+/*
+    * init / hook
+ */
+}
+```
+```c
+t_img *create_image()
+{
+/*
+    * create image (a faire)
+*/
+}
+```
+```c
+int main(int argc, char **argv)
+{
+/*
+    ...
+    
+    * loop
+    * free
+*/
+}
+
+```
+
+
