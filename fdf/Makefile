@@ -8,7 +8,8 @@ SRCS		:=	main.c\
 				treat_value.c\
 				creat_coord.c\
 				utils.c\
-				list_utils.c
+				list_utils.c\
+				draw_all.c
 
 HEAD		:=	fdf.h
 
@@ -36,7 +37,7 @@ CC		:=	cc
 
 RM		:=	rm -rf
 #-Wall -Wextra -Werror
-CFLAGS	:= -Wall -Wextra -Werror -g -g3 -I$(HEAD_D) -I$(LIB_D)
+CFLAGS	:= -fsanitize=address -g -g3 -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAME)
 

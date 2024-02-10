@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:50:30 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/09 17:02:56 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/10 13:26:33 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ void	ft_lstadd_back(t_map **li, int x, char *color, int real);
 char	*ft_strndup(const char *s, unsigned int n);
 void	free_all(t_mlx *mlx, void *start, int i);
 int		ft_close(t_mlx *mlx);
+void	co_to_struct(t_coord *co, float x, float y, float x1, float y1);
+void	draw_all(t_img_vars *img, t_map *map, t_colors color, t_mlx mlx);
+
 
 
 

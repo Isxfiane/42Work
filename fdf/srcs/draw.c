@@ -38,6 +38,15 @@ void	draw_pixel(char *buffer, int pixel, t_colors color, int endian)
 	}
 }
 
+
+void	co_to_struct(t_coord *co, float x, float y, float x1, float y1)
+{
+	co->x0 = x;
+	co->x1 = x1;
+	co->y1 = y1;
+	co->y0 = y;
+}
+
 void	drawto(t_img_vars *img, t_colors *col, t_coord *co)
 {
 	float	delta_x;

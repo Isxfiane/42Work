@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creat_coord.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:25:13 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/09 12:36:41 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/10 14:31:04 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ t_map	*calculate_coord(t_map *map)
 
 	before = map;
 	len = ft_linelen(map);
-	sep_h = (HEIGHT - 100) / (ft_listlen(map) / len);
-	sep_w = (WIDTH - 100) / len;
+	sep_w = (WIDTH - 100) / (ft_listlen(map) / len);
+	sep_h = (HEIGHT - 100) / len;
 	n = 0;
 	map->x = 50;
 	map->y = 50;
 	before = map;
 	map = map->next;
-	find_coord(map, before, sep_h, sep_w);
+	find_coord(map, before, sep_w, sep_h);
 	return (map);
 }

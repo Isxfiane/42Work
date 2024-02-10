@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:25:19 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/09 17:18:53 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/10 14:27:43 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,41 @@ void	free_all(t_mlx *mlx, void *start, int i)
 
 int	main(int argc, char **argv)
 {
-	t_map	*map;
-	t_mlx	mlx;
+	t_map		*map;
+	t_mlx		mlx;
+	t_img_vars img;
+	t_colors color;
 
+	color.a = 1;
+	color.r = 164;
+	color.g = 255;
+	color.b = 164;
 	(void)argc;
 	map = parsing_and_coord(argv);
 	mlx.start = map;
+	while (map->next != NULL)
+	{
+		printf("|\t%.1f\t| ", map->x);
+		printf("|\t%.1f\t| ", map->y);
+		printf("|\t%d\t| ", map->z);
+		printf("|\t%d\t| ", map->real);
+		printf("%s\t|\n", map->color);
+		map = map->next;
+	}
+	printf("|\t%.1f\t| ", map->x);
+	printf("|\t%.1f\t| ", map->y);
+	printf("|\t%d\t| ", map->z);
+	printf("|\t%d\t| ", map->real);
+	printf("%s\t|\n", map->color);
+	map = mlx.start;
 	init_and_hook(&mlx);
+	img.img = mlx_new_image(mlx.mlx, 1920, 1080);
+	img.buffer = mlx_get_data_addr(img.img, &img.pixel_bits, &img.line_bytes, &img.endian);
+	draw_all(&img, map, color, mlx);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
+
+
+
 	mlx_loop(mlx.mlx);
 	free_all(&mlx, mlx.start, 1);
 }
