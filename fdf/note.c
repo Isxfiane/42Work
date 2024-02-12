@@ -1,3 +1,4 @@
+/*
 void	draw_tile(t_img_vars *img, t_colors *col, t_coord *co) // moche, pas beau, connard
 {
 	int pixel;
@@ -233,4 +234,56 @@ int main (int argc, char **argv)
 
 
 //	coord.x0 = 
-//	coord.y0 = 
+//	coord.y0 =
+
+/*
+ * void	draw_top(t_img_vars *img, t_map *map, t_map *linebefore, t_coord co, t_colors color)
+{
+	printf("Map : %.1f | %.1f\n Line : %.1f | %.1f\n", map->x, map->y, linebefore->x, linebefore->y);
+	co_to_struct(&co, map->x, map->y, linebefore->x, linebefore->y);
+	drawto(img, &color, &co);
+}
+
+
+void	draw_all(t_img_vars *img, t_map *map, t_colors color, t_mlx mlx)
+{
+	t_map		*before;
+	t_coord		co;
+	float 		save_h;
+	t_map		*linebefore;
+
+	before = map;
+	map = map->next;
+	save_h = map->x;
+	linebefore = map;
+	while (map->real != -1)
+	{
+		co_to_struct(&co, before->x, before->y, map->x, map->y);
+		drawto(img, &color, &co);
+		before = map;
+		map = map->next;
+	}
+	while (map->next != NULL)
+	{
+		map = map->next;
+		before = map;
+		linebefore = linebefore->next;
+		map = map->next;
+		while (map->real != -1 && map->next != NULL)
+		{
+			draw_top(img, map, linebefore, co, color);
+			co_to_struct(&co, before->x, before->y, map->x, map->y);
+			drawto(img, &color, &co);
+			before = map;
+			map = map->next;
+			linebefore = linebefore->next;
+		}
+	}
+	draw_top(img, map, linebefore, co, color);
+	if (map->real == -1)
+		return ;
+	co_to_struct(&co, before->x, before->y, map->x, map->y);
+	drawto(img, &color, &co);
+	draw_top(img, map, linebefore, co, color);
+}
+ */

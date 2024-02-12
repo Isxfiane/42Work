@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:25:13 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/10 14:31:04 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:34:50 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	find_coord(t_map *map, t_map *before, int sep_h, int sep_w)
 				break ;
 		}
 		map->x = 50 + sep_h * n;
+		map->z = map->z * 10;
 		if (map->x == before->x)
 			map->y = before->y + sep_w;
 		else
@@ -36,7 +37,7 @@ void	find_coord(t_map *map, t_map *before, int sep_h, int sep_w)
 	}
 	map->x = 50 + sep_h * n;
 	if (map->x == before->x)
-		map->y = before->y + sep_w;
+		map->y = before->y + sep_h;
 	else
 		map->y = 50;
 }

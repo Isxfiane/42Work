@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:44:57 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/02 16:24:53 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:08:10 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	pix_draw(t_img_vars *img, t_colors *color, int x, int y)
 {
 	int	pixel;
 
+	if (x > WIDTH || y > HEIGHT || 0 > x || 0 > y)
+		return ;
 	pixel = (x * img->line_bytes) + (y * img->pixel_bits / 8);
 	draw_pixel(img->buffer, pixel, *color, img->endian);
 }

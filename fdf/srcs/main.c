@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:25:19 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/10 14:27:43 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/12 18:08:13 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,24 @@ void	test(t_map *map)
 {
 	while (map->next != NULL)
 	{
-		map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
-		map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+//		map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+//		map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+		map->x = (map->x - map->z)/sqrt(2);
+		map->y = (map->x +2 * map->y + map->z)/sqrt(6);
+//		if (map->x < 0)
+//			map->x *= -1;
+//		if (map->y < 0)
+//			map->y *= -1;
 		map = map->next;
 	}
-	map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
-	map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+//	map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+//	map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+	map->x = (map->x - map->z)/sqrt(2);
+	map->y = (map->x +2 * map->y + map->z)/sqrt(6);
+//	if (map->x < 0)
+//		map->x *= -1;
+//	if (map->y < 0)
+//		map->y *= -1;
 }
 
 int	main(int argc, char **argv)
@@ -74,21 +86,6 @@ int	main(int argc, char **argv)
 	if (map == NULL)
 		exit(1);
 	mlx.start = map;
-	while (map->next != NULL)
-	{
-		printf("|\t%.1f\t| ", map->x);
-		printf("|\t%.1f\t| ", map->y);
-		printf("|\t%d\t| ", map->z);
-		printf("|\t%d\t| ", map->real);
-		printf("%s\t|\n", map->color);
-		map = map->next;
-	}
-	printf("|\t%.1f\t| ", map->x);
-	printf("|\t%.1f\t| ", map->y);
-	printf("|\t%d\t| ", map->z);
-	printf("|\t%d\t| ", map->real);
-	printf("%s\t|\n", map->color);
-	printf("\n-----------------\n");
 	map = mlx.start;
 	test(map);
 	//map = mlx.start;
