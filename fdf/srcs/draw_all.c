@@ -50,6 +50,8 @@ void	draw_all(t_img_vars *img, t_map *map, t_colors color, t_mlx mlx)
 		}
 	}
 		draw_top(img, before, save_h, co, color);
+	if (map->real == -1)
+		return ;
 		co_to_struct(&co, before->x, before->y, map->x, map->y);
 		drawto(img, &color, &co);
 		draw_top(img, map, save_h, co, color);

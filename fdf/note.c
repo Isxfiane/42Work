@@ -232,9 +232,5 @@ int main (int argc, char **argv)
 
 
 
---
-
-
-
-//	coord.x0 = (1 / sqrtf(2)) * coord.x0 + (1 / sqrt(2)) * coord.y0;
-//	coord.y0 = -(1 / sqrtf(6)) * coord.x0 + (1 / sqrt(6)) * coord.y0 - (2 / sqrt(6)) * coord.z0;
+//	coord.x0 = 
+//	coord.y0 = 

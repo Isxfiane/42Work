@@ -45,12 +45,25 @@ void	free_all(t_mlx *mlx, void *start, int i)
 		ft_lst_clear(start);
 }
 
+void	test(t_map *map)
+{
+	while (map->next != NULL)
+	{
+		map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+		map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+		map = map->next;
+	}
+	map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+	map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+}
+
 int	main(int argc, char **argv)
 {
 	t_map		*map;
 	t_mlx		mlx;
 	t_img_vars img;
 	t_colors color;
+	t_map		*map2;
 
 	color.a = 1;
 	color.r = 164;
@@ -58,7 +71,27 @@ int	main(int argc, char **argv)
 	color.b = 164;
 	(void)argc;
 	map = parsing_and_coord(argv);
+	if (map == NULL)
+		exit(1);
 	mlx.start = map;
+	while (map->next != NULL)
+	{
+		printf("|\t%.1f\t| ", map->x);
+		printf("|\t%.1f\t| ", map->y);
+		printf("|\t%d\t| ", map->z);
+		printf("|\t%d\t| ", map->real);
+		printf("%s\t|\n", map->color);
+		map = map->next;
+	}
+	printf("|\t%.1f\t| ", map->x);
+	printf("|\t%.1f\t| ", map->y);
+	printf("|\t%d\t| ", map->z);
+	printf("|\t%d\t| ", map->real);
+	printf("%s\t|\n", map->color);
+	printf("\n-----------------\n");
+	map = mlx.start;
+	test(map);
+	//map = mlx.start;
 	while (map->next != NULL)
 	{
 		printf("|\t%.1f\t| ", map->x);
@@ -79,9 +112,6 @@ int	main(int argc, char **argv)
 	img.buffer = mlx_get_data_addr(img.img, &img.pixel_bits, &img.line_bytes, &img.endian);
 	draw_all(&img, map, color, mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
-
-
-
 	mlx_loop(mlx.mlx);
 	free_all(&mlx, mlx.start, 1);
 }
