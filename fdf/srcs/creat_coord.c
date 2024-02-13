@@ -36,8 +36,9 @@ void	find_coord(t_map *map, t_map *before, int sep_h, int sep_w)
 		map = map->next;
 	}
 	map->x = 50 + sep_h * n;
+	map->z = map->z * 10;
 	if (map->x == before->x)
-		map->y = before->y + sep_h;
+		map->y = before->y + sep_w;
 	else
 		map->y = 50;
 }
@@ -57,6 +58,7 @@ t_map	*calculate_coord(t_map *map)
 	n = 0;
 	map->x = 50;
 	map->y = 50;
+	map->z = map->z * 10;
 	before = map;
 	map = map->next;
 	find_coord(map, before, sep_w, sep_h);

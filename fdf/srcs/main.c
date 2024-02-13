@@ -49,32 +49,24 @@ void	test(t_map *map)
 {
 	while (map->next != NULL)
 	{
-//		map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
-//		map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+		// map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+		// map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
 		map->x = (map->x - map->z)/sqrt(2);
-		map->y = (map->x +2 * map->y + map->z)/sqrt(6);
-//		if (map->x < 0)
-//			map->x *= -1;
-//		if (map->y < 0)
-//			map->y *= -1;
+		map->y = (map->x + 2 * map->y + map->z) / sqrt(6);
 		map = map->next;
 	}
-//	map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
-//	map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+	// map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+	// map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
 	map->x = (map->x - map->z)/sqrt(2);
-	map->y = (map->x +2 * map->y + map->z)/sqrt(6);
-//	if (map->x < 0)
-//		map->x *= -1;
-//	if (map->y < 0)
-//		map->y *= -1;
+	map->y = (map->x + 2 * map->y + map->z) / sqrt(6);
 }
 
 int	main(int argc, char **argv)
 {
 	t_map		*map;
 	t_mlx		mlx;
-	t_img_vars img;
-	t_colors color;
+	t_img_vars	img;
+	t_colors	color;
 	t_map		*map2;
 
 	color.a = 1;
@@ -88,8 +80,8 @@ int	main(int argc, char **argv)
 	mlx.start = map;
 	map = mlx.start;
 	test(map);
-	//map = mlx.start;
-	while (map->next != NULL)
+	map = mlx.start;
+		while (map->next != NULL)
 	{
 		printf("|\t%.1f\t| ", map->x);
 		printf("|\t%.1f\t| ", map->y);

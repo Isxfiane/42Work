@@ -17,9 +17,10 @@ cc test.c  minilibx-linux/libmlx_Linux.a -Lminilibx-linux -lmlx -lXext -lX11 && 
 
 1. [x] Afficher une ligne correctemnt `draw_to`.
 3. [x] Parsing de la map.
-4. [ ] Assemblage et debug.
+4. [x] Assemblage et debug.
 2. [x] Trouver la formule pour afficher sur un plan iso | calculer avec `x, y, z` `x', y'`.
-3. [ ] Securiter lors du print a faire
+3. [x] Securiter lors du print a faire
+3. [ ] Faire un scale inteligent
 
 > *Seulement les points principaux doivent etre convertie, pas tout un segement.*
 >

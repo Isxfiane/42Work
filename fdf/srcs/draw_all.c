@@ -52,6 +52,6 @@ void	draw_all(t_img_vars *img, t_map *map, t_colors color, t_mlx mlx)
 	co_to_struct(&co, before->x, before->y, map->x, map->y);
 	drawto(img, &color, &co);
 	before = before->next;
-	co_to_struct(&co, before->x, before->y, linebefore->x, linebefore->y);
+	co_to_struct(&co, map->x, map->y, linebefore->x, linebefore->y);
 	drawto(img, &color, &co);
 }
