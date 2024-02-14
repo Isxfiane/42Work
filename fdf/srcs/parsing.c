@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:31:26 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/09 12:43:52 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:47:25 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,13 @@ int	open_file(char *argv)
 	return (fd);
 }
 
-char	**parsing(char *argv)
+char	**parsing(int fd)
 {
 	char		**result;
 	char		*temp;
-	char		buffer[51];
-	int			fd;
-	ssize_t		k;
 
-	if (check_file(argv) == -1)
-		return (NULL);
-	fd = open_file(argv);
-	if (fd == -1)
-		return (NULL);
-	k = 1;
-	temp = NULL;
-	while (k != 0)
-	{
-		k = read(fd, buffer, 50);
-		if (k <= 0)
-			break ;
-		buffer[k] = '\0';
-		temp = ft_strjoin(temp, buffer);
-	}
+	temp = get_next_line(fd);
 	result = ft_split(temp, ' ');
 	free(temp);
-	close(fd);
 	return (result);
 }

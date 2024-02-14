@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:52:26 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/12 12:38:31 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:00:41 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	draw_all(t_img_vars *img, t_map *map, t_colors color, t_mlx mlx)
 			before = map;
 			map = map->next;
 			linebefore = linebefore->next;
+			if (linebefore->real == -1)
+				linebefore = linebefore->next;
 		}
 		co_to_struct(&co, before->x, before->y, linebefore->x, linebefore->y);
 		drawto(img, &color, &co);

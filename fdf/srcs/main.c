@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:25:19 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/12 18:08:13 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:18:43 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,25 @@ t_map	*parsing_and_coord(char **argv)
 {
 	char	**result;
 	t_map	*map;
+	int 	fd;
 
-	result = parsing(argv[1]);
+	map = NULL;
+	if (check_file(argv[1]) == -1)
+		return (NULL);
+	fd = open_file(argv[1]);
+	if (fd == -1)
+		return (NULL);
+	result = parsing(fd);
 	if (!result)
 		return (NULL);
-	map = NULL;
-	fill_list(result, &map);
+	while (result != NULL)
+	{
+		fill_list(result, &map);
+		free_char(result, 0);
+		result = parsing(fd);
+	}
 	calculate_coord(map);
-	free_char(result, 0);
+	close(fd);
 	return (map);
 }
 
@@ -38,6 +49,7 @@ void	init_and_hook(t_mlx *mlx)
 
 void	free_all(t_mlx *mlx, void *start, int i)
 {
+	mlx_destroy_image(mlx->mlx, mlx->img->img);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);
@@ -49,14 +61,14 @@ void	test(t_map *map)
 {
 	while (map->next != NULL)
 	{
-		// map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
-		// map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+//		 map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+//		 map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
 		map->x = (map->x - map->z)/sqrt(2);
 		map->y = (map->x + 2 * map->y + map->z) / sqrt(6);
 		map = map->next;
 	}
-	// map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
-	// map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+//	 map->x = (1 / sqrtf(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+//	 map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
 	map->x = (map->x - map->z)/sqrt(2);
 	map->y = (map->x + 2 * map->y + map->z) / sqrt(6);
 }
@@ -70,9 +82,9 @@ int	main(int argc, char **argv)
 	t_map		*map2;
 
 	color.a = 1;
-	color.r = 164;
-	color.g = 255;
-	color.b = 164;
+	color.r = 255;
+	color.g = 164;
+	color.b = 250;
 	(void)argc;
 	map = parsing_and_coord(argv);
 	if (map == NULL)
@@ -81,7 +93,17 @@ int	main(int argc, char **argv)
 	map = mlx.start;
 	test(map);
 	map = mlx.start;
-		while (map->next != NULL)
+	init_and_hook(&mlx);
+	img.img = mlx_new_image(mlx.mlx, 1920, 1080);
+	img.buffer = mlx_get_data_addr(img.img, &img.pixel_bits, &img.line_bytes, &img.endian);
+	mlx.img = &img;
+	draw_all(&img, map, color, mlx);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
+	mlx_loop(mlx.mlx);
+	free_all(&mlx, mlx.start, 1);
+}
+/*
+ * 	while (map->next != NULL)
 	{
 		printf("|\t%.1f\t| ", map->x);
 		printf("|\t%.1f\t| ", map->y);
@@ -96,11 +118,4 @@ int	main(int argc, char **argv)
 	printf("|\t%d\t| ", map->real);
 	printf("%s\t|\n", map->color);
 	map = mlx.start;
-	init_and_hook(&mlx);
-	img.img = mlx_new_image(mlx.mlx, 1920, 1080);
-	img.buffer = mlx_get_data_addr(img.img, &img.pixel_bits, &img.line_bytes, &img.endian);
-	draw_all(&img, map, color, mlx);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
-	mlx_loop(mlx.mlx);
-	free_all(&mlx, mlx.start, 1);
-}
+ */

@@ -26,6 +26,15 @@ cc test.c  minilibx-linux/libmlx_Linux.a -Lminilibx-linux -lmlx -lXext -lX11 && 
 >
 >
 
+```
+listutils.c
+utils.c
+parsing.c
+hook.c
+treat_value.c
+```
+
+
 ```c
 t_map *parsing_and_coord()
 {

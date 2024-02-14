@@ -46,6 +46,7 @@ void	ft_lstrm_back(t_map **li)
 		return ;
 	if ((*li)->next == NULL)
 	{
+		free((*li)->color);
 		free(*li);
 		*li = NULL;
 		return ;
