@@ -6,11 +6,19 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:25:13 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/14 14:33:04 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:09:36 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	set_last_coord(t_map *map, t_map *before, int sep_w)
+{
+	if (map->x == before->x)
+		map->y = before->y + sep_w;
+	else
+		map->y = 50;
+}
 
 void	find_coord(t_map *map, t_map *before, int sep_h, int sep_w)
 {
@@ -37,10 +45,7 @@ void	find_coord(t_map *map, t_map *before, int sep_h, int sep_w)
 	}
 	map->x = 50 + sep_h * n;
 	map->z = map->z * 10;
-	if (map->x == before->x)
-		map->y = before->y + sep_w;
-	else
-		map->y = 50;
+	set_last_coord(map, before, sep_w);
 }
 
 t_map	*calculate_coord(t_map *map)
@@ -49,13 +54,11 @@ t_map	*calculate_coord(t_map *map)
 	float	sep_h;
 	float	sep_w;
 	t_map	*before;
-	int		n;
 
 	before = map;
 	len = ft_linelen(map);
 	sep_w = (WIDTH - 100) / (ft_listlen(map) / len);
 	sep_h = (HEIGHT - 100) / len;
-	n = 0;
 	map->x = 50;
 	map->y = 50;
 	map->z = map->z * 10;

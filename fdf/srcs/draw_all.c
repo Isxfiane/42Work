@@ -6,28 +6,25 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:52:26 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/14 12:00:41 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/15 13:59:53 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_all(t_img_vars *img, t_map *map, t_colors color, t_mlx mlx)
+void	draw_to_map(t_map *before, t_map *lbefore, t_coord co, t_img_vars *img)
 {
-	t_map		*before;
-	t_coord		co;
-	t_map		*linebefore;
+	co.x0 = before->x;
+	co.x1 = lbefore->x;
+	co.y1 = lbefore->y;
+	co.y0 = before->y;
+	drawto(img, &co);
+}
 
-	before = map;
-	map = map->next;
-	linebefore = mlx.start;
-	while (map->real != -1 && map != NULL)
-	{
-		co_to_struct(&co, before->x, before->y, map->x, map->y);
-		drawto(img, &color, &co);
-		before = map;
-		map = map->next;
-	}
+void	draw_full(t_map *map, t_map *before, t_map *lbefore, t_img_vars *img)
+{
+	t_coord	co;
+
 	while (map->next != NULL)
 	{
 		map = map->next;
@@ -35,25 +32,38 @@ void	draw_all(t_img_vars *img, t_map *map, t_colors color, t_mlx mlx)
 		map = map->next;
 		while (map->real != -1 && map->next != NULL)
 		{
-			co_to_struct(&co, before->x, before->y, linebefore->x, linebefore->y);
-			drawto(img, &color, &co);
-			co_to_struct(&co, before->x, before->y, map->x, map->y);
-			drawto(img, &color, &co);
+			draw_to_map(before, lbefore, co, img);
+			draw_to_map(before, map, co, img);
 			before = map;
 			map = map->next;
-			linebefore = linebefore->next;
-			if (linebefore->real == -1)
-				linebefore = linebefore->next;
+			lbefore = lbefore->next;
+			if (lbefore->real == -1)
+				lbefore = lbefore->next;
 		}
-		co_to_struct(&co, before->x, before->y, linebefore->x, linebefore->y);
-		drawto(img, &color, &co);
-		linebefore = linebefore->next;
-		if (linebefore->real == -1)
-			linebefore = linebefore->next;
+		draw_to_map(before, lbefore, co, img);
+		lbefore = lbefore->next;
+		if (lbefore->real == -1)
+			lbefore = lbefore->next;
 	}
-	co_to_struct(&co, before->x, before->y, map->x, map->y);
-	drawto(img, &color, &co);
+	draw_to_map(before, map, co, img);
 	before = before->next;
-	co_to_struct(&co, map->x, map->y, linebefore->x, linebefore->y);
-	drawto(img, &color, &co);
+	draw_to_map(map, lbefore, co, img);
+}
+
+void	draw_all(t_img_vars *img, t_map *map)
+{
+	t_map		*before;
+	t_coord		co;
+	t_map		*lbefore;
+
+	before = map;
+	map = map->next;
+	lbefore = before;
+	while (map->real != -1 && map->next != NULL)
+	{
+		draw_to_map(before, map, co, img);
+		before = map;
+		map = map->next;
+	}
+	draw_full(map, before, lbefore, img);
 }

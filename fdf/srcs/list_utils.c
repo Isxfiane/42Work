@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:24:57 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/09 13:26:39 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:10:26 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	ft_lstrm_back(t_map **li)
 
 void	*ft_lst_clear(t_map *li)
 {
+	if (li == NULL)
+		return (NULL);
 	while (li != NULL)
 		ft_lstrm_back(&li);
 	return (NULL);

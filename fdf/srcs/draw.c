@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:44:57 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/12 12:08:10 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:17:14 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	pix_draw(t_img_vars *img, t_colors *color, int x, int y)
+void	pix_draw(t_img_vars *img, int x, int y)
 {
 	int	pixel;
 
 	if (x > WIDTH || y > HEIGHT || 0 > x || 0 > y)
 		return ;
 	pixel = (x * img->line_bytes) + (y * img->pixel_bits / 8);
-	draw_pixel(img->buffer, pixel, *color, img->endian);
+	draw_pixel(img->buffer, pixel, img->color, img->endian);
 }
 
 void	draw_pixel(char *buffer, int pixel, t_colors color, int endian)
@@ -40,16 +40,7 @@ void	draw_pixel(char *buffer, int pixel, t_colors color, int endian)
 	}
 }
 
-
-void	co_to_struct(t_coord *co, float x, float y, float x1, float y1)
-{
-	co->x0 = x;
-	co->x1 = x1;
-	co->y1 = y1;
-	co->y0 = y;
-}
-
-void	drawto(t_img_vars *img, t_colors *col, t_coord *co)
+void	drawto(t_img_vars *img, t_coord *co)
 {
 	float	delta_x;
 	float	delta_y;
@@ -62,7 +53,7 @@ void	drawto(t_img_vars *img, t_colors *col, t_coord *co)
 	delta_y = delta_y / pixels;
 	while (pixels--)
 	{
-		pix_draw(img, col, co->x0, co->y0);
+		pix_draw(img, co->x0, co->y0);
 		co->z0++;
 		co->x0 += delta_x;
 		co->y0 += delta_y;

@@ -9,7 +9,8 @@ SRCS		:=	main.c\
 				creat_coord.c\
 				utils.c\
 				list_utils.c\
-				draw_all.c
+				draw_all.c\
+				free.c
 
 HEAD		:=	fdf.h
 
@@ -36,8 +37,8 @@ LIB_A		:=	libft/libft.a
 CC		:=	cc
 
 RM		:=	rm -rf
-#-Wall -Wextra -Werror -fsanitize=address
-CFLAGS	:= -g -g3 -I$(HEAD_D) -I$(LIB_D)
+# -fsanitize=address
+CFLAGS	:= -Wall -Wextra -Werror -g -g3 -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAME)
 

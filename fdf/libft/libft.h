@@ -19,7 +19,7 @@
 # include <stdarg.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 50
+#  define BUFFER_SIZE 1024
 # endif
 
 void	*ft_bzero(void *s, size_t n);
