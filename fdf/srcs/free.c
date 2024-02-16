@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:26:48 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/15 15:07:00 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:41:18 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,45 @@ void	free_all(t_mlx *mlx, void *start, int i)
 	free(mlx->mlx);
 	if (i == 1)
 		ft_lst_clear(start);
+}
+
+void	free_char(char **result, int limit)
+{
+	int	i;
+
+	i = 0;
+	if (limit == 0)
+	{
+		while (result[i] != NULL)
+		{
+			free(result[i]);
+			i++;
+		}
+		free(result);
+	}
+	else
+	{
+		while (i < limit)
+		{
+			free(result[i]);
+			i++;
+		}
+		if (result[i] == NULL)
+			free(result);
+	}
+}
+
+int	ft_close(t_mlx *mlx)
+{
+	free_all(mlx, mlx->start, 1);
+	exit(0);
+}
+
+void	*ft_lst_clear(t_map *li)
+{
+	if (li == NULL)
+		return (NULL);
+	while (li != NULL)
+		ft_lstrm_back(&li);
+	return (NULL);
 }

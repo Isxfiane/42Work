@@ -38,7 +38,7 @@ CC		:=	cc
 
 RM		:=	rm -rf
 # -fsanitize=address
-CFLAGS	:= -Wall -Wextra -Werror -g -g3 -I$(HEAD_D) -I$(LIB_D)
+CFLAGS	:= -Wall -Wextra -Werror -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAME)
 

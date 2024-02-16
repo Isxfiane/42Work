@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:52:26 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/15 13:59:53 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:50:00 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_full(t_map *map, t_map *before, t_map *lbefore, t_img_vars *img)
 		map = map->next;
 		before = map;
 		map = map->next;
-		while (map->real != -1 && map->next != NULL)
+		while (map->real != -1 && map->next != NULL )
 		{
 			draw_to_map(before, lbefore, co, img);
 			draw_to_map(before, map, co, img);
@@ -46,7 +46,6 @@ void	draw_full(t_map *map, t_map *before, t_map *lbefore, t_img_vars *img)
 			lbefore = lbefore->next;
 	}
 	draw_to_map(before, map, co, img);
-	before = before->next;
 	draw_to_map(map, lbefore, co, img);
 }
 

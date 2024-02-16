@@ -63,15 +63,6 @@ void	ft_lstrm_back(t_map **li)
 	free(temp);
 }
 
-void	*ft_lst_clear(t_map *li)
-{
-	if (li == NULL)
-		return (NULL);
-	while (li != NULL)
-		ft_lstrm_back(&li);
-	return (NULL);
-}
-
 int	ft_listlen(t_map *li)
 {
 	int	size;

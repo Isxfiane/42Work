@@ -25,32 +25,6 @@ int	ft_linelen(t_map *li)
 	return (size);
 }
 
-void	free_char(char **result, int limit)
-{
-	int	i;
-
-	i = 0;
-	if (limit == 0)
-	{
-		while (result[i] != NULL)
-		{
-			free(result[i]);
-			i++;
-		}
-		free(result);
-	}
-	else
-	{
-		while (i < limit)
-		{
-			free(result[i]);
-			i++;
-		}
-		if (result[i] == NULL)
-			free(result);
-	}
-}
-
 char	*ft_strndup(const char *s, unsigned int n)
 {
 	unsigned int	i;

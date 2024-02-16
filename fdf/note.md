@@ -7,6 +7,7 @@
 > All good, fonctionne, j'vois pas comment faire mieux, only mandatory
 # *To do list*
 
+2.[ ] New Line
 
 3.[ ] Manque la gestions couleurs
 

@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:25:19 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/15 15:37:22 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:01:53 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_map	*parsing_and_coord(char **argv)
 		ft_lst_clear(map);
 		return (NULL);
 	}
+	ft_printf("Terminated parsing\n");
 	calculate_coord(map);
 	close(fd);
 	return (map);
@@ -52,13 +53,13 @@ void	init_and_hook(t_mlx *mlx)
 
 void	init_img(t_img_vars *img, t_mlx mlx)
 {
-	img->img = mlx_new_image(mlx.mlx, 1920, 1080);
+	img->img = mlx_new_image(mlx.mlx, HEIGHT, WIDTH);
 	img->buffer = mlx_get_data_addr(img->img, &img->pixel_bits,
 			&img->line_bytes, &img->endian);
 	img->color.a = 1;
-	img->color.r = 127;
-	img->color.g = 17;
-	img->color.b = 224;
+	img->color.r = 255;
+	img->color.g = 255;
+	img->color.b = 255;
 }
 
 void	set_iso(t_map *map)
@@ -87,7 +88,6 @@ int	main(int argc, char **argv)
 		exit(1);
 	}
 	mlx.start = map;
-	map = mlx.start;
 	set_iso(map);
 	map = mlx.start;
 	init_and_hook(&mlx);
