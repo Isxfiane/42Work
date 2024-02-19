@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:44:57 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/15 12:17:14 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:00:00 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	pix_draw(t_img_vars *img, int x, int y)
+void	pix_draw(t_img_vars *img, int x, int y, t_colors col)
 {
 	int	pixel;
 
 	if (x > WIDTH || y > HEIGHT || 0 > x || 0 > y)
 		return ;
 	pixel = (x * img->line_bytes) + (y * img->pixel_bits / 8);
-	draw_pixel(img->buffer, pixel, img->color, img->endian);
+	draw_pixel(img->buffer, pixel, col, img->endian);
 }
 
 void	draw_pixel(char *buffer, int pixel, t_colors color, int endian)
@@ -40,22 +40,40 @@ void	draw_pixel(char *buffer, int pixel, t_colors color, int endian)
 	}
 }
 
-void	drawto(t_img_vars *img, t_coord *co)
+int	set_delta(t_delta *d, t_coord *co, t_colors before, t_colors new)
 {
-	float	delta_x;
-	float	delta_y;
 	int		pixels;
 
-	delta_x = co->x1 - co->x0;
-	delta_y = co->y1 - co->y0;
-	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
-	delta_x = delta_x / pixels;
-	delta_y = delta_y / pixels;
+	d->delta_x = co->x1 - co->x0;
+	d->delta_y = co->y1 - co->y0;
+	pixels = sqrt((d->delta_x * d->delta_x) + (d->delta_y * d->delta_y));
+	d->delta_x = d->delta_x / pixels;
+	d->delta_y = d->delta_y / pixels;
+	d->delta_r = (float)(new.r - before.r) / pixels;
+	d->delta_g = (float)(new.g - before.g) / pixels;
+	d->delta_b = (float)(new.b - before.b) / pixels;
+	printf("%f | %f | %d\n", before.g, new.g, pixels);
+	printf("Col\t r: %f| g: %f | b %f\n", d->delta_r, d->delta_g, d->delta_b);
+
+	return (pixels);
+}
+
+void	drawto(t_img_vars *img, t_coord *co, t_colors colnew, t_colors before)
+{
+	int		pixels;
+	t_delta	delta;
+
+	pixels = set_delta(&delta, co, before, colnew);
 	while (pixels--)
 	{
-		pix_draw(img, co->x0, co->y0);
+		pix_draw(img, co->x0, co->y0, before);
 		co->z0++;
-		co->x0 += delta_x;
-		co->y0 += delta_y;
+		co->x0 += delta.delta_x;
+		co->y0 += delta.delta_y;
+		printf("aol\t r: %f | g: %f | b %f\n", before.r, before.g, before.b);
+		before.r += delta.delta_r;
+		before.g += delta.delta_g;
+		before.b += delta.delta_b;
+		printf("bCol\t r: %f | g: %f | b %f\n", before.r, before.g, before.b);
 	}
 }

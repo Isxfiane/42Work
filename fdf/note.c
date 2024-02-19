@@ -287,3 +287,25 @@ void	draw_all(t_img_vars *img, t_map *map, t_colors color, t_mlx mlx)
 	draw_top(img, map, linebefore, co, color);
 }
  */
+
+/*
+ * void	drawto(t_img_vars *img, t_coord *co);
+ * {
+	float	delta_x;
+	float	delta_y;
+	int		pixels;
+
+	delta_x = co->x1 - co->x0;
+	delta_y = co->y1 - co->y0;
+	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
+	delta_x = delta_x / pixels;
+	delta_y = delta_y / pixels;
+	while (pixels--)
+	{
+		pix_draw(img, co->x0, co->y0);
+		co->z0++;
+		co->x0 += delta_x;
+		co->y0 += delta_y;
+	}
+}
+ */

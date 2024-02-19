@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:50:30 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/16 13:14:17 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:46:06 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@
 
 # define HEIGHT 1920
 # define WIDTH 1080
+
+typedef struct s_delta
+{
+	float	delta_x;
+	float	delta_y;
+	float	delta_r;
+	float	delta_g;
+	float 	delta_b;
+}		t_delta;
+
 
 typedef struct s_map
 {
@@ -46,10 +56,10 @@ typedef struct s_coord
 
 typedef struct s_colors
 {
-	uint8_t	a;
-	uint8_t	r;
-	uint8_t	g;
-	uint8_t	b;
+	float	a;
+	float	r;
+	float	g;
+	float	b;
 }			t_colors;
 
 typedef struct s_img_vars
@@ -83,8 +93,10 @@ t_map	*calculate_coord(t_map *map);
 
 /*			Draw			*/
 void	draw_pixel(char *buffer, int pixel, t_colors color, int endian);
-void	pix_draw(t_img_vars *img, int x, int y);
-void	drawto(t_img_vars *img, t_coord *co);
+/*void	pix_draw(t_img_vars *img, int x, int y);*/
+/*void	drawto(t_img_vars *img, t_coord *co);*/
+void	pix_draw(t_img_vars *img, int x, int y, t_colors col);
+void	drawto(t_img_vars *img, t_coord *co, t_colors colnew, t_colors before);
 void	draw_all(t_img_vars *img, t_map *map);
 
 /*			Hook			*/

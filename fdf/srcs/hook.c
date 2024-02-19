@@ -48,5 +48,3 @@ int	mouse_hook(int button, int x, int y, t_mlx *mlx)
 	printf("I see youuu yep, t'es la batard [%d][%d]\n", x, y);
 	return (0);
 }
-
-
