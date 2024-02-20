@@ -42,3 +42,14 @@ char	*ft_strndup(const char *s, unsigned int n)
 	str[i] = '\0';
 	return (str);
 }
+
+char	*char_to_string(char c, char d)
+{
+	char	*result;
+
+	result = malloc(sizeof(char) * 3);
+	result[0] = c;
+	result[1] = d;
+	result[2] = '\0';
+	return (result);
+}

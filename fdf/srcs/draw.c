@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:44:57 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/19 16:00:00 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:35:22 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ int	set_delta(t_delta *d, t_coord *co, t_colors before, t_colors new)
 	d->delta_r = (float)(new.r - before.r) / pixels;
 	d->delta_g = (float)(new.g - before.g) / pixels;
 	d->delta_b = (float)(new.b - before.b) / pixels;
-	printf("%f | %f | %d\n", before.g, new.g, pixels);
-	printf("Col\t r: %f| g: %f | b %f\n", d->delta_r, d->delta_g, d->delta_b);
-
 	return (pixels);
 }
 
@@ -70,10 +67,8 @@ void	drawto(t_img_vars *img, t_coord *co, t_colors colnew, t_colors before)
 		co->z0++;
 		co->x0 += delta.delta_x;
 		co->y0 += delta.delta_y;
-		printf("aol\t r: %f | g: %f | b %f\n", before.r, before.g, before.b);
 		before.r += delta.delta_r;
 		before.g += delta.delta_g;
 		before.b += delta.delta_b;
-		printf("bCol\t r: %f | g: %f | b %f\n", before.r, before.g, before.b);
 	}
 }

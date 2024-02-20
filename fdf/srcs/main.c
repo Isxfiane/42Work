@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:25:19 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/19 16:51:25 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:28:19 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ void	init_img(t_img_vars *img, t_mlx mlx)
 	img->img = mlx_new_image(mlx.mlx, HEIGHT, WIDTH);
 	img->buffer = mlx_get_data_addr(img->img, &img->pixel_bits,
 			&img->line_bytes, &img->endian);
-	img->color.a = 1;
-	img->color.r = 255;
-	img->color.g = 255;
-	img->color.b = 255;
 }
 
 void	set_iso(t_map *map)
@@ -72,7 +68,7 @@ void	set_iso(t_map *map)
 	map->x = (map->x - map->z) / sqrt(2);
 	map->y = (map->x + 2 * map->y + map->z) / sqrt(6);
 }
-/*
+
 int	main(int argc, char **argv)
 {
 	t_map		*map;
@@ -97,8 +93,15 @@ int	main(int argc, char **argv)
 	mlx_loop(mlx.mlx);
 	free_all(&mlx, mlx.start, 1);
 }
-*/
 
+/*
+int main(void)
+{
+	printf("%s\n", correct_hex("0xff", 4));
+	return 0;
+}
+*/
+/*
 int	main(int argc, char **argv)
 {
 	t_mlx		mlx;
@@ -114,23 +117,27 @@ int	main(int argc, char **argv)
 
 	col2.a = 1;
 	col2.r = 0;
-	col2.g = 255;
-	col2.b = 246;
+	col2.g = 0;
+	col2.b = 0;
 
 	co.x0 = 200;
 	co.y0 = 200;
-	co.x1 = 1080;
+	co.x1 = 1000;
 	co.y1 = 1080;
 	(void)argc;
-	init_and_hook(&mlx);
-	init_img(&img, mlx);
-	mlx.img = &img;
-	drawto(&img, &co, col1, col2);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
-	mlx_loop(mlx.mlx);
-	free_all(&mlx, mlx.start, 1);
-}
+	col2 = hex_to_rgb("0xFF0000");
+	printf("R : %.2f | G : %2.f | B: %2.f\n", col2.r, col2.g, col2.b);
 
+	//printf("%s\n", correct_hex("0xff", 4));
+//	init_and_hook(&mlx);
+//	init_img(&img, mlx);
+//	mlx.img = &img;
+//	drawto(&img, &co, col1, col2);
+//	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
+//	mlx_loop(mlx.mlx);
+//	free_all(&mlx, mlx.start, 1);
+}
+*/
 /*
  *	while (map->next != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:50:30 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/19 14:46:06 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:46:39 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ typedef struct s_delta
 	float 	delta_b;
 }		t_delta;
 
+typedef struct s_colors
+{
+	float	a;
+	float	r;
+	float	g;
+	float	b;
+}			t_colors;
 
 typedef struct s_map
 {
@@ -41,6 +48,7 @@ typedef struct s_map
 	float			y;
 	int				z;
 	char			*color;
+	t_colors		col;
 	int				real;
 	struct s_map	*next;
 }		t_map;
@@ -53,14 +61,6 @@ typedef struct s_coord
 	float	x1;
 	float	y1;
 }				t_coord;
-
-typedef struct s_colors
-{
-	float	a;
-	float	r;
-	float	g;
-	float	b;
-}			t_colors;
 
 typedef struct s_img_vars
 {
@@ -82,39 +82,40 @@ typedef struct s_mlx
 }				t_mlx;
 
 /*		list_func			*/
-int		ft_linelen(t_map *li);
-int		ft_listlen(t_map *li);
-void	ft_lstrm_back(t_map **li);
-void	ft_lstadd_back(t_map **li, int x, char *color, int real);
+int			ft_linelen(t_map *li);
+int			ft_listlen(t_map *li);
+void		ft_lstrm_back(t_map **li);
+void		ft_lstadd_back(t_map **li, int x, char *color, int real);
 
 /*			Utils			*/
-char	*ft_strndup(const char *s, unsigned int n);
-t_map	*calculate_coord(t_map *map);
+char		*ft_strndup(const char *s, unsigned int n);
+t_map		*calculate_coord(t_map *map);
+t_colors	hex_to_rgb(char *hex);
+char		*char_to_string(char c, char d);
+
 
 /*			Draw			*/
-void	draw_pixel(char *buffer, int pixel, t_colors color, int endian);
-/*void	pix_draw(t_img_vars *img, int x, int y);*/
-/*void	drawto(t_img_vars *img, t_coord *co);*/
-void	pix_draw(t_img_vars *img, int x, int y, t_colors col);
-void	drawto(t_img_vars *img, t_coord *co, t_colors colnew, t_colors before);
-void	draw_all(t_img_vars *img, t_map *map);
+void		draw_pixel(char *buffer, int pixel, t_colors color, int endian);
+void		pix_draw(t_img_vars *img, int x, int y, t_colors col);
+void		drawto(t_img_vars *img, t_coord *co, t_colors colnew, t_colors before);
+void		draw_all(t_img_vars *img, t_map *map);
 
 /*			Hook			*/
-int		key_hook(int keycode, t_mlx *mlx);
-int		mouse_hook(int button, int x, int y, t_mlx *mlx);
+int			key_hook(int keycode, t_mlx *mlx);
+int			mouse_hook(int button, int x, int y, t_mlx *mlx);
 
 /*		File Check			*/
-void	check_file(char *argv);
-int		open_file(char *argv);
+void		check_file(char *argv);
+int			open_file(char *argv);
 
 /*			Parsing			*/
-void	fill_list(char **result, t_map **map);
-char	**parsing(int fd);
+void		fill_list(char **result, t_map **map);
+char		**parsing(int fd);
 
 /*			Free			*/
-void	free_char(char **result, int limit);
-void	free_all(t_mlx *mlx, void *start, int i);
-void	*ft_lst_clear(t_map *li);
-int		ft_close(t_mlx *mlx);
+void		free_char(char **result, int limit);
+void		free_all(t_mlx *mlx, void *start, int i);
+void		*ft_lst_clear(t_map *li);
+int			ft_close(t_mlx *mlx);
 
 #endif

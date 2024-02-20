@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:52:26 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/19 11:07:09 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:11:59 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 void	draw_to_map(t_map *before, t_map *lbefore, t_img_vars *img)
 {
-	t_coord co;
+	t_coord		co;
+	t_colors	cbefore;
+	t_colors	clbefore;
+
 
 	co.x0 = before->x;
 	co.x1 = lbefore->x;
 	co.y1 = lbefore->y;
 	co.y0 = before->y;
-	//drawto(img, &co);
+	clbefore = hex_to_rgb(lbefore->color);
+	cbefore = hex_to_rgb(before->color);
+	drawto(img, &co, clbefore, cbefore);
 }
 
 void	draw_full(t_map *map, t_map *before, t_map *lbefore, t_img_vars *img)

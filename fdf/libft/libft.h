@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:55:40 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/19 11:11:11 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:40:29 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ int		get_size(int nb);
 int		ft_putnbr_count(int *cwrite, int nb);
 int		print_address(unsigned long long add, int *cwrite);
 int		ft_putunbr_count(int *cwrite, unsigned int nb);
+int		ft_atoi_base(char *str, char *base);
+void	ft_lower_string(char *str);
 
 #endif
