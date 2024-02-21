@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:50:30 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/20 15:46:39 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:01:50 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_map
 	float			y;
 	int				z;
 	char			*color;
-	t_colors		col;
 	int				real;
 	struct s_map	*next;
 }		t_map;
@@ -69,8 +68,6 @@ typedef struct s_img_vars
 	int			line_bytes;
 	int			endian;
 	char		*buffer;
-	float		z_scale_quotient;
-	t_colors	color;
 }			t_img_vars;
 
 typedef struct s_mlx
@@ -86,6 +83,8 @@ int			ft_linelen(t_map *li);
 int			ft_listlen(t_map *li);
 void		ft_lstrm_back(t_map **li);
 void		ft_lstadd_back(t_map **li, int x, char *color, int real);
+void		ft_lstrm_front(t_map **li);
+void		ft_lstadd_front(t_map **li, int x, char *color, int real);
 
 /*			Utils			*/
 char		*ft_strndup(const char *s, unsigned int n);
@@ -100,9 +99,12 @@ void		pix_draw(t_img_vars *img, int x, int y, t_colors col);
 void		drawto(t_img_vars *img, t_coord *co, t_colors colnew, t_colors before);
 void		draw_all(t_img_vars *img, t_map *map);
 
+/*		Image Gestion		*/
+void	init_img(t_img_vars *img, t_mlx mlx);
+
 /*			Hook			*/
 int			key_hook(int keycode, t_mlx *mlx);
-int			mouse_hook(int button, int x, int y, t_mlx *mlx);
+/*int			mouse_hook(int button, int x, int y, t_mlx *mlx);*/
 
 /*		File Check			*/
 void		check_file(char *argv);

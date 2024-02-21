@@ -16,7 +16,7 @@ void	pix_draw(t_img_vars *img, int x, int y, t_colors col)
 {
 	int	pixel;
 
-	if (x > WIDTH || y > HEIGHT || 0 > x || 0 > y)
+	if (x >= WIDTH || y >= HEIGHT || 0 >= x || 0 >= y)
 		return ;
 	pixel = (x * img->line_bytes) + (y * img->pixel_bits / 8);
 	draw_pixel(img->buffer, pixel, col, img->endian);

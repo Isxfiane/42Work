@@ -55,7 +55,6 @@ t_map	*calculate_coord(t_map *map)
 	float	sep_w;
 	t_map	*before;
 
-	before = map;
 	len = ft_linelen(map);
 	sep_w = (WIDTH - 100) / (ft_listlen(map) / len);
 	sep_h = (HEIGHT - 100) / len;

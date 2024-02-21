@@ -6,11 +6,34 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:43:49 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/16 12:11:07 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:11:26 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	moove(t_mlx *mlx, float x, float y)
+{
+	t_map		*map;
+	t_img_vars	newimg;
+
+	map = mlx->start;
+	while (map->next != NULL)
+	{
+		map->x += x;
+		map->y += y;
+		map = map->next;
+	}
+	map->x += x;
+	map->y += y;
+	map = mlx->start;
+	init_img(&newimg, *mlx);
+	draw_all(&newimg, map);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, newimg.img, 0, 0);
+	mlx_destroy_image(mlx->mlx, mlx->img->img);
+	(*mlx->img) = newimg;
+}
+
 
 int	key_hook(int keycode, t_mlx *mlx)
 {
@@ -20,20 +43,20 @@ int	key_hook(int keycode, t_mlx *mlx)
 		exit(0);
 	}
 	if (keycode == 119)
-		printf("`w`\n"); /* -1 pour tout les x | Redraw et put_img */
+		moove(mlx, 10, 0);
 	if (keycode == 97)
-		printf("`a`\n"); /* +1 pour tout les y | Redraw et put_img */
+		moove(mlx, 0, 10);
 	if (keycode == 115)
-		printf("`s`\n"); /* +1 pour tout les x | Redraw et put_img */
+		moove(mlx, -10, 0);
 	if (keycode == 100)
-		printf("`d`\n"); /* -1 pour tout les y | Redraw et put_img */
+		moove(mlx, 0, -10);
 	if (keycode == 65362)
-		printf("`up`\n"); /* Multiplicateur de z augmenter | Redraw et put_img */
+		printf("`up`\n");
 	if (keycode == 65364)
-		printf("`down`\n"); /* Multiplicateur de z deiminuer | Redraw et put_img */
+		printf("`down`\n");
 	return (0);
 }
-
+/*
 int	mouse_hook(int button, int x, int y, t_mlx *mlx)
 {
 	(void)mlx;
@@ -48,3 +71,4 @@ int	mouse_hook(int button, int x, int y, t_mlx *mlx)
 	printf("I see youuu yep, t'es la batard [%d][%d]\n", x, y);
 	return (0);
 }
+*/

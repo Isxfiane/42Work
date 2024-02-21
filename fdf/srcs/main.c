@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:25:19 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/20 15:28:19 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:08:19 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	init_and_hook(t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, HEIGHT, WIDTH, "fdf");
-	mlx_key_hook(mlx->win, key_hook, mlx);
-	mlx_mouse_hook(mlx->win, mouse_hook, mlx);
+	mlx_hook(mlx->win, 02, 1L<<0, key_hook, mlx);
 	mlx_hook(mlx->win, 17, 0L, ft_close, mlx);
 }
 
@@ -61,8 +60,8 @@ void	set_iso(t_map *map)
 {
 	while (map->next != NULL)
 	{
-		map->x = (map->x - map->z) / sqrt(2);
-		map->y = (map->x + 2 * map->y + map->z) / sqrt(6);
+		map->x = (map->x - map->z) / sqrt(2); /* (map->x - map->z) * sqrt(2); */
+		map->y = (map->x + 2 * map->y + map->z) / sqrt(6); /* (map->x + map->z)/2 + (map->y/ sqrt(6))*/
 		map = map->next;
 	}
 	map->x = (map->x - map->z) / sqrt(2);

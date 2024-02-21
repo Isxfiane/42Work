@@ -6,13 +6,11 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:27:35 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/20 16:54:30 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:34:13 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-
 
 void	fill_colors(float r, float g, float b, t_colors *col)
 {
@@ -38,7 +36,7 @@ char	*correct_hex(char *hex, int diff)
 {
 	int		i;
 	char	*result;
-	char 	*temp;
+	char	*temp;
 
 	i = 2;
 	result = malloc(sizeof(char) * (ft_strlen(hex) + diff));
@@ -62,7 +60,7 @@ t_colors	hex_to_rgb(char *hex)
 	t_colors	result;
 	int			i;
 	char		*temp;
-	int 		n;
+	int			n;
 
 	n = 0;
 	i = ft_strlen(hex);

@@ -59,6 +59,6 @@ void	*ft_lst_clear(t_map *li)
 	if (li == NULL)
 		return (NULL);
 	while (li != NULL)
-		ft_lstrm_back(&li);
+		ft_lstrm_front(&li);
 	return (NULL);
 }

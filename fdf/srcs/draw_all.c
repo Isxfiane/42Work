@@ -18,7 +18,6 @@ void	draw_to_map(t_map *before, t_map *lbefore, t_img_vars *img)
 	t_colors	cbefore;
 	t_colors	clbefore;
 
-
 	co.x0 = before->x;
 	co.x1 = lbefore->x;
 	co.y1 = lbefore->y;
