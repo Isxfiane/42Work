@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:23:25 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/21 17:05:34 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:38:46 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	basic_case(int k, char **result, int i, t_map **map)
 	if (k != -1)
 	{
 		len = ft_strlen(result[i]) - k;
-		ft_lstadd_back(map, ft_atoi(result[i]),
+		ft_lstadd_front(map, ft_atoi(result[i]),
 			ft_substr(result[i], k + 1, len - 1), 1);
 	}
 	else if (result[i][0] != '\0')
-		ft_lstadd_back(map, ft_atoi(result[i]), NULL, 1);
+		ft_lstadd_front(map, ft_atoi(result[i]), NULL, 1);
 }
 
 void	fill_list(char **result, t_map **map)
@@ -51,7 +51,7 @@ void	fill_list(char **result, t_map **map)
 	{
 		if (result[i][0] == '|')
 		{
-			ft_lstadd_back(map, ft_atoi(result[i]), NULL, -1);
+			ft_lstadd_front(map, ft_atoi(result[i]), NULL, -1);
 			i++;
 		}
 		k = ft_strfind(result[i], '\n');

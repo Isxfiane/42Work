@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:24:57 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/21 16:00:08 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:52:05 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,32 +59,24 @@ void	ft_lstadd_front(t_map **li, int x, char *color, int real)
 	}
 }
 
-void	ft_lstrm_back(t_map **li)
+void	ft_lst_reverse(t_map **map)
 {
-	t_map	*temp;
-	t_map	*beforetemp;
+	t_map	*prev;
+	t_map	*current;
+	t_map	*next;
 
-	if (*li == NULL)
-		return ;
-	if ((*li)->next == NULL)
+	current = *map;
+	prev = NULL;
+	next = NULL;
+	while (current != NULL)
 	{
-		free((*li)->color);
-		free(*li);
-		*li = NULL;
-		return ;
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
 	}
-	temp = *li;
-	beforetemp = *li;
-	while (temp->next != NULL)
-	{
-		beforetemp = temp;
-		temp = temp->next;
-	}
-	beforetemp->next = NULL;
-	free(temp->color);
-	free(temp);
+	*map = prev;
 }
-
 
 
 void	ft_lstrm_front(t_map **li)

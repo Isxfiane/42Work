@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:50:30 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/21 16:01:50 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:29:00 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ typedef struct s_mlx
 /*		list_func			*/
 int			ft_linelen(t_map *li);
 int			ft_listlen(t_map *li);
-void		ft_lstrm_back(t_map **li);
 void		ft_lstadd_back(t_map **li, int x, char *color, int real);
 void		ft_lstrm_front(t_map **li);
 void		ft_lstadd_front(t_map **li, int x, char *color, int real);
+void		ft_lst_reverse(t_map **map);
 
 /*			Utils			*/
 char		*ft_strndup(const char *s, unsigned int n);

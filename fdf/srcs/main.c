@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:25:19 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/21 14:08:19 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:49:02 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_map	*parsing_and_coord(char **argv)
 		ft_lst_clear(map);
 		return (NULL);
 	}
+	ft_lst_reverse(&map);
 	calculate_coord(map);
 	close(fd);
 	return (map);
@@ -60,12 +61,16 @@ void	set_iso(t_map *map)
 {
 	while (map->next != NULL)
 	{
-		map->x = (map->x - map->z) / sqrt(2); /* (map->x - map->z) * sqrt(2); */
-		map->y = (map->x + 2 * map->y + map->z) / sqrt(6); /* (map->x + map->z)/2 + (map->y/ sqrt(6))*/
+		/*
+		map->x *= 0.82 * (map->x - map->z) / sqrt(2);
+		map->y *= 0.82 * (map->x + 2 * map->y + map->z) / sqrt(6);
+		 */
+		map->x = (float)-map->z + (map->y + map->x) * (float)sin(0.523599); // X doit negatif
+		map->y = (map->x + map->y) * (float)cos(0.856);
 		map = map->next;
 	}
-	map->x = (map->x - map->z) / sqrt(2);
-	map->y = (map->x + 2 * map->y + map->z) / sqrt(6);
+	map->x = (float)-map->z + (map->y + map->x) * (float)sin(0.523599);
+	map->y = (map->x + map->y) * (float)cos(0.856);
 }
 
 int	main(int argc, char **argv)
@@ -82,7 +87,7 @@ int	main(int argc, char **argv)
 		exit(1);
 	}
 	mlx.start = map;
-	set_iso(map);
+	//set_iso(map);
 	map = mlx.start;
 	init_and_hook(&mlx);
 	init_img(&img, mlx);
@@ -121,7 +126,7 @@ int	main(int argc, char **argv)
 
 	co.x0 = 200;
 	co.y0 = 200;
-	co.x1 = 1000;
+	co.x1 = 500;
 	co.y1 = 1080;
 	(void)argc;
 	col2 = hex_to_rgb("0xFF0000");
