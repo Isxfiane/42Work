@@ -35,7 +35,7 @@ void	find_coord(t_map *map, t_map *before, int sep_h, int sep_w)
 				break ;
 		}
 		map->x = 50 + sep_h * n;
-		map->z = map->z * 2;
+		map->z = map->z * 5;
 		if (map->x == before->x)
 			map->y = before->y + sep_w;
 		else
@@ -44,7 +44,7 @@ void	find_coord(t_map *map, t_map *before, int sep_h, int sep_w)
 		map = map->next;
 	}
 	map->x = 50 + sep_h * n;
-	map->z = map->z * 2;
+	map->z = map->z * 5;
 	set_last_coord(map, before, sep_w);
 }
 
@@ -60,7 +60,7 @@ t_map	*calculate_coord(t_map *map)
 	sep_h = (HEIGHT - 100) / len;
 	map->x = 50;
 	map->y = 50;
-	map->z = map->z * 2;
+	map->z = map->z * 5;
 	before = map;
 	map = map->next;
 	find_coord(map, before, sep_w, sep_h);

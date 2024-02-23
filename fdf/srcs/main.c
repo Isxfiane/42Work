@@ -56,6 +56,7 @@ void	init_img(t_img_vars *img, t_mlx mlx)
 	img->buffer = mlx_get_data_addr(img->img, &img->pixel_bits,
 			&img->line_bytes, &img->endian);
 }
+#define M_PI  3.14159265358979323846
 
 void	set_iso(t_map *map)
 {
@@ -65,12 +66,38 @@ void	set_iso(t_map *map)
 		map->x *= 0.82 * (map->x - map->z) / sqrt(2);
 		map->y *= 0.82 * (map->x + 2 * map->y + map->z) / sqrt(6);
 		 */
+		/*
 		map->x = (float)-map->z + (map->y + map->x) * (float)sin(0.523599); // X doit negatif
 		map->y = (map->x + map->y) * (float)cos(0.856);
+		map->y = ((map->y + map->x) * cos(0.523599));
+		map->x = ((map->x - map->y) * sin(0.523599)) - map->z;
+		*/
+		/*
+		double rotateXRad = 70.0 * (M_PI /  180.0);
+		double rotateYRad = 63.264 * (M_PI /  180.0);
+		double tempX = map->x * cos(rotateYRad) - map->y * sin(rotateYRad);
+		double tempY = map->x * sin(rotateYRad) + map->y * cos(rotateYRad);
+		map->x = tempX * cos(rotateXRad) - map->z * sin(rotateXRad);
+		map->y = tempY;
+		map->z = tempX * sin(rotateXRad) + map->z * cos(rotateXRad);
+		*/
+	/*
+			ret.x = (1 / sqrt(2)) * map.x + (1 / sqrt(2)) * map.y;
+		ret.y = -(1 / sqrt(6)) * map.x
+			+ (1 / sqrt(6)) * map.y - (2 / sqrt(6)) * map.z;
+			*/
+
+		map->y = (1 / sqrt(2)) * map->y + (1 / sqrt(2)) * map->x;
+		map->x = -(1 / sqrt(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+
 		map = map->next;
+
+
 	}
+	/*
 	map->x = (float)-map->z + (map->y + map->x) * (float)sin(0.523599);
 	map->y = (map->x + map->y) * (float)cos(0.856);
+	*/
 }
 
 int	main(int argc, char **argv)
@@ -87,7 +114,7 @@ int	main(int argc, char **argv)
 		exit(1);
 	}
 	mlx.start = map;
-	//set_iso(map);
+	set_iso(map);
 	map = mlx.start;
 	init_and_hook(&mlx);
 	init_img(&img, mlx);
