@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:24:57 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/22 10:52:05 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:26:02 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,9 @@ void	ft_lst_reverse(t_map **map)
 	*map = prev;
 }
 
-
 void	ft_lstrm_front(t_map **li)
 {
-	t_map *tmp;
+	t_map	*tmp;
 
 	if (*li == NULL)
 		return ;

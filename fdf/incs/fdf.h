@@ -81,7 +81,6 @@ typedef struct s_mlx
 /*		list_func			*/
 int			ft_linelen(t_map *li);
 int			ft_listlen(t_map *li);
-void		ft_lstadd_back(t_map **li, int x, char *color, int real);
 void		ft_lstrm_front(t_map **li);
 void		ft_lstadd_front(t_map **li, int x, char *color, int real);
 void		ft_lst_reverse(t_map **map);

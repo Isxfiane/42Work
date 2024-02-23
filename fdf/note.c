@@ -309,3 +309,72 @@ void	draw_all(t_img_vars *img, t_map *map, t_colors color, t_mlx mlx)
 	}
 }
  */
+
+
+
+/*
+int main(void)
+{
+	printf("%s\n", correct_hex("0xff", 4));
+	return 0;
+}
+*/
+/*
+int	main(int argc, char **argv)
+{
+	t_mlx		mlx;
+	t_img_vars	img;
+	t_coord co;
+	t_colors col1;
+	t_colors col2;
+
+	col1.a = 1;
+	col1.r = 230;
+	col1.g = 246;
+	col1.b = 3;
+
+	col2.a = 1;
+	col2.r = 0;
+	col2.g = 0;
+	col2.b = 0;
+
+	co.x0 = 200;
+	co.y0 = 200;
+	co.x1 = 500;
+	co.y1 = 1080;
+	(void)argc;
+	col2 = hex_to_rgb("0xFF0000");
+	printf("R : %.2f | G : %2.f | B: %2.f\n", col2.r, col2.g, col2.b);
+
+	//printf("%s\n", correct_hex("0xff", 4));
+//	init_and_hook(&mlx);
+//	init_img(&img, mlx);
+//	mlx.img = &img;
+//	drawto(&img, &co, col1, col2);
+//	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
+//	mlx_loop(mlx.mlx);
+//	free_all(&mlx, mlx.start, 1);
+}
+*/
+/*
+ *	while (map->next != NULL)
+	{
+		printf("|\t%.1f\t| ", map->x);
+		printf("|\t%.1f\t| ", map->y);
+		printf("|\t%d\t| ", map->z);
+		printf("|\t%d\t| ", map->real);
+		printf("%s\t|\n", map->color);
+		map = map->next;
+	}
+	printf("|\t%.1f\t| ", map->x);
+	printf("|\t%.1f\t| ", map->y);
+	printf("|\t%d\t| ", map->z);
+	printf("|\t%d\t| ", map->real);
+	printf("%s\t|\n", map->color);
+//	 map->x = (1 / sqrtf(6)) * map->y + 
+		(1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+//	 map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+//	 map->x = (1 / sqrtf(6)) * map->y + 
+		(1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+//	 map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
+ */

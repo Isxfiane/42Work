@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:27:35 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/21 12:34:13 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:50:27 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,36 +55,21 @@ char	*correct_hex(char *hex, int diff)
 	return (result);
 }
 
-t_colors	hex_to_rgb(char *hex)
+void	find_rbg(t_colors *result, char *hex, int i, int n)
 {
-	t_colors	result;
-	int			i;
-	char		*temp;
-	int			n;
+	char	*temp;
 
-	n = 0;
-	i = ft_strlen(hex);
-	if (i < 4 || hex[0] != '0' || hex[1] != 'x')
-	{
-		fill_colors(255, 255, 255, &result);
-		return (result);
-	}
-	if (i < 8)
-	{
-		hex = correct_hex(hex, 6 - (i - 2));
-		n = 1;
-	}
-	fill_colors(-1, -1, -1, &result);
+	fill_colors(-1, -1, -1, result);
 	ft_lower_string(hex);
 	i = 2;
 	while (hex[i] != '\0')
 	{
 		if (hex[i] == '0')
-			add_value(0, &result);
+			add_value(0, result);
 		else
 		{
 			temp = char_to_string(hex[i], hex[i + 1]);
-			add_value (ft_atoi_base(temp, "0123456789abdef"), &result);
+			add_value (ft_atoi_base(temp, "0123456789abdef"), result);
 			free(temp);
 		}
 		if (hex[i + 1] != '\0')
@@ -94,6 +79,27 @@ t_colors	hex_to_rgb(char *hex)
 	}
 	if (n == 1)
 		free(hex);
+}
+
+t_colors	hex_to_rgb(char *hex)
+{
+	t_colors	result;
+	int			i;
+	int			n;
+
+	n = 0;
+	i = ft_strlen(hex);
+	if (i < 4 || hex[0] != '0' || hex[1] != 'x')
+	{
+		fill_colors(0, 255, 150, &result);
+		return (result);
+	}
+	if (i < 8)
+	{
+		hex = correct_hex(hex, 6 - (i - 2));
+		n = 1;
+	}
+	find_rbg(&result, hex, i, n);
 	while (result.b == -1)
 		add_value(0, &result);
 	return (result);

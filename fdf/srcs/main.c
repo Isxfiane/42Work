@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:25:19 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/22 17:49:02 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:30:06 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ t_map	*parsing_and_coord(char **argv)
 	if (ft_listlen(map) == 1)
 	{
 		close(fd);
-		ft_lst_clear(map);
-		return (NULL);
+		return (ft_lst_clear(map));
 	}
 	ft_lst_reverse(&map);
 	calculate_coord(map);
@@ -46,7 +45,7 @@ void	init_and_hook(t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, HEIGHT, WIDTH, "fdf");
-	mlx_hook(mlx->win, 02, 1L<<0, key_hook, mlx);
+	mlx_hook(mlx->win, 02, 1L << 0, key_hook, mlx);
 	mlx_hook(mlx->win, 17, 0L, ft_close, mlx);
 }
 
@@ -56,48 +55,21 @@ void	init_img(t_img_vars *img, t_mlx mlx)
 	img->buffer = mlx_get_data_addr(img->img, &img->pixel_bits,
 			&img->line_bytes, &img->endian);
 }
-#define M_PI  3.14159265358979323846
 
 void	set_iso(t_map *map)
 {
-	while (map->next != NULL)
+	float	tempy;
+	float	tempx;
+
+	while (map != NULL)
 	{
-		/*
-		map->x *= 0.82 * (map->x - map->z) / sqrt(2);
-		map->y *= 0.82 * (map->x + 2 * map->y + map->z) / sqrt(6);
-		 */
-		/*
-		map->x = (float)-map->z + (map->y + map->x) * (float)sin(0.523599); // X doit negatif
-		map->y = (map->x + map->y) * (float)cos(0.856);
-		map->y = ((map->y + map->x) * cos(0.523599));
-		map->x = ((map->x - map->y) * sin(0.523599)) - map->z;
-		*/
-		/*
-		double rotateXRad = 70.0 * (M_PI /  180.0);
-		double rotateYRad = 63.264 * (M_PI /  180.0);
-		double tempX = map->x * cos(rotateYRad) - map->y * sin(rotateYRad);
-		double tempY = map->x * sin(rotateYRad) + map->y * cos(rotateYRad);
-		map->x = tempX * cos(rotateXRad) - map->z * sin(rotateXRad);
-		map->y = tempY;
-		map->z = tempX * sin(rotateXRad) + map->z * cos(rotateXRad);
-		*/
-	/*
-			ret.x = (1 / sqrt(2)) * map.x + (1 / sqrt(2)) * map.y;
-		ret.y = -(1 / sqrt(6)) * map.x
-			+ (1 / sqrt(6)) * map.y - (2 / sqrt(6)) * map.z;
-			*/
-
-		map->y = (1 / sqrt(2)) * map->y + (1 / sqrt(2)) * map->x;
-		map->x = -(1 / sqrt(6)) * map->y + (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
-
+		tempy = -(1 / sqrt(6)) * map->y
+			+ (1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
+		tempx = (1 / sqrt(2)) * map->y + (1 / sqrt(2)) * map->x;
+		map->x = tempy + 700;
+		map->y = tempx - 100;
 		map = map->next;
-
-
 	}
-	/*
-	map->x = (float)-map->z + (map->y + map->x) * (float)sin(0.523599);
-	map->y = (map->x + map->y) * (float)cos(0.856);
-	*/
 }
 
 int	main(int argc, char **argv)
@@ -124,70 +96,3 @@ int	main(int argc, char **argv)
 	mlx_loop(mlx.mlx);
 	free_all(&mlx, mlx.start, 1);
 }
-
-/*
-int main(void)
-{
-	printf("%s\n", correct_hex("0xff", 4));
-	return 0;
-}
-*/
-/*
-int	main(int argc, char **argv)
-{
-	t_mlx		mlx;
-	t_img_vars	img;
-	t_coord co;
-	t_colors col1;
-	t_colors col2;
-
-	col1.a = 1;
-	col1.r = 230;
-	col1.g = 246;
-	col1.b = 3;
-
-	col2.a = 1;
-	col2.r = 0;
-	col2.g = 0;
-	col2.b = 0;
-
-	co.x0 = 200;
-	co.y0 = 200;
-	co.x1 = 500;
-	co.y1 = 1080;
-	(void)argc;
-	col2 = hex_to_rgb("0xFF0000");
-	printf("R : %.2f | G : %2.f | B: %2.f\n", col2.r, col2.g, col2.b);
-
-	//printf("%s\n", correct_hex("0xff", 4));
-//	init_and_hook(&mlx);
-//	init_img(&img, mlx);
-//	mlx.img = &img;
-//	drawto(&img, &co, col1, col2);
-//	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
-//	mlx_loop(mlx.mlx);
-//	free_all(&mlx, mlx.start, 1);
-}
-*/
-/*
- *	while (map->next != NULL)
-	{
-		printf("|\t%.1f\t| ", map->x);
-		printf("|\t%.1f\t| ", map->y);
-		printf("|\t%d\t| ", map->z);
-		printf("|\t%d\t| ", map->real);
-		printf("%s\t|\n", map->color);
-		map = map->next;
-	}
-	printf("|\t%.1f\t| ", map->x);
-	printf("|\t%.1f\t| ", map->y);
-	printf("|\t%d\t| ", map->z);
-	printf("|\t%d\t| ", map->real);
-	printf("%s\t|\n", map->color);
-//	 map->x = (1 / sqrtf(6)) * map->y + 
-		(1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
-//	 map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
-//	 map->x = (1 / sqrtf(6)) * map->y + 
-		(1 / sqrt(6)) * map->x - (2 / sqrt(6)) * map->z;
-//	 map->y = (1 / sqrtf(2)) * map->y + (1 / sqrt(2)) * map->x;
- */

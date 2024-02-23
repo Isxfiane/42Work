@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:43:49 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/21 17:11:26 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:26:22 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	moove(t_mlx *mlx, float x, float y)
 	(*mlx->img) = newimg;
 }
 
-
 int	key_hook(int keycode, t_mlx *mlx)
 {
 	if (keycode == 65307)
@@ -56,19 +55,3 @@ int	key_hook(int keycode, t_mlx *mlx)
 		printf("`down`\n");
 	return (0);
 }
-/*
-int	mouse_hook(int button, int x, int y, t_mlx *mlx)
-{
-	(void)mlx;
-	if (button == 1)
-		printf("Clique gauche\n");
-	else if (button == 3)
-		printf("Clique droite\n");
-	else if (button == 2)
-		printf("Clique middle\n");
-	else
-		printf("Scroll\n");
-	printf("I see youuu yep, t'es la batard [%d][%d]\n", x, y);
-	return (0);
-}
-*/
