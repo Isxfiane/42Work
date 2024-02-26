@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:25:13 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/23 12:41:31 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:39:53 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	set_last_coord(t_map *map, t_map *before, int sep_w)
 		map->y = 50;
 }
 
-void	find_coord(t_map *map, t_map *before, int sep_h, int sep_w)
+void	find_coord(t_map *map, t_map *before, int sep_w)
 {
 	int	n;
 
@@ -52,17 +52,15 @@ t_map	*calculate_coord(t_map *map)
 {
 	int		len;
 	float	sep_h;
-	float	sep_w;
 	t_map	*before;
 
 	len = ft_linelen(map);
-	sep_w = (WIDTH - 100) / (ft_listlen(map) / len);
 	sep_h = (HEIGHT - 100) / len;
 	map->x = 50;
 	map->y = 50;
 	map->z = map->z * 5;
 	before = map;
 	map = map->next;
-	find_coord(map, before, sep_w, sep_h);
+	find_coord(map, before, sep_h);
 	return (map);
 }

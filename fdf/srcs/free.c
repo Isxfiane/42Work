@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:26:48 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/16 11:41:18 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:20:12 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,11 @@ void	*ft_lst_clear(t_map *li)
 		return (NULL);
 	while (li != NULL)
 		ft_lstrm_front(&li);
+	return (NULL);
+}
+
+void	*ft_free(char *str)
+{
+	free(str);
 	return (NULL);
 }

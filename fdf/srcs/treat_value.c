@@ -46,7 +46,6 @@ void	fill_list(char **result, t_map **map)
 	int		k;
 
 	i = 0;
-	k = 0;
 	while (result[i] != NULL)
 	{
 		if (result[i][0] == '|')

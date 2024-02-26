@@ -38,8 +38,8 @@ LIB_A		:=	libft/libft.a
 CC		:=	cc
 
 RM		:=	rm -rf
-# - -Wall -Wextra -Werror -fsanitize=address
-CFLAGS	:= -o3 -I$(HEAD_D) -I$(LIB_D)
+#
+CFLAGS	:= -Wall -Wextra -Werror -fsanitize=address -g -g3  -I$(HEAD_D) -I$(LIB_D)
 
 all			:	$(NAME)
 

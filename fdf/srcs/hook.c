@@ -28,7 +28,7 @@ void	moove(t_mlx *mlx, float x, float y)
 	map->y += y;
 	map = mlx->start;
 	init_img(&newimg, *mlx);
-	draw_all(&newimg, map);
+	draw_all(&newimg, map, mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, newimg.img, 0, 0);
 	mlx_destroy_image(mlx->mlx, mlx->img->img);
 	(*mlx->img) = newimg;

@@ -100,7 +100,6 @@ char	*get_next_line(int fd)
 	while (n != -1)
 	{
 		lenread = read(fd, buffer, BUFFER_SIZE);
-		buffer[lenread] = '\0';
 		if (lenread == 0)
 			return (result);
 		if (lenread == -1)
@@ -108,6 +107,7 @@ char	*get_next_line(int fd)
 			free(result);
 			return (NULL);
 		}
+		buffer[lenread] = '\0';
 		result = fusion(buffer, result, lenread, &n);
 	}
 	return (result);

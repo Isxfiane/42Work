@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:05:46 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/08 11:43:10 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:17:14 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ char	*ft_strjoin(char *s1, char const *s2)
 	if (s2 == NULL)
 		return (ft_strdup(s1));
 	temp = ft_strdup(s1);
+	if (!temp)
+		return (NULL);
 	free(s1);
 	lens1 = ft_strlen(temp);
-	lens2 = ft_strlen (s2);
+	lens2 = ft_strlen(s2);
 	join = (char *) malloc (sizeof(char) * (lens1 + lens2) + 1);
 	if (join == NULL)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:27:35 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/23 14:50:27 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:32:14 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*correct_hex(char *hex, int diff)
 
 	i = 2;
 	result = malloc(sizeof(char) * (ft_strlen(hex) + diff));
+	if (!result)
+		return (NULL);
 	result[0] = '0';
 	result[1] = 'x';
 	while (diff > 0)
@@ -50,12 +52,14 @@ char	*correct_hex(char *hex, int diff)
 	}
 	result[i] = '\0';
 	temp = ft_substr(hex, 2, ft_strlen(hex) - 2);
+	if (!temp)
+		return (ft_free(result));
 	result = ft_strjoin(result, temp);
 	free(temp);
 	return (result);
 }
 
-void	find_rbg(t_colors *result, char *hex, int i, int n)
+int	find_rbg(t_colors *result, char *hex, int i, int n)
 {
 	char	*temp;
 
@@ -69,6 +73,8 @@ void	find_rbg(t_colors *result, char *hex, int i, int n)
 		else
 		{
 			temp = char_to_string(hex[i], hex[i + 1]);
+			if (!temp)
+				return (-1);
 			add_value (ft_atoi_base(temp, "0123456789abdef"), result);
 			free(temp);
 		}
@@ -79,28 +85,33 @@ void	find_rbg(t_colors *result, char *hex, int i, int n)
 	}
 	if (n == 1)
 		free(hex);
+	return (0);
 }
 
-t_colors	hex_to_rgb(char *hex)
+t_colors	*hex_to_rgb(char *hex)
 {
-	t_colors	result;
+	t_colors	*result;
 	int			i;
 	int			n;
 
 	n = 0;
+	result = malloc(sizeof(t_colors));
 	i = ft_strlen(hex);
 	if (i < 4 || hex[0] != '0' || hex[1] != 'x')
 	{
-		fill_colors(0, 255, 150, &result);
+		fill_colors(0, 255, 150, result);
 		return (result);
 	}
 	if (i < 8)
 	{
 		hex = correct_hex(hex, 6 - (i - 2));
+		if (hex == NULL)
+			return (NULL);
 		n = 1;
 	}
-	find_rbg(&result, hex, i, n);
-	while (result.b == -1)
-		add_value(0, &result);
+	if (find_rbg(result, hex, i, n) == -1)
+		return (NULL);
+	while (result->b == -1)
+		add_value(0, result);
 	return (result);
 }

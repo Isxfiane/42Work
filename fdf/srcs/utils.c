@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:22:17 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/09 13:26:40 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:27:59 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	*char_to_string(char c, char d)
 	char	*result;
 
 	result = malloc(sizeof(char) * 3);
+	if (!result)
+		return (NULL);
 	result[0] = c;
 	result[1] = d;
 	result[2] = '\0';

@@ -6,7 +6,7 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:50:30 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/22 10:29:00 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:44:33 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_delta
 	float	delta_y;
 	float	delta_r;
 	float	delta_g;
-	float 	delta_b;
+	float	delta_b;
 }		t_delta;
 
 typedef struct s_colors
@@ -54,11 +54,11 @@ typedef struct s_map
 
 typedef struct s_coord
 {
-	float	x0;
-	float	y0;
-	int		z0;
-	float	x1;
-	float	y1;
+	float		x0;
+	float		y0;
+	long int	z0;
+	float		x1;
+	float		y1;
 }				t_coord;
 
 typedef struct s_img_vars
@@ -82,28 +82,27 @@ typedef struct s_mlx
 int			ft_linelen(t_map *li);
 int			ft_listlen(t_map *li);
 void		ft_lstrm_front(t_map **li);
-void		ft_lstadd_front(t_map **li, int x, char *color, int real);
+int			ft_lstadd_front(t_map **li, int x, char *color, int real);
 void		ft_lst_reverse(t_map **map);
 
 /*			Utils			*/
 char		*ft_strndup(const char *s, unsigned int n);
 t_map		*calculate_coord(t_map *map);
-t_colors	hex_to_rgb(char *hex);
+t_colors	*hex_to_rgb(char *hex);
 char		*char_to_string(char c, char d);
-
 
 /*			Draw			*/
 void		draw_pixel(char *buffer, int pixel, t_colors color, int endian);
 void		pix_draw(t_img_vars *img, int x, int y, t_colors col);
-void		drawto(t_img_vars *img, t_coord *co, t_colors colnew, t_colors before);
-void		draw_all(t_img_vars *img, t_map *map);
+void		drawto(t_img_vars *img, t_coord *co, t_colors colnew,
+				t_colors before);
+void		draw_all(t_img_vars *img, t_map *map, t_mlx *mlx);
 
 /*		Image Gestion		*/
-void	init_img(t_img_vars *img, t_mlx mlx);
+void		init_img(t_img_vars *img, t_mlx mlx);
 
 /*			Hook			*/
 int			key_hook(int keycode, t_mlx *mlx);
-/*int			mouse_hook(int button, int x, int y, t_mlx *mlx);*/
 
 /*		File Check			*/
 void		check_file(char *argv);
@@ -118,5 +117,6 @@ void		free_char(char **result, int limit);
 void		free_all(t_mlx *mlx, void *start, int i);
 void		*ft_lst_clear(t_map *li);
 int			ft_close(t_mlx *mlx);
+void		*ft_free(char *str);
 
 #endif

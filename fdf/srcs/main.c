@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-rho <sben-rho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:25:19 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/23 13:30:06 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:17:55 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,19 @@ t_map	*parsing_and_coord(char **argv)
 void	init_and_hook(t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
+	if (mlx->mlx == NULL)
+	{
+		ft_lst_clear(mlx->start);
+		exit(1);
+	}
 	mlx->win = mlx_new_window(mlx->mlx, HEIGHT, WIDTH, "fdf");
+	if (mlx->win == NULL)
+	{
+		mlx_destroy_display(mlx->mlx);
+		free(mlx->mlx);
+		ft_lst_clear(mlx->start);
+		exit(1);
+	}
 	mlx_hook(mlx->win, 02, 1L << 0, key_hook, mlx);
 	mlx_hook(mlx->win, 17, 0L, ft_close, mlx);
 }
@@ -52,6 +64,11 @@ void	init_and_hook(t_mlx *mlx)
 void	init_img(t_img_vars *img, t_mlx mlx)
 {
 	img->img = mlx_new_image(mlx.mlx, HEIGHT, WIDTH);
+	if (img == NULL)
+	{
+		free_all(&mlx, mlx.start, 1);
+		exit(1);
+	}
 	img->buffer = mlx_get_data_addr(img->img, &img->pixel_bits,
 			&img->line_bytes, &img->endian);
 }
@@ -82,7 +99,7 @@ int	main(int argc, char **argv)
 	map = parsing_and_coord(argv);
 	if (map == NULL)
 	{
-		ft_putstr_fd ("\e[3;31m[FDF] This is not enough\e[0m\n", 2);
+		ft_putstr_fd ("\e[3;31m[FDF] This is not enough.\e[0m\n", 2);
 		exit(1);
 	}
 	mlx.start = map;
@@ -91,7 +108,7 @@ int	main(int argc, char **argv)
 	init_and_hook(&mlx);
 	init_img(&img, mlx);
 	mlx.img = &img;
-	draw_all(&img, map);
+	draw_all(&img, map, &mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
 	mlx_loop(mlx.mlx);
 	free_all(&mlx, mlx.start, 1);

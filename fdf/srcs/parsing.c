@@ -6,23 +6,40 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 11:31:26 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/02/15 14:47:31 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:19:34 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+int	check_extension(char *argv, char *fdf)
+{
+	int		i;
+	int		k;
+
+	k = ft_strlen(fdf);
+	i = ft_strlen(argv);
+	while (argv[i + 1] != '.')
+	{
+		if (argv[i] == fdf[k])
+		{
+			i--;
+			k--;
+		}
+		else
+			return (-1);
+	}
+	return (0);
+}
+
 void	check_file(char *argv)
 {
-	size_t	len;
-
 	if (!argv || argv[0] == '\0')
 	{
 		ft_putstr_fd("\e[3;31m[FDF] Huh ? No File, No map.\e[0m\n", 2);
 		exit(1);
 	}
-	len = ft_strlen(argv);
-	if (ft_strnstr(argv, ".fdf", len) == NULL)
+	if (check_extension(argv, ".fdf") == -1)
 	{
 		ft_putstr_fd("\e[3;31m[FDF] Oh, Watch out, "
 			"i need a '.fdf' file.\e[0m\n", 2);
