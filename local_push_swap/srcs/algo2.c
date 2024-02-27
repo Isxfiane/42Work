@@ -1,4 +1,15 @@
-#include "test.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/16 10:51:33 by sben-rho          #+#    #+#             */
+/*   Updated: 2024/02/27 12:30:17 by sben-rho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include "push_swap.h"
 
 void	minialgo(t_list **la, t_list **lb)
 {
@@ -13,65 +24,59 @@ void	minialgo(t_list **la, t_list **lb)
 	{
 		if (ft_isreverse((*lb)) == -1)
 			ft_lst_reverse(lb, ft_findmax((*lb)), "rb", "rrb");
-		ft_lst_push(la, lb, "pb");
-//		if (content < max)
-//			ft_lst_rot(lb, "rb"); // -2
+		if (ft_lst_push(la, lb, "pb") == -1)
+		{
+			ft_lst_clear(*la);
+			ft_lst_clear(*lb);
+			exit(1);
+		}
 	}
 	else
 		safeplace(la, lb, content);
 }
 
+void	repush(t_list **la, t_list **lb, int limit)
+{
+	int	j;
+
+	j = -1;
+	ft_lst_reverse(lb, ft_findmax((*lb)), "rb", "rrb");
+	while (++j != limit)
+		ft_lst_push(lb, la, "pa");
+	j = -1;
+	while (++j != limit)
+		ft_lst_rot(la, "ra");
+	j = -1;
+}
+
 void	pushandrepush(t_list **la, t_list **lb, int limit)
 {
-	int len;
-	int	j;
-	int i;
+	int	len;
+	int	i;
 
 	len = ft_listlen(*la) + 1;
 	i = 0;
-	j = -1;
 	while (len != 0)
 	{
 		if (i == limit)
 		{
-			ft_lst_reverse(lb, ft_findmax((*lb)), "rb", "rrb");
-			while (++j != limit)
-				ft_lst_push(lb, la, "pa");
-			j = -1;
-			while (++j != limit)
-				ft_lst_rot(la, "ra");
-			j = -1;
+			repush(la, lb, limit);
 			i = 0;
 		}
 		minialgo(la, lb);
 		len--;
-		if (len == 0)
-		{
-			ft_lst_reverse(lb, ft_findmax((*lb)), "rb", "rrb");
-			while (++j != limit)
-				ft_lst_push(lb, la, "pa");
-			j = -1;
-			while (++j != limit)
-				ft_lst_rot(la, "ra");
-			j = -1;
-			i = 0;
-		}
 		i++;
 	}
 }
+
 void	sortbigaglo(t_list **la, t_list **lb, int len)
 {
-	if (len > 498)
-	{
-		ft_lst_rerot(la, "rra");
-		pushandrepush(la, lb, 50);
-		logicalpush(la, lb, 50);
-	}
-	else
-	{
-		pushandrepush(la, lb, 20);
-		logicalpush(la, lb, 20);
-	}
+	float	test;
+
+	test = (3.0 / 40.0) * len + 12.5;
+	ft_lst_rerot(la, "rra");
+	pushandrepush(la, lb, test);
+	logicalpush(la, lb, test);
 	ft_lst_reverse(lb, ft_findmax((*lb)), "rb", "rrb");
 	logcical_replace(la, lb);
 }

@@ -1,22 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_base_fun.c                                    :+:      :+:    :+:   */
+/*   list_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:23:21 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/05 09:37:27 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:09:28 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "test.h"
-/*
-int		isemptylt(t_list *li);
-int		ft_listlen(t_list *li);
-void	ft_print_list(t_list *li);
-int		ft_isorder(t_list *li);
-int		ft_isreverse(t_list *li);
-*/
+#include "push_swap.h"
 
 int	isemptylt(t_list *li)
 {
@@ -38,18 +31,6 @@ int	ft_listlen(t_list *li)
 		li = li->next;
 	}
 	return (size);
-}
-
-void	ft_print_list(t_list *li)
-{
-	if (isemptylt(li) == -1)
-		return ;
-	while (li != NULL)
-	{
-		ft_printf("[%d]", li->content);
-		li = li->next;
-	}
-	ft_printf("\n");
 }
 
 int	ft_isorder(t_list *li)

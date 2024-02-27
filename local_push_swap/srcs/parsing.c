@@ -9,7 +9,7 @@
 /*   Updated: 2024/01/08 13:39:16 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "test.h"
+#include "push_swap.h"
 
 long int	ft_atol(const char *nptr)
 {
@@ -54,7 +54,8 @@ t_list	*ft_fill_numb(t_list *li, int argc, char **argv)
 			ft_lst_clear(li);
 			return (NULL);
 		}
-		ft_lstadd_back(&li, (int)nb);
+		if (ft_lstadd_back(&li, (int)nb) == -1)
+			return (NULL);
 		i++;
 	}
 	return (li);

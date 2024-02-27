@@ -9,7 +9,7 @@
 /*   Updated: 2024/01/10 10:59:30 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "test.h"
+#include "push_swap.h"
 
 void	case_two(t_list *li, char *str)
 {

@@ -6,11 +6,11 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:27:10 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/10 12:37:33 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:06:10 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "push_swap.h"
 
 int	ft_findmax(t_list *li)
 {
@@ -55,7 +55,7 @@ int	calc(int a, int b)
 	return (a - b);
 }
 
-int	ft_lst_find_near(t_list *li, int nb)
+int	ft_findnear(t_list *li, int nb)
 {
 	int	betterresult;
 	int	betternb;

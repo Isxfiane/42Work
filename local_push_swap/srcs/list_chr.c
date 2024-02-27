@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   help.c                                             :+:      :+:    :+:   */
+/*   list_chr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:38:25 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/05 09:39:41 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:06:10 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "test.h"
-/*
-void	ft_lst_reverse(t_list **li, int x)
-int		ft_listchr(t_list *li, long int x)
+#include "push_swap.h"
 
-
-
-*/
 void	ft_lst_reverse(t_list **li, int x, char *rot, char *rerot)
 {
 	int	index;

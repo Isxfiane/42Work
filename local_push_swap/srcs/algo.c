@@ -6,21 +6,26 @@
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 07:20:17 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/15 13:46:23 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:30:17 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "push_swap.h"
 
 void	safeplace(t_list **la, t_list **lb, int content)
 {
 	int	near;
 
-	near = ft_lst_find_near((*lb), content);
+	near = ft_findnear((*lb), content);
 	ft_lst_reverse(lb, near, "rb", "rrb");
 	if (near > content)
 		ft_lst_rot(lb, "rb");
-	ft_lst_push(la, lb, "pb");
+	if (ft_lst_push(la, lb, "pb") == -1)
+	{
+		ft_lst_clear(*la);
+		ft_lst_clear(*lb);
+		exit(1);
+	}
 }
 
 void	logicalpush(t_list **la, t_list **lb, int limit)
@@ -43,8 +48,6 @@ void	logicalpush(t_list **la, t_list **lb, int limit)
 			if (ft_isreverse((*lb)) == -1)
 				ft_lst_reverse(lb, ft_findmax((*lb)), "rb", "rrb");
 			ft_lst_push(la, lb, "pb");
-//			if (content > max)
-//				ft_lst_rot(lb, "rb"); PLUS QUE 1
 		}
 		else
 			safeplace(la, lb, content);
@@ -55,7 +58,7 @@ void	rotpush(t_list **la, t_list **lb, int x)
 {
 	int	temp;
 
-	temp = ft_lst_find_near(*la, x);
+	temp = ft_findnear(*la, x);
 	ft_lst_reverse(la, temp, "ra", "rra");
 	if (temp < x)
 		ft_lst_rot(la, "ra");
@@ -95,9 +98,7 @@ void	ft_mainalgo(t_list **li, t_list **b)
 		case_two(*li, "sa");
 	if (len == 3)
 		case_three(li);
-	if (len == 4)
-		case_for(li, b);
-	if (len > 4  && len < 45)
+	if (len >= 4 && len < 45)
 	{
 		logicalpush(li, b, 3);
 		ft_lst_reverse(b, ft_findmax((*b)), "rb", "rrb");

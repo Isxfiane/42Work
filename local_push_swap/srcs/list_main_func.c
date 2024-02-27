@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_func.c                                        :+:      :+:    :+:   */
+/*   list_main_func.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sben-rho <sben-rho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:23:28 by sben-rho          #+#    #+#             */
-/*   Updated: 2024/01/05 09:31:46 by sben-rho         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:20:53 by sben-rho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "test.h"
-/*
-void	ft_lstadd_back(t_list **li, int x);
-void	ft_lstadd_front(t_list **li, int x);
-void	ft_lstrm_back(t_list **li);
-void	ft_lstrm_front(t_list **li);
-void	*ft_lst_clear(t_list *li);
-*/
+#include "push_swap.h"
 
-void	ft_lstadd_back(t_list **li, int x)
+int	ft_lstadd_back(t_list **li, int x)
 {
 	t_list	*element;
 	t_list	*temp;
 
 	element = malloc(sizeof(*element));
 	if (!element)
-		return ;
+		return (-1);
 	element->content = x;
 	element->next = NULL;
 	if (*li == NULL)
 	{
 		*li = element;
-		return ;
+		return (0);
 	}
 	temp = *li;
 	while (temp->next != NULL)
@@ -39,15 +32,16 @@ void	ft_lstadd_back(t_list **li, int x)
 		temp = temp->next;
 	}
 	temp->next = element;
+	return (0);
 }
 
-void	ft_lstadd_front(t_list **li, int x)
+int	ft_lstadd_front(t_list **li, int x)
 {
 	t_list	*element;
 
 	element = malloc(sizeof(*element));
 	if (!element)
-		return ;
+		return (-1);
 	element->content = x;
 	if (*li == NULL)
 	{
@@ -59,6 +53,7 @@ void	ft_lstadd_front(t_list **li, int x)
 		element->next = *li;
 		*li = element;
 	}
+	return (0);
 }
 
 void	ft_lstrm_back(t_list **li)
