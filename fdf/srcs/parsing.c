@@ -67,6 +67,8 @@ char	**parsing(int fd)
 	char		*temp;
 
 	temp = get_next_line(fd);
+	if (temp == NULL && read(fd, temp, 1) > 0)
+		return (NULL);
 	result = ft_split(temp, ' ');
 	free(temp);
 	return (result);

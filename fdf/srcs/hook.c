@@ -49,9 +49,5 @@ int	key_hook(int keycode, t_mlx *mlx)
 		moove(mlx, -10, 0);
 	if (keycode == 100)
 		moove(mlx, 0, -10);
-	if (keycode == 65362)
-		printf("`up`\n");
-	if (keycode == 65364)
-		printf("`down`\n");
 	return (0);
 }
