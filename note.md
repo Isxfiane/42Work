@@ -45,7 +45,7 @@ char	**get_cmdpaths(char **const env)
 }
 ```
 
-# Variable d'environement
+# Variable d'environnement
 Des qu'un `$` est croiser, cela signifie qu'on va avoir le nom d'une __Variable d'environement__.
 - *Dans ce cas on peut recuprer le nom de la variable en **lisant** la suite du nom puis avec la fonction `getenv(char * name)`.*
 - *Ensuite il faut donc remplace dans la chaine princpal le `$NAME` par ce qu'il en est.*
@@ -80,12 +80,15 @@ int main(int argc, char **argv, char **envp)
 ```
 <br>
 
-# Priorite
-En bash, sur une simple ligne de commande beaucoup d'element doivent etre etendue, notre amis bash le fait avec des ordres de prioriter, une fois fait, il traite le commande. pour les exemple, voici `ARGS`.
+# Quoting & Expansion | L'avant traitement
+En bash, sur une simple ligne de commande beaucoup d'element doivent etre etendue, notre amis bash le fait avec des ordres de prioriter et agis en fonction du type de `quote` (Quoting), une fois fait, il traite le commande. pour les exemple, voici `ARGS`.
 
-- Single Quotes (`''`) (Sa prend le texte brute a l'interieur, blc des meta-char)
-- Double Quotes (`""`) (Affiche tout)
-- Locale-Specific Translation (`Variable d'environement`)
+>  `Quoting `| Premier arriver, premier servis. (Meme si l'autre est present, blc)
+- Single Quotes (`''`) (Texte `brute` prit en compte)
+- Double Quotes (`""`) (Ecoute que `$` en meta-char)
+> `Expansion` | Ordre a suivre.
+- Locale-Specific Translation (`Variable d'environnement`)
+- Retirer les quotes principales
 
 Exemple :
 
@@ -116,23 +119,53 @@ Affiche `'zebi'`.
 
 <br>
 
-# Notre mission
+# Notre (ma) mission | Traitement
 Parser tout les elements pour les mettres dans une structure prete a executer la commande demander, la structure sera constuit de cette maniere pour faciliter le travail du mate
 ```c
 typedef struct s_info
 {
 	char	**path; // Ton tableau avec tout les path
-	char	*flags // comme ya que une fonction qui en prend, je met juste une string, si y'a pas de flags alors = NULL;
-	char	*args // les arguments avec des `\n` s'il faut retour ligne ou autre
-	int		fd;	// fd ou tu doit ecrire.
+	char	*cmd // comme ya que une fonction qui en prend, je met juste une string, si y'a pas de flags alors = NULL; (cmd + flags)
+	char	**args // les arguments avec des `\n` s'il faut retour ligne ou autre
+	char	*file;	// == NULL | fd = 1 sinon 
+	int		fd; // fd == -1 
 }               t_info;
 ```
 Attention il faut appliquer l'odre suivant
 - Realiser les expand pour avoir une string complete
-- Et seulement ensuite traiter cette sting.
+- Et seulement ensuite traiter cette string.
 <br>
+
+# Plan du code 4-4-2
+
+- [ ] Stack des `PATH`
+	- `char	**get_cmdpaths(char **const env)`
+- [ ] Pre-Check
+	- si `"[]{}()\\;&^%#@*,:"` | si `quotes non fini` > **Refus de la commande**
+> **Le reste des etapes sont a realiser a petit a petit sur TOUTE la string** (Donc y'a moyen que se soit fait plusieurs fois)<br> 
+Exemple : `blahblah'$ARGS'bouhbouh"$ARGS"` | `"blahblah'$ARGS'bouhbouh""$ARGS"` > plusieurs passage vu que plusieur Quoting
+- [ ] Retrait de la commande & des flags | stack dans la struct
+- [ ] Retrait des pipe && redirection | traitement plus tard
+- [ ] Quoting
+	- mod_1 : `""` | Expension a faire
+	- mod_2 : `''` | Expension a skip
+- [ ] Expansion
+	- Recherche des replaces && replace
+- [ ] Retrait des quotes *(A reflechir)*
+- [ ] Rangement dans `char **` *(A reflechir)*
+	- Chaque fois qu'on a traiter une portions 
+- [ ] Envoie de infos
+- [ ] Si `|` ou `>` agir en fonction
+	- `|` Recup le result de la premiere cmd et devient args de la deuxieme, dans ce cas `fd == -1` et `file == NULL`.
+	- `>` Set `fd == -1` && `file == (nom du fichier)`
+	- sinon `fd == 1` && `file == NULL``
 
 # Note pure
 - Golden garbage (List chainee qui contient l'addresse de tout les element malloc, comme sa par de galere en cas de free_all)
 - Ne pas oublier qu'une commande peut fail, mais pas pour autant close le programe.
 - **TOUJOURS** ce referer au terminal en **BASH** en cas de doute
+- Blacklist : "[]{}()\\;&^%#@*,:"
+- **TOUT** ce qui **N'EST PAS DEMANDER DANS LE SUJET** n'est **PAS** a faire.
+- Beleck si pas de `""` et que plusieurs args, tej les whitespaces.
+- `ARGS=string` = Variable d'envirnnoment temporaire | `export ARGS=string` = Variable d'environnement present dans `env`
+- Imagine que quand y'a pas de quotes, les espaces font offic de double quotes 
